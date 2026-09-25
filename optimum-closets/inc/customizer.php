@@ -17,7 +17,7 @@ function optimum_defaults() {
 		// الألوان.
 		'color_primary'      => '#9a6a3f',
 		'color_accent'       => '#c8a15a',
-		'color_dark'         => '#1d1a16',
+		'color_dark'         => '#14110e',
 
 		// التواصل.
 		'whatsapp'           => '',
@@ -30,6 +30,7 @@ function optimum_defaults() {
 		'announcement'       => 'توصيل وتركيب داخل المدينة • اطلب خزانتك بمقاساتك عبر واتساب',
 
 		// الواجهة الرئيسية.
+		'hero_intro'         => 'الفخامة تبدأ من الداخل',
 		'hero_eyebrow'       => 'تصميم • تفصيل • تركيب',
 		'hero_title'         => 'خزائن تُصمَّم لمساحتك، وتدوم معك',
 		'hero_text'          => 'غرف ملابس وخزائن جدارية ومطابخ بخامات مختارة وتشطيب متقن، نفصّلها على مقاسك ونركّبها في منزلك.',
@@ -37,6 +38,11 @@ function optimum_defaults() {
 		'hero_btn_url'       => '',
 		'hero_btn2_text'     => 'اطلب تصميمك الخاص',
 		'hero_image'         => '',
+
+		// مصمم الخزانة.
+		'config_title'       => 'صمّم خزانتك في دقيقة',
+		'config_text'        => 'اختر المقاس ونوع الأبواب واللون وتوزيع الداخل، وشاهد خزانتك تتشكل أمامك. أرسل التصميم لنا وسنعود إليك بعرض سعر دقيق.',
+		'config_price_m2'    => 0,
 
 		// المزايا.
 		'feature_1_title'    => 'تفصيل حسب المقاس',
@@ -134,6 +140,7 @@ function optimum_customize_register( $wp_customize ) {
 		'optimum_hero'     => __( 'الصفحة الرئيسية: الواجهة', 'optimum' ),
 		'optimum_features' => __( 'الصفحة الرئيسية: المزايا والخطوات', 'optimum' ),
 		'optimum_custom'   => __( 'الصفحة الرئيسية: قسم التفصيل', 'optimum' ),
+		'optimum_config'   => __( 'مصمم الخزانة التفاعلي', 'optimum' ),
 		'optimum_faq'      => __( 'الأسئلة الشائعة', 'optimum' ),
 		'optimum_shop'     => __( 'المتجر والشحن', 'optimum' ),
 		'optimum_footer'   => __( 'التذييل والتواصل الاجتماعي', 'optimum' ),
@@ -151,13 +158,18 @@ function optimum_customize_register( $wp_customize ) {
 		'hours'           => array( 'optimum_contact', 'text', 'أوقات العمل', 'مثال: السبت - الخميس، 9 ص - 10 م' ),
 		'announcement'    => array( 'optimum_contact', 'text', 'نص الشريط العلوي', 'اتركه فارغاً لإخفاء الشريط' ),
 
+		'hero_intro'      => array( 'optimum_hero', 'text', 'العبارة الأولى (قبل فتح الأبواب)', 'تظهر على الخزانة المغلقة، ثم تنفتح الأبواب مع التمرير' ),
 		'hero_eyebrow'    => array( 'optimum_hero', 'text', 'النص الصغير فوق العنوان', '' ),
 		'hero_title'      => array( 'optimum_hero', 'text', 'العنوان الرئيسي', '' ),
 		'hero_text'       => array( 'optimum_hero', 'textarea', 'الوصف', '' ),
 		'hero_btn_text'   => array( 'optimum_hero', 'text', 'نص الزر الأول', '' ),
 		'hero_btn_url'    => array( 'optimum_hero', 'url', 'رابط الزر الأول', 'اتركه فارغاً ليفتح صفحة المتجر' ),
 		'hero_btn2_text'  => array( 'optimum_hero', 'text', 'نص زر واتساب', '' ),
-		'hero_image'      => array( 'optimum_hero', 'image', 'صورة الواجهة', 'صورة عالية الجودة لخزانة أو غرفة ملابس من أعمالكم (1600×1000 تقريباً)' ),
+		'hero_image'      => array( 'optimum_hero', 'image', 'الصورة خلف الأبواب', 'صورة من أعمالكم تظهر عندما تنفتح أبواب الخزانة (يفضل عمودية أو مربعة، 1200×1400 تقريباً)' ),
+
+		'config_title'    => array( 'optimum_config', 'text', 'العنوان', '' ),
+		'config_text'     => array( 'optimum_config', 'textarea', 'الوصف', '' ),
+		'config_price_m2' => array( 'optimum_config', 'number', 'سعر المتر المربع للواجهة (ريال)', 'لعرض سعر تقديري للعميل أثناء التصميم. ضع 0 لإخفاء السعر.' ),
 
 		'custom_title'    => array( 'optimum_custom', 'text', 'العنوان', '' ),
 		'custom_text'     => array( 'optimum_custom', 'textarea', 'الوصف', '' ),

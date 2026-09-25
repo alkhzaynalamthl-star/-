@@ -124,8 +124,72 @@
 		} );
 	}
 
+	var reduceMotion = window.matchMedia && window.matchMedia( '(prefers-reduced-motion: reduce)' ).matches;
+
+	/* الخزانة التي تنفتح أبوابها مع التمرير */
+	var doorHero = doc.querySelector( '[data-door-hero]' );
+	if ( doorHero && ! reduceMotion ) {
+		doorHero.classList.add( 'is-animated' );
+		var clamp = function ( v ) {
+			return Math.max( 0, Math.min( 1, v ) );
+		};
+		var ease = function ( t ) {
+			return t < 0.5 ? 4 * t * t * t : 1 - Math.pow( -2 * t + 2, 3 ) / 2;
+		};
+		var ticking = false;
+		var paint = function () {
+			ticking = false;
+			var rect = doorHero.getBoundingClientRect();
+			var range = doorHero.offsetHeight - window.innerHeight;
+			var p = range > 0 ? clamp( -rect.top / range ) : 1;
+			var open = ease( clamp( ( p - 0.04 ) / 0.5 ) );
+			var content = ease( clamp( ( p - 0.5 ) / 0.3 ) );
+			var intro = 1 - clamp( p / 0.2 );
+			doorHero.style.setProperty( '--open', open.toFixed( 4 ) );
+			doorHero.style.setProperty( '--content', content.toFixed( 4 ) );
+			doorHero.style.setProperty( '--intro', intro.toFixed( 4 ) );
+			doorHero.classList.toggle( 'content-on', content > 0.5 );
+		};
+		var requestPaint = function () {
+			if ( ! ticking ) {
+				ticking = true;
+				window.requestAnimationFrame( paint );
+			}
+		};
+		window.addEventListener( 'scroll', requestPaint, { passive: true } );
+		window.addEventListener( 'resize', requestPaint );
+		paint();
+
+		// الروابط داخل الواجهة (مثل «صمّم خزانتك») تعمل حتى قبل اكتمال الحركة.
+		doorHero.addEventListener( 'focusin', function () {
+			if ( ! doorHero.classList.contains( 'content-on' ) ) {
+				window.scrollTo( 0, doorHero.offsetTop + doorHero.offsetHeight - window.innerHeight );
+			}
+		} );
+	}
+
+	/* صورة المجموعة تتبع المؤشر */
+	var list = doc.querySelector( '[data-collection-list]' );
+	var floating = doc.querySelector( '.collection-float' );
+	if ( list && floating && window.matchMedia( '(hover: hover)' ).matches ) {
+		var floatImg = floating.querySelector( 'img' );
+		list.addEventListener( 'mousemove', function ( e ) {
+			floating.style.setProperty( '--x', ( e.clientX - 130 ) + 'px' );
+			floating.style.setProperty( '--y', ( e.clientY - 160 ) + 'px' );
+		} );
+		list.querySelectorAll( '.collection-row[data-img]' ).forEach( function ( row ) {
+			row.addEventListener( 'mouseenter', function () {
+				floatImg.src = row.getAttribute( 'data-img' );
+				floating.classList.add( 'is-on' );
+			} );
+			row.addEventListener( 'mouseleave', function () {
+				floating.classList.remove( 'is-on' );
+			} );
+		} );
+	}
+
 	/* ظهور تدريجي للأقسام */
-	var revealTargets = doc.querySelectorAll( '.section .section-head, .cat-card, .feature, .custom-media, .custom-content, .review-card, .faq-item, .woocommerce ul.products li.product' );
+	var revealTargets = doc.querySelectorAll( '.section .section-head, .manifesto-text, .manifesto-list li, .collection-row, .config-head, .process-head, .process-steps li, .review-card, .faq-item, .finale-title, .woocommerce ul.products li.product' );
 	if ( 'IntersectionObserver' in window && revealTargets.length ) {
 		var io = new IntersectionObserver( function ( entries ) {
 			entries.forEach( function ( entry ) {

@@ -55,7 +55,7 @@ add_action( 'after_setup_theme', 'optimum_content_width', 0 );
 function optimum_assets() {
 	wp_enqueue_style(
 		'optimum-fonts',
-		'https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Noto+Kufi+Arabic:wght@600;700;800&display=swap',
+		'https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Noto+Kufi+Arabic:wght@600;700;800&family=Reem+Kufi:wght@500;600;700&display=swap',
 		array(),
 		null
 	);
@@ -63,6 +63,10 @@ function optimum_assets() {
 
 	if ( class_exists( 'WooCommerce' ) ) {
 		wp_enqueue_style( 'optimum-woocommerce', OPTIMUM_URI . '/assets/css/woocommerce.css', array( 'optimum-main' ), OPTIMUM_VERSION );
+	}
+
+	if ( is_front_page() ) {
+		wp_enqueue_style( 'optimum-home', OPTIMUM_URI . '/assets/css/home.css', array( 'optimum-main' ), OPTIMUM_VERSION );
 	}
 
 	wp_add_inline_style( 'optimum-main', optimum_customizer_css() );
@@ -111,6 +115,20 @@ function optimum_widgets_init() {
 	);
 }
 add_action( 'widgets_init', 'optimum_widgets_init' );
+
+/**
+ * رأس داكن فوق الواجهة السينمائية في الصفحة الرئيسية.
+ *
+ * @param array $classes الأصناف.
+ * @return array
+ */
+function optimum_body_classes( $classes ) {
+	if ( is_front_page() ) {
+		$classes[] = 'header-dark';
+	}
+	return $classes;
+}
+add_filter( 'body_class', 'optimum_body_classes' );
 
 /**
  * لون شريط المتصفح على الجوال.

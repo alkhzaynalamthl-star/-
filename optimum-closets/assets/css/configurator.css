@@ -1,0 +1,239 @@
+/* ==========================================================================
+   مصمم الخزانة التفاعلي
+   ========================================================================== */
+
+.config-section {
+	position: relative;
+	padding-block: clamp(64px, 9vw, 120px);
+	background:
+		radial-gradient(900px 500px at 70% 0%, rgb(201 164 92 / 12%), transparent 60%),
+		var(--c-ink);
+	color: var(--c-ivory);
+	overflow: hidden;
+}
+.config-head { max-width: 720px; margin-bottom: 48px; }
+.config-head .eyebrow { color: var(--c-gold); }
+.config-head .display-title { color: #fff; }
+.config-head .lead { color: rgb(244 236 225 / 72%); }
+.config-content { margin-top: 48px; color: rgb(244 236 225 / 80%); }
+
+.configurator {
+	display: grid;
+	grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+	gap: 28px;
+	align-items: start;
+}
+
+/* ---------- Stage ---------- */
+.cfg-stage {
+	position: sticky;
+	top: calc(var(--header-h) + 16px);
+	display: flex;
+	flex-direction: column;
+	gap: 14px;
+	padding: 24px;
+	min-height: 560px;
+	border: 1px solid rgb(255 255 255 / 8%);
+	border-radius: 28px;
+	background:
+		radial-gradient(60% 55% at 50% 38%, rgb(255 236 200 / 14%), transparent 70%),
+		linear-gradient(180deg, #221d18 0%, #16130f 100%);
+	box-shadow: inset 0 1px 0 rgb(255 255 255 / 5%), 0 40px 80px -40px rgb(0 0 0 / 70%);
+}
+.cfg-view {
+	align-self: center;
+	display: inline-flex;
+	padding: 4px;
+	border-radius: 999px;
+	background: rgb(255 255 255 / 6%);
+	border: 1px solid rgb(255 255 255 / 8%);
+}
+.cfg-view-btn {
+	min-height: 38px;
+	padding: 0 20px;
+	border: 0;
+	border-radius: 999px;
+	background: transparent;
+	color: rgb(244 236 225 / 70%);
+	font: 600 .9rem var(--f-body);
+	cursor: pointer;
+	transition: background-color .25s, color .25s;
+}
+.cfg-view-btn.is-active { background: var(--c-ivory); color: var(--c-ink); }
+
+.cfg-canvas { flex: 1; display: grid; place-items: center; min-height: 0; }
+.cfg-svg { width: 100%; height: auto; max-height: min(62vh, 620px); overflow: visible; }
+.cfg-svg text { font-family: var(--f-body); }
+
+.cfg-section { cursor: pointer; outline: none; }
+.cfg-hit { fill: transparent; stroke: transparent; stroke-width: 1.2; transition: fill .2s, stroke .2s; }
+.cfg-section:hover .cfg-hit,
+.cfg-section:focus-visible .cfg-hit { fill: rgb(201 164 92 / 10%); stroke: var(--c-gold); }
+.cfg-label {
+	font-size: 7px;
+	font-weight: 600;
+	fill: #3a332c;
+	opacity: 0;
+	transition: opacity .2s;
+	pointer-events: none;
+}
+.cfg-section:hover .cfg-label,
+.cfg-section:focus-visible .cfg-label { opacity: .9; }
+.cfg-led { mix-blend-mode: screen; pointer-events: none; }
+
+.cfg-door {
+	transition: transform .9s cubic-bezier(.65, 0, .25, 1), opacity .9s;
+	transform: scaleX(.06);
+	opacity: 0;
+	pointer-events: none;
+}
+.cfg-door-slide { transform: translateX(var(--slide)); }
+.is-closed .cfg-door { transform: none; opacity: 1; pointer-events: auto; cursor: pointer; }
+.cfg-doors { transition: opacity .3s; }
+
+.cfg-dims path { stroke: rgb(244 236 225 / 35%); stroke-width: .6; fill: none; }
+.cfg-dims text { fill: rgb(244 236 225 / 75%); font-size: 8px; font-weight: 600; }
+
+.cfg-hint {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 6px;
+	margin: 0;
+	color: rgb(244 236 225 / 55%);
+	font-size: .85rem;
+}
+.cfg-hint .icon { color: var(--c-gold); }
+
+/* ---------- Panel ---------- */
+.cfg-panel {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+}
+.cfg-step {
+	margin: 0;
+	padding: 20px 22px;
+	border: 1px solid rgb(255 255 255 / 8%);
+	border-radius: 20px;
+	background: rgb(255 255 255 / 3%);
+}
+.cfg-step legend {
+	float: inline-start;
+	width: 100%;
+	display: flex;
+	align-items: baseline;
+	gap: 10px;
+	margin-bottom: 14px;
+	padding: 0;
+	font-family: var(--f-head);
+	font-weight: 700;
+	font-size: 1.02rem;
+	color: var(--c-ivory);
+}
+.cfg-step legend + * { clear: both; }
+.cfg-num { font-family: var(--f-body); font-size: .75rem; font-weight: 600; letter-spacing: .08em; color: var(--c-gold); }
+.cfg-picked { margin-inline-start: auto; font-family: var(--f-body); font-style: normal; font-weight: 500; font-size: .85rem; color: rgb(244 236 225 / 65%); }
+
+.cfg-range { display: block; margin-bottom: 12px; font-weight: 400; }
+.cfg-range:last-child { margin-bottom: 0; }
+.cfg-range > span { display: block; margin-bottom: 6px; font-size: .9rem; color: rgb(244 236 225 / 70%); }
+.cfg-range output { color: var(--c-ivory); font-weight: 700; font-size: 1.05rem; }
+.cfg-range input[type="range"] {
+	width: 100%;
+	height: 28px;
+	margin: 0;
+	background: transparent;
+	-webkit-appearance: none;
+	appearance: none;
+	cursor: pointer;
+	direction: ltr;
+}
+.cfg-range input[type="range"]::-webkit-slider-runnable-track { height: 4px; border-radius: 4px; background: rgb(255 255 255 / 14%); }
+.cfg-range input[type="range"]::-moz-range-track { height: 4px; border-radius: 4px; background: rgb(255 255 255 / 14%); }
+.cfg-range input[type="range"]::-webkit-slider-thumb {
+	-webkit-appearance: none;
+	width: 22px; height: 22px;
+	margin-top: -9px;
+	border-radius: 50%;
+	border: 3px solid var(--c-ink);
+	background: var(--c-gold);
+	box-shadow: 0 0 0 1px var(--c-gold);
+}
+.cfg-range input[type="range"]::-moz-range-thumb { width: 18px; height: 18px; border-radius: 50%; border: 3px solid var(--c-ink); background: var(--c-gold); }
+
+.cfg-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.cfg-chips label { position: relative; font-weight: 500; }
+.cfg-chips input,
+.cfg-swatches input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.cfg-chips span {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	min-height: 42px;
+	padding: 0 16px;
+	border: 1px solid rgb(255 255 255 / 16%);
+	border-radius: 999px;
+	color: rgb(244 236 225 / 80%);
+	font-size: .92rem;
+	cursor: pointer;
+	transition: .2s;
+}
+.cfg-chips span:hover { border-color: rgb(255 255 255 / 40%); color: var(--c-ivory); }
+.cfg-chips input:checked + span { background: var(--c-ivory); border-color: var(--c-ivory); color: var(--c-ink); }
+.cfg-chips input:focus-visible + span,
+.cfg-swatches input:focus-visible + span { outline: 2px solid var(--c-gold); outline-offset: 2px; }
+.cfg-chips .dot { width: 12px; height: 12px; border-radius: 50%; background: var(--d); box-shadow: 0 0 0 1px rgb(255 255 255 / 30%); }
+
+.cfg-swatches { display: flex; flex-wrap: wrap; gap: 10px; }
+.cfg-swatches label { position: relative; }
+.cfg-swatches span:not(.screen-reader-text) {
+	display: block;
+	width: 42px; height: 42px;
+	border-radius: 50%;
+	background: var(--sw);
+	box-shadow: inset 0 0 0 1px rgb(255 255 255 / 18%), 0 4px 12px -4px rgb(0 0 0 / 60%);
+	cursor: pointer;
+	transition: transform .2s, box-shadow .2s;
+}
+.cfg-swatches span.is-grain { background: repeating-linear-gradient(100deg, rgb(255 255 255 / 0%) 0 3px, rgb(0 0 0 / 12%) 3px 4px, rgb(255 255 255 / 0%) 4px 7px), var(--sw); }
+.cfg-swatches span:not(.screen-reader-text):hover { transform: scale(1.08); }
+.cfg-swatches input:checked + span { box-shadow: 0 0 0 3px var(--c-ink), 0 0 0 5px var(--c-gold); }
+
+.cfg-summary { display: grid; gap: 12px; margin-top: 4px; }
+.cfg-estimate {
+	display: grid;
+	padding: 18px 22px;
+	border-radius: 20px;
+	background: linear-gradient(135deg, rgb(201 164 92 / 18%), rgb(201 164 92 / 4%));
+	border: 1px solid rgb(201 164 92 / 30%);
+}
+.cfg-estimate span { font-size: .88rem; color: rgb(244 236 225 / 70%); }
+.cfg-estimate strong { font-family: var(--f-head); font-size: 1.8rem; color: var(--c-ivory); line-height: 1.4; }
+.cfg-estimate small { color: rgb(244 236 225 / 55%); }
+.cfg-estimate[hidden] { display: none; }
+.cfg-reset {
+	justify-self: center;
+	padding: 6px 12px;
+	border: 0;
+	background: none;
+	color: rgb(244 236 225 / 55%);
+	font: 500 .88rem var(--f-body);
+	text-decoration: underline;
+	text-underline-offset: 4px;
+	cursor: pointer;
+}
+.cfg-reset:hover { color: var(--c-ivory); }
+.cfg-admin-note { margin: 0; padding: 14px; border: 1px dashed rgb(201 164 92 / 50%); border-radius: 14px; font-size: .88rem; color: var(--c-gold); }
+
+/* الصفحات الفاتحة (عند استخدام الكود المختصر داخل صفحة عادية) */
+.entry-content .configurator { padding: 20px; border-radius: 28px; background: var(--c-ink); color: var(--c-ivory); }
+
+@media (max-width: 960px) {
+	.configurator { grid-template-columns: 1fr; }
+	.cfg-stage { position: sticky; top: var(--header-h); z-index: 5; min-height: 0; padding: 12px 12px 10px; border-radius: 22px; }
+	.cfg-svg { max-height: 36vh; }
+	.cfg-hint { font-size: .78rem; }
+	.cfg-view-btn { min-height: 34px; padding: 0 16px; }
+	.cfg-step { padding: 16px; }
+}
