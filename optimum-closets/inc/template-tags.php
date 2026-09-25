@@ -226,12 +226,13 @@ function optimum_primary_nav( $context = 'header' ) {
 function optimum_language_switcher( $class = '' ) {
 	$other = optimum_is_en() ? 'ar' : 'en';
 	printf(
-		'<a class="lang-switch %1$s" href="%2$s" hreflang="%3$s" lang="%3$s">%4$s<span>%5$s</span></a>',
+		'<a class="lang-switch %1$s" href="%2$s" hreflang="%3$s" lang="%3$s">%4$s<span class="lang-long">%5$s</span><span class="lang-short" aria-hidden="true">%6$s</span></a>',
 		esc_attr( $class ),
 		esc_url( optimum_lang_url( $other ) ),
 		esc_attr( $other ),
 		optimum_icon( 'globe', 16 ), // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-		'en' === $other ? 'English' : 'العربية'
+		'en' === $other ? 'English' : 'العربية',
+		'en' === $other ? 'EN' : 'ع'
 	);
 }
 

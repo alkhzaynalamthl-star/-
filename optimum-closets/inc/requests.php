@@ -94,8 +94,10 @@ function optimum_normalise_mobile( $phone ) {
 function optimum_handle_request() {
 	// admin-post.php has no language in its URL: use the language of the page the form was on.
 	$GLOBALS['optimum_lang'] = isset( $_POST['oc_lang'] ) && 'en' === $_POST['oc_lang'] ? 'en' : 'ar'; // phpcs:ignore WordPress.Security.NonceVerification.Missing
-	if ( 'en' === $GLOBALS['optimum_lang'] ) {
-		switch_to_locale( 'en_US' );
+	switch_to_locale( 'en' === $GLOBALS['optimum_lang'] ? 'en_US' : 'ar' );
+	unload_textdomain( 'optimum' );
+	if ( 'ar' === $GLOBALS['optimum_lang'] ) {
+		load_textdomain( 'optimum', OPTIMUM_DIR . '/languages/ar.mo', 'ar' );
 	}
 	// phpcs:disable WordPress.Security.NonceVerification.Missing -- verified just below.
 	$kind     = isset( $_POST['oc_kind'] ) && 'contact' === $_POST['oc_kind'] ? 'contact' : 'design';

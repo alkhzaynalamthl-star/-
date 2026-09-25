@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Design Concepts — Optimum Closets</title>
+<title>Optimum Closets Design Directions</title>
 <meta name="description" content="Three design directions for the Optimum Closets store, compared, with a recommendation.">
 <link rel="stylesheet" href="../assets/fonts/fonts.css">
 <style>
@@ -40,6 +40,16 @@ table { width: 100%; border-collapse: collapse; font-size: 14px; margin-top: 8px
 th, td { text-align: start; padding: 10px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
 th { color: var(--muted); font-weight: 500; }
 .tablewrap { overflow-x: auto; }
+.store { padding-block: 8px 48px; border-top: 1px solid var(--line); }
+.store h2 { font-family: "Markazi Text", serif; font-weight: 600; font-size: 36px; margin: 28px 0 6px; }
+.store > p { color: var(--muted); max-width: 70ch; margin: 0 0 20px; }
+.store-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 18px; }
+.store-grid figure { margin: 0; display: grid; gap: 8px; align-content: start; }
+.store-grid a { display: block; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; background: var(--card); aspect-ratio: 4 / 3; }
+.store-grid img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+.store-grid figcaption { font-size: 14px; color: var(--muted); }
+.store-grid figcaption strong { display: block; color: var(--ink); font-weight: 600; }
+.checks { margin: 18px 0 0; padding-inline-start: 20px; color: var(--muted); font-size: 14.5px; display: grid; gap: 4px; }
 footer { color: var(--muted); font-size: 13px; padding-block: 0 40px; }
 @media (max-width: 860px) { .concept { grid-template-columns: 1fr; } }
 </style>
@@ -68,7 +78,7 @@ footer { color: var(--muted); font-size: 13px; padding-block: 0 40px; }
 				<dt data-i="palette">الألوان</dt><dd data-i="c1p">عاجي، إسبريسو، برونزي</dd>
 				<dt data-i="best">الأنسب لـ</dt><dd data-i="c1b">بناء الثقة والانطباع الفاخر، والطلبات عالية القيمة</dd>
 			</dl>
-			<div class="links"><a class="primary" href="atelier.html" data-i="openAr">افتح بالعربية</a><a href="atelier.html?lang=en" data-i="openEn">افتح بالإنجليزية</a></div>
+			<div class="links"><a class="primary" href="atelier.html#ar" data-i="openAr">افتح بالعربية</a><a href="atelier.html#en" data-i="openEn">افتح بالإنجليزية</a></div>
 		</div>
 	</section>
 
@@ -86,7 +96,7 @@ footer { color: var(--muted); font-size: 13px; padding-block: 0 40px; }
 				<dt data-i="palette">الألوان</dt><dd data-i="c2p">جوز داكن، ضوء نحاسي</dd>
 				<dt data-i="best">الأنسب لـ</dt><dd data-i="c2b">إبراز الخزائن الزجاجية والإضاءة والتقسيمات الداخلية</dd>
 			</dl>
-			<div class="links"><a class="primary" href="showroom.html" data-i="openAr">افتح بالعربية</a><a href="showroom.html?lang=en" data-i="openEn">افتح بالإنجليزية</a></div>
+			<div class="links"><a class="primary" href="showroom.html#ar" data-i="openAr">افتح بالعربية</a><a href="showroom.html#en" data-i="openEn">افتح بالإنجليزية</a></div>
 		</div>
 	</section>
 
@@ -104,7 +114,7 @@ footer { color: var(--muted); font-size: 13px; padding-block: 0 40px; }
 				<dt data-i="palette">الألوان</dt><dd data-i="c3p">رملي، طيني، أخضر عميق</dd>
 				<dt data-i="best">الأنسب لـ</dt><dd data-i="c3b">التصفح السريع ومقارنة الأسعار والشراء من الجوال</dd>
 			</dl>
-			<div class="links"><a class="primary" href="bayt.html" data-i="openAr">افتح بالعربية</a><a href="bayt.html?lang=en" data-i="openEn">افتح بالإنجليزية</a></div>
+			<div class="links"><a class="primary" href="bayt.html#ar" data-i="openAr">افتح بالعربية</a><a href="bayt.html#en" data-i="openEn">افتح بالإنجليزية</a></div>
 		</div>
 	</section>
 
@@ -126,6 +136,20 @@ footer { color: var(--muted); font-size: 13px; padding-block: 0 40px; }
 					<tr><th data-i="r4">الأداء على الجوال</th><td>●●●</td><td>●●○</td><td>●●●</td></tr>
 				</tbody>
 			</table>
+		</div>
+	</section>
+	<section class="store" id="store">
+		<h2 data-i="storeT">المتجر المبني على «أتيليه»</h2>
+		<p data-i="storeP">لقطات من المتجر الفعلي على ووردبريس وووكومرس (نسخة التطوير ببيانات تجريبية). المسار كامل ومختبر: من اختيار المواصفات إلى تأكيد الطلب، بالعربية والإنجليزية، على 375 و768 و1440 بكسل.</p>
+		<div class="store-grid">
+			<figure><a href="shots/store-home.webp"><img src="shots/store-home.webp" alt="" loading="lazy" data-alt-ar="الصفحة الرئيسية" data-alt-en="Homepage"></a><figcaption><strong data-i="s_home">الصفحة الرئيسية</strong><span data-i="s_homed">بطاقات الأقسام والمختارات والخامات والمعارض.</span></figcaption></figure>
+			<figure><a href="shots/store-shop.webp"><img src="shots/store-shop.webp" alt="" loading="lazy" data-alt-ar="المتجر والفلاتر" data-alt-en="Shop and filters"></a><figcaption><strong data-i="s_shop">المتجر والفلاتر</strong><span data-i="s_shopd">بحث وترتيب وفلاتر: نوع الأبواب، عرض الجدار، اللون، السعر.</span></figcaption></figure>
+			<figure><a href="shots/store-product.webp"><img src="shots/store-product.webp" alt="" loading="lazy" data-alt-ar="صفحة المنتج" data-alt-en="Product page"></a><figcaption><strong data-i="s_product">صفحة المنتج</strong><span data-i="s_productd">عرض من الداخل بنقاط تفاعلية، تبديل التشطيب، سعر يُحسب على الخادم.</span></figcaption></figure>
+			<figure><a href="shots/store-cart.webp"><img src="shots/store-cart.webp" alt="" loading="lazy" data-alt-ar="السلة" data-alt-en="Cart"></a><figcaption><strong data-i="s_cart">السلة</strong><span data-i="s_cartd">المواصفات المختارة لكل منتج، الكمية، والإجمالي شامل الضريبة.</span></figcaption></figure>
+			<figure><a href="shots/store-checkout.webp"><img src="shots/store-checkout.webp" alt="" loading="lazy" data-alt-ar="إتمام الطلب" data-alt-en="Checkout"></a><figcaption><strong data-i="s_checkout">إتمام الطلب</strong><span data-i="s_checkoutd">عنوان التركيب في جدة ومكة، وطريقة «معاينة — بدون دفع».</span></figcaption></figure>
+			<figure><a href="shots/store-confirm.webp"><img src="shots/store-confirm.webp" alt="" loading="lazy" data-alt-ar="تأكيد الطلب" data-alt-en="Confirmation"></a><figcaption><strong data-i="s_confirm">تأكيد الطلب</strong><span data-i="s_confirmd">يقول بوضوح إنه طلب معاينة ولم تُؤخذ أي دفعة.</span></figcaption></figure>
+			<figure><a href="shots/store-mtm.webp"><img src="shots/store-mtm.webp" alt="" loading="lazy" data-alt-ar="التصميم بالمقاس" data-alt-en="Made to measure"></a><figcaption><strong data-i="s_mtm">التصميم بالمقاس</strong><span data-i="s_mtmd">المقاسات وصور المكان وبيانات التواصل، مع تحقق من الخادم.</span></figcaption></figure>
+			<figure><a href="shots/store-mobile.webp"><img src="shots/store-mobile.webp" alt="" loading="lazy" data-alt-ar="على الجوال" data-alt-en="On mobile"></a><figcaption><strong data-i="s_mobile">على الجوال</strong><span data-i="s_mobiled">صفحة المنتج بعرض 375 بكسل مع شريط الشراء الثابت.</span></figcaption></figure>
 		</div>
 	</section>
 	<footer data-i="foot">الصور مجسّمات ثلاثية الأبعاد توضيحية أُنشئت لهذا المشروع، والأسعار تجريبية. ستُستبدل بصور منتجات وأعمال الخزائن الأمثل الفعلية.</footer>
@@ -152,11 +176,21 @@ footer { color: var(--muted); font-size: 13px; padding-block: 0 40px; }
 		rec2: 'From Bayt: compact cards, fast filters and sorting, and clear prices on the product listing.',
 		rec3: 'The other two directions stay available to preview, and the store’s default direction can be switched in the WordPress Customizer.',
 		r1: 'Feel', r1a: 'Premium, calm', r1b: 'Theatrical, technical', r1c: 'Warm, practical', r2: 'Shopping speed', r3: 'Shows interiors', r4: 'Mobile performance',
+		s_home: 'Homepage', s_homed: 'Categories, featured products, materials and showrooms.',
+		s_shop: 'Shop and filters', s_shopd: 'Search, sorting and filters: door type, wall width, colour, price.',
+		s_product: 'Product page', s_productd: 'See-inside view with hotspots, finish switching, server-computed price.',
+		s_cart: 'Cart', s_cartd: 'Chosen options per line, quantity, totals including VAT.',
+		s_checkout: 'Checkout', s_checkoutd: 'Installation address for Jeddah & Makkah, and the “Preview — no payment” method.',
+		s_confirm: 'Confirmation', s_confirmd: 'Says plainly it is a preview order and no payment was taken.',
+		s_mtm: 'Made to measure', s_mtmd: 'Measurements, photos of the space and contact details, validated on the server.',
+		s_mobile: 'On mobile', s_mobiled: 'Product page at 375 px with the sticky buy bar.',
+		storeT: 'The store, built on “Atelier”',
+		storeP: 'Screenshots of the working WordPress / WooCommerce store (development copy with demo data). The whole journey is tested, from choosing options to order confirmation, in Arabic and English at 375, 768 and 1440 px.',
 		foot: 'Images are illustrative 3D renders created for this project, and prices are demo values. They will be replaced with Optimum Closets’ actual product and project photos.'
 	};
 	var ar = {};
 	document.querySelectorAll( '[data-i]' ).forEach( function ( el ) { ar[ el.getAttribute( 'data-i' ) ] = el.innerHTML; } );
-	var lang = new URLSearchParams( location.search ).get( 'lang' ) === 'en' ? 'en' : 'ar';
+	var lang = ( new URLSearchParams( location.search ).get( 'lang' ) === 'en' || location.hash === '#en' ) ? 'en' : 'ar';
 	function apply() {
 		var d = lang === 'en' ? en : ar;
 		document.documentElement.lang = lang;
@@ -166,9 +200,10 @@ footer { color: var(--muted); font-size: 13px; padding-block: 0 40px; }
 			if ( d[ k ] !== undefined ) { el.innerHTML = d[ k ]; }
 		} );
 		document.querySelectorAll( '.links a, a.shot' ).forEach( function ( a ) {
-			if ( a.classList.contains( 'shot' ) ) { a.href = a.getAttribute( 'href' ).split( '?' )[ 0 ] + ( lang === 'en' ? '?lang=en' : '?lang=ar' ); }
+			if ( a.classList.contains( 'shot' ) ) { a.href = a.getAttribute( 'href' ).split( /[?#]/ )[ 0 ] + '#' + lang; }
 		} );
 		document.getElementById( 'lang' ).textContent = lang === 'en' ? 'العربية' : 'English';
+		document.querySelectorAll( 'img[data-alt-ar]' ).forEach( function ( img ) { img.alt = img.getAttribute( lang === 'en' ? 'data-alt-en' : 'data-alt-ar' ); } );
 		document.querySelectorAll( 'img[data-alt]' ).forEach( function ( img ) {
 			var n = img.getAttribute( 'data-alt' );
 			var name = { c1: 'Atelier', c2: 'Showroom', c3: 'Bayt' }[ n.slice( 0, 2 ) ];
@@ -177,7 +212,7 @@ footer { color: var(--muted); font-size: 13px; padding-block: 0 40px; }
 	}
 	document.getElementById( 'lang' ).addEventListener( 'click', function () {
 		lang = lang === 'en' ? 'ar' : 'en';
-		var u = new URL( location.href ); u.searchParams.set( 'lang', lang ); history.replaceState( null, '', u );
+		try { var u = new URL( location.href ); u.hash = lang; u.searchParams.delete( 'lang' ); history.replaceState( null, '', u ); } catch ( e ) {}
 		apply();
 	} );
 	apply();

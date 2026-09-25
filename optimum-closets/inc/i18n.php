@@ -160,6 +160,19 @@ add_filter( 'home_url', 'optimum_home_url_prefix', 10, 2 );
  * @return string
  */
 function optimum_add_lang_prefix( $url, $lang ) {
+	// Relative URLs (e.g. WooCommerce's wc-ajax endpoint uses home_url( '/', 'relative' )).
+	if ( '' !== $url && '/' === $url[0] && ( ! isset( $url[1] ) || '/' !== $url[1] ) ) {
+		$base = untrailingslashit( optimum_home_path() );
+		if ( '' !== $base && 0 !== strpos( $url, $base . '/' ) && $url !== $base ) {
+			return $url;
+		}
+		$rest = (string) substr( $url, strlen( $base ) );
+		$rest = preg_replace( '#^/en(?=/|\?|\#|$)#', '', $rest );
+		if ( 'en' === $lang ) {
+			$rest = '/en' . ( '' === $rest ? '/' : $rest );
+		}
+		return $base . ( '' === $rest ? '/' : $rest );
+	}
 	$home  = untrailingslashit( get_option( 'home' ) );
 	$home2 = preg_replace( '#^https?:#', '', $home );
 	$check = preg_replace( '#^https?:#', '', $url );

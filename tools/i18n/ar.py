@@ -221,6 +221,7 @@ AR = {
     "Show results": "اعرض النتائج",
     "Clear all": "مسح الكل",
     "Fits %s cm": "يناسب %s سم",
+    "Price %1$s to %2$s": "السعر من %1$s إلى %2$s",
     "Active filters": "الفلاتر المفعّلة",
     "Remove filter": "إزالة الفلتر",
     "All wardrobes": "كل الخزائن",

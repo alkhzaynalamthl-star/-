@@ -61,12 +61,18 @@ const pages = ( args.pages || 'home' ).split( ',' );
 				}
 				errors.length = 0;
 				await page.goto( url, { waitUntil: 'networkidle' } ).catch( ( e ) => errors.push( 'goto ' + e.message ) );
+				await page.waitForLoadState( 'networkidle' );
 				await page.evaluate( async () => {
 					document.querySelectorAll( '.reveal' ).forEach( ( el ) => el.classList.add( 'is-in' ) );
-					document.querySelectorAll( 'img[loading="lazy"]' ).forEach( ( i ) => { i.loading = 'eager'; } );
+					// Headless full-page captures don't paint lazy images: load them all up front.
+					document.querySelectorAll( 'img' ).forEach( ( i ) => {
+						i.removeAttribute( 'loading' );
+						if ( ( i.getAttribute( 'sizes' ) || '' ).indexOf( 'auto' ) === 0 ) { i.setAttribute( 'sizes', i.getAttribute( 'sizes' ).replace( /^auto,\s*/, '' ) ); }
+						const s = i.currentSrc || i.src; if ( s ) { const n = new Image(); n.src = s; }
+					} );
 					for ( let y = 0; y < document.body.scrollHeight; y += 700 ) { window.scrollTo( 0, y ); await new Promise( ( r ) => setTimeout( r, 60 ) ); }
 					window.scrollTo( 0, 0 );
-				} );
+				} ).catch( ( e ) => errors.push( 'scroll: ' + e.message.slice( 0, 80 ) ) );
 				await page.waitForLoadState( 'networkidle' );
 				await page.waitForFunction( () => [ ...document.images ].every( ( i ) => i.complete ), null, { timeout: 15000 } ).catch( () => {} );
 				await page.waitForTimeout( 300 );

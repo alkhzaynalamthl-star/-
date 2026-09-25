@@ -40,7 +40,7 @@ $optimum_transparent = is_front_page() && 'bayt' !== optimum_concept();
 		</nav>
 
 		<div class="header-actions">
-			<?php optimum_language_switcher( 'hide-sm' ); ?>
+			<?php optimum_language_switcher( 'header-lang' ); ?>
 			<button class="icon-btn search-toggle" type="button" aria-controls="header-search" aria-expanded="false">
 				<?php echo optimum_icon( 'search' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 				<span class="screen-reader-text"><?php esc_html_e( 'Search', 'optimum' ); ?></span>

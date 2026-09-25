@@ -207,7 +207,8 @@ function optimum_active_filter_chips() {
 	}
 	if ( $v['min_price'] || $v['max_price'] ) {
 		$chips[] = array(
-			wp_strip_all_tags( ( $v['min_price'] ? wc_price( $v['min_price'] ) : '0' ) . ' – ' . ( $v['max_price'] ? wc_price( $v['max_price'] ) : '∞' ) ),
+			/* translators: 1: minimum price, 2: maximum price */
+			wp_strip_all_tags( sprintf( __( 'Price %1$s to %2$s', 'optimum' ), $v['min_price'] ? wc_price( $v['min_price'] ) : '0', $v['max_price'] ? wc_price( $v['max_price'] ) : '∞' ) ),
 			remove_query_arg( array( 'min_price', 'max_price' ) ),
 		);
 	}

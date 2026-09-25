@@ -1001,7 +1001,7 @@ def hero_wide(res=(2400, 1200)):
     hs, _ = build_wardrobe(-1.5, 3.0, door="glass", finish="walnut", frame="bronze", glass="bronze", open_doors=(3,))
     downlights([-1.0, 1.0], -0.6)
     area_light("fill", (2.4, -4.2, 1.8), (math.radians(70), 0, math.radians(35)), 3.0, 170, k=4500)
-    c = camera((0.0, -6.2, 1.25), (0.0, 0.3, 1.25), lens=30, shift_y=0.07, res=res)
+    c = camera((0.0, -5.0, 1.3), (0.0, 0.3, 1.3), lens=30, shift_y=0.05, res=res)
     return hs, c
 
 
@@ -1017,10 +1017,13 @@ def detail_scene(kind, res=(1200, 1200)):
     hs = Hotspots()
     if kind == "handle":
         build_wardrobe(-1.2, 2.4, door="hinged", finish="oak", handle="brass", layouts=["hang_double", "shelves"])
-        c = camera((0.35, -0.55, 1.25), (0.02, 0.0, 1.12), lens=70, res=res, dof=(0.62, 2.8))
+        # Door 2 is hinged on the left, so its bar handle sits near x = +0.54 m.
+        c = camera((0.86, -0.62, 1.28), (0.55, 0.0, 1.1), lens=65, res=res, dof=(0.7, 3.2))
     elif kind == "glass-frame":
         build_wardrobe(-1.2, 2.4, door="glass", finish="walnut", frame="bronze", glass="bronze", layouts=["hang_long", "shelves"])
         c = camera((-0.3, -0.7, 1.05), (0.0, 0.0, 0.95), lens=60, res=res, dof=(0.78, 3.2))
+        bpy.context.scene.view_settings.exposure = -0.7
+        area_light("frame_key", (-0.9, -1.2, 1.4), (math.radians(65), 0, math.radians(-35)), 1.2, 90, k=4000)
     elif kind == "led-shelf":
         build_wardrobe(-1.2, 2.4, door="glass", finish="walnut", frame="bronze", glass="bronze", open_doors=(0, 1, 2, 3), layouts=["shelves", "shelves"])
         c = camera((-0.45, -0.75, 1.55), (-0.6, 0.3, 1.3), lens=55, res=res, dof=(1.0, 2.8))

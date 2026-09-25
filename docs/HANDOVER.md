@@ -83,7 +83,7 @@ The brand site (optimum-closets.com), Instagram and the Facebook page **could no
 
 ## 4. Design references
 
-The two sites named in the brief could not be browsed: **motionsites.ai** and **21st.dev** were both blocked by the environment's network policy. motionsites.ai is also mostly a paid prompt library. What each offers was checked through search results only. The references below were used for specific ideas, and no code or assets were copied.
+The two sites named in the brief could not be browsed: **motionsites.ai** and **21st.dev** were both blocked by the environment's network policy. motionsites.ai is also mostly a paid prompt library. The motionsites MCP server (`xgdzyqfalbibzelpdpvr.supabase.co`) could not be added either, for the same reason: allow the domain under the environment's network access settings, then add it in a new session. What each offers was checked through search results only. The references below were used for specific ideas, and no code or assets were copied.
 
 | # | Reference | Element that inspired us | Used in |
 |---|---|---|---|
@@ -129,6 +129,8 @@ Tested in Chromium at 375, 768 and 1440 px in Arabic and English (results in `do
 - The request form validates on the server (Saudi mobile format, dimensions, photo type, size and count, consent, honeypot and timing trap). It stores the request privately with the photos and tells the customer exactly what happened.
 - Keyboard: the skip link, menus, mega menu (Esc), drawer (focus trap), filter sheet, tabs (arrow keys), the closed/open toggle (arrow keys), hotspots (Enter), and zoom (Esc, +/−). `prefers-reduced-motion` turns off reveals and the hero curtain.
 
+**Development-environment notes.** The dev store runs WooCommerce on SQLite, so one WooCommerce core query (the refunds lookup in order e-mails) logs a harmless SQLite "datatype mismatch" error. This does not happen on MySQL. The dev store also cannot send e-mail, which is why request notifications there report "could not be confirmed" whenever preview mode is off.
+
 ## 8. Integrations still required
 
 1. **Payment gateway** with server-side verification (webhook or callback), for example Moyasar, HyperPay, Tap or PayTabs for mada, Visa/Mastercard and Apple Pay, plus Tabby or Tamara if instalments are wanted. After it is live, turn **off** preview mode.
@@ -138,7 +140,7 @@ Tested in Chromium at 375, 768 and 1440 px in Arabic and English (results in `do
 5. **Request handling:** an e-mail recipient (Customizer → Requests & integrations) and working SMTP (for example WP Mail SMTP with the company mailbox). Optionally, a CRM or ticketing webhook URL plus `OPTIMUM_WEBHOOK_SECRET` in `wp-config.php`.
 6. **Arabic language packs** on the live site (Settings → General → Site language: العربية, then Dashboard → Updates). The theme's fallback covers WooCommerce's customer-facing strings until then.
 7. **Multilingual plugin decision:** if the live site already uses Polylang or WPML for `/en/`, keep it (the theme detects it). Otherwise the built-in layer is used and English content is entered in the "English version" boxes.
-8. **nginx only:** deny `/wp-content/uploads/oc-requests/` (Apache is covered by the bundled `.htaccess`).
+8. **nginx only:** deny `/wp-content/uploads/oc-requests/` (Apache is covered by the bundled `.htaccess`; PHP's built-in dev server ignores it, so use the dev store for testing only).
 9. **Security review** of the current live site: search engines index spam pages on the domain (for example "Schrader … TPMS … Tire Pressure Sensor", "LiTime … Lithium Battery Charger"). Check for injected content before migrating.
 
 ## 9. Moving to the live site without breaking anything

@@ -116,13 +116,13 @@ const money = ( s ) => +String( s ).replace( /[^\d.]/g, '' );
 	await page.fill( '#billing_address_1', 'Al-Naeem, Prince Sultan St' );
 	await page.waitForTimeout( 1500 );
 	const pm = await page.$$eval( '.wc_payment_method', ( a ) => a.map( ( x ) => x.textContent.trim().slice( 0, 60 ) ) );
-	ok( pm.length === 1 && /(Preview|معاينة)/.test( pm[ 0 ] ), `only the preview method is offered: ${ pm.join( ' | ' ) }` );
+	ok( pm.length === 1 && ( lang === 'en' ? /Preview order/ : /طلب معاينة/ ).test( pm[ 0 ] ), `only the preview method is offered, in the page language: ${ pm.join( ' | ' ).replace( /\s+/g, ' ' ).slice( 0, 80 ) }` );
 	await shot( '03-checkout' );
 	await page.click( '#place_order' );
 	await page.waitForURL( /order-received/, { timeout: 20000 } ).catch( () => {} );
 	await page.waitForLoadState( 'networkidle' );
 	const confirm = await page.textContent( '.confirm-card' ).catch( () => '' );
-	ok( /(Preview order recorded|تم تسجيل طلب معاينة)/.test( confirm ), 'confirmation says “preview order”, not “payment received”' );
+	ok( ( lang === 'en' ? /Preview order recorded/ : /تم تسجيل طلب معاينة/ ).test( confirm ), 'confirmation says “preview order” (in the page language), not “payment received”' );
 	ok( ! /(payment was received|تم استلام الدفعة)/.test( confirm ), 'no false payment claim' );
 	await shot( '04-confirmation' );
 

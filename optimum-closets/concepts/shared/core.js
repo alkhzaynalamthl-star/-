@@ -10,7 +10,8 @@
 	var params = new URLSearchParams( location.search );
 	var stored = null;
 	try { stored = localStorage.getItem( 'oc-lang' ); } catch ( e ) {}
-	var lang = params.get( 'lang' ) || stored || 'ar';
+	var hash = ( location.hash || '' ).replace( '#', '' );
+	var lang = params.get( 'lang' ) || ( hash === 'en' || hash === 'ar' ? hash : '' ) || stored || 'ar';
 	if ( lang !== 'en' ) { lang = 'ar'; }
 
 	var OC = window.OC = {
@@ -51,9 +52,12 @@
 		setLang: function ( l ) {
 			lang = l === 'en' ? 'en' : 'ar';
 			try { localStorage.setItem( 'oc-lang', lang ); } catch ( e ) {}
-			var u = new URL( location.href );
-			u.searchParams.set( 'lang', lang );
-			history.replaceState( null, '', u );
+			try {
+				var u = new URL( location.href );
+				u.hash = lang;
+				u.searchParams.delete( 'lang' );
+				history.replaceState( null, '', u );
+			} catch ( e ) {}
 			OC.apply();
 		},
 		apply: function () {

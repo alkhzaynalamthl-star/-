@@ -1,4 +1,104 @@
 {
+ "bespoke-wall-wide": {
+  "w": 2400,
+  "h": 1200,
+  "sizes": [
+   960,
+   1600,
+   2400
+  ],
+  "fallback": 1600,
+  "alt": {
+   "ar": "جدار خزائن مفصّل بالمقاس بلون كشميري مع تسريحة من البلوط ومرآة دائرية",
+   "en": "Made-to-measure wardrobe wall in cashmere with an oak vanity niche and round mirror"
+  },
+  "source": "render"
+ },
+ "bespoke-wall": {
+  "w": 1200,
+  "h": 1500,
+  "sizes": [
+   400,
+   800,
+   1200
+  ],
+  "fallback": 800,
+  "alt": {
+   "ar": "جدار خزائن مفصّل بالمقاس بلون كشميري مع تسريحة من البلوط ومرآة دائرية",
+   "en": "Made-to-measure wardrobe wall in cashmere with an oak vanity niche and round mirror"
+  },
+  "source": "render"
+ },
+ "detail-drawer": {
+  "w": 1200,
+  "h": 1200,
+  "sizes": [
+   600,
+   1200
+  ],
+  "fallback": 1200,
+  "alt": {
+   "ar": "أدراج داخلية من الجوز بمقابض برونزية",
+   "en": "Walnut interior drawers with bronze pulls"
+  },
+  "source": "render"
+ },
+ "detail-glass-frame": {
+  "w": 1200,
+  "h": 1200,
+  "sizes": [
+   600,
+   1200
+  ],
+  "fallback": 1200,
+  "alt": {
+   "ar": "زاوية إطار ألمنيوم برونزي نحيف مع زجاج برونزي",
+   "en": "Corner of a slim bronze aluminium frame with bronze glass"
+  },
+  "source": "render"
+ },
+ "detail-handle": {
+  "w": 1200,
+  "h": 1200,
+  "sizes": [
+   600,
+   1200
+  ],
+  "fallback": 1200,
+  "alt": {
+   "ar": "مقبض نحاسي مصقول على باب من البلوط الطبيعي",
+   "en": "Brushed brass bar handle on a natural oak door"
+  },
+  "source": "render"
+ },
+ "detail-led-shelf": {
+  "w": 1200,
+  "h": 1200,
+  "sizes": [
+   600,
+   1200
+  ],
+  "fallback": 1200,
+  "alt": {
+   "ar": "أرفف بإضاءة LED مدمجة داخل خزانة زجاجية",
+   "en": "Shelves with integrated LED strips inside a glass wardrobe"
+  },
+  "source": "render"
+ },
+ "detail-sliding-profile": {
+  "w": 1200,
+  "h": 1200,
+  "sizes": [
+   600,
+   1200
+  ],
+  "fallback": 1200,
+  "alt": {
+   "ar": "مقطع الباب المنزلق مع البروفايل البرونزي والمسار العلوي",
+   "en": "Sliding door edge profile and top track in bronze"
+  },
+  "source": "render"
+ },
  "glass-black-closed": {
   "w": 1200,
   "h": 1500,
@@ -133,6 +233,36 @@
   },
   "source": "render"
  },
+ "hinged-cashmere-open-drawers": {
+  "w": 1200,
+  "h": 1500,
+  "sizes": [
+   400,
+   800,
+   1200
+  ],
+  "fallback": 800,
+  "alt": {
+   "ar": "خزانة ملابس بأبواب خشبية مفصلية بتشطيب كشميري مطفي، بأبواب مفتوحة تُظهر أدراج داخلية وأرفف",
+   "en": "Hinged wooden-door wardrobe in matt cashmere with doors open showing interior drawers and shelves"
+  },
+  "source": "render"
+ },
+ "hinged-cashmere-open-long": {
+  "w": 1200,
+  "h": 1500,
+  "sizes": [
+   400,
+   800,
+   1200
+  ],
+  "fallback": 800,
+  "alt": {
+   "ar": "خزانة ملابس بأبواب خشبية مفصلية بتشطيب كشميري مطفي، بأبواب مفتوحة تُظهر علّاقة طويلة للثياب والعبايات وأرفف",
+   "en": "Hinged wooden-door wardrobe in matt cashmere with doors open showing long hanging for thobes and abayas plus shelves"
+  },
+  "source": "render"
+ },
  "hinged-cashmere-open": {
   "w": 1200,
   "h": 1500,
@@ -163,6 +293,36 @@
   },
   "source": "render"
  },
+ "hinged-oak-open-drawers": {
+  "w": 1200,
+  "h": 1500,
+  "sizes": [
+   400,
+   800,
+   1200
+  ],
+  "fallback": 800,
+  "alt": {
+   "ar": "خزانة ملابس بأبواب خشبية مفصلية بتشطيب بلوط طبيعي، بأبواب مفتوحة تُظهر أدراج داخلية وأرفف",
+   "en": "Hinged wooden-door wardrobe in natural oak with doors open showing interior drawers and shelves"
+  },
+  "source": "render"
+ },
+ "hinged-oak-open-long": {
+  "w": 1200,
+  "h": 1500,
+  "sizes": [
+   400,
+   800,
+   1200
+  ],
+  "fallback": 800,
+  "alt": {
+   "ar": "خزانة ملابس بأبواب خشبية مفصلية بتشطيب بلوط طبيعي، بأبواب مفتوحة تُظهر علّاقة طويلة للثياب والعبايات وأرفف",
+   "en": "Hinged wooden-door wardrobe in natural oak with doors open showing long hanging for thobes and abayas plus shelves"
+  },
+  "source": "render"
+ },
  "hinged-oak-open": {
   "w": 1200,
   "h": 1500,
@@ -190,6 +350,36 @@
   "alt": {
    "ar": "خزانة ملابس بأبواب خشبية مفصلية بتشطيب جوز مدخّن ومقابض نحاسية، بأبواب مغلقة",
    "en": "Hinged wooden-door wardrobe in smoked walnut with brass bar handles, with doors closed"
+  },
+  "source": "render"
+ },
+ "hinged-walnut-open-drawers": {
+  "w": 1200,
+  "h": 1500,
+  "sizes": [
+   400,
+   800,
+   1200
+  ],
+  "fallback": 800,
+  "alt": {
+   "ar": "خزانة ملابس بأبواب خشبية مفصلية بتشطيب جوز مدخّن، بأبواب مفتوحة تُظهر أدراج داخلية وأرفف",
+   "en": "Hinged wooden-door wardrobe in smoked walnut with doors open showing interior drawers and shelves"
+  },
+  "source": "render"
+ },
+ "hinged-walnut-open-long": {
+  "w": 1200,
+  "h": 1500,
+  "sizes": [
+   400,
+   800,
+   1200
+  ],
+  "fallback": 800,
+  "alt": {
+   "ar": "خزانة ملابس بأبواب خشبية مفصلية بتشطيب جوز مدخّن، بأبواب مفتوحة تُظهر علّاقة طويلة للثياب والعبايات وأرفف",
+   "en": "Hinged wooden-door wardrobe in smoked walnut with doors open showing long hanging for thobes and abayas plus shelves"
   },
   "source": "render"
  },
@@ -295,6 +485,219 @@
   "alt": {
    "ar": "خزانة ملابس بأبواب منزلقة بتشطيب جوز مدخّن ولوح زجاجي أوسط، مع باب منزلق مفتوح يُظهر الرف والعلّاقات",
    "en": "Sliding-door wardrobe in smoked walnut with a glass centre panel, with one sliding panel open showing shelves and hanging space"
+  },
+  "source": "render"
+ },
+ "swatch-cashmere": {
+  "w": 600,
+  "h": 600,
+  "sizes": [
+   160,
+   320
+  ],
+  "fallback": 320,
+  "alt": {
+   "ar": "عينة تشطيب كشميري مطفي",
+   "en": "Matt cashmere finish sample"
+  },
+  "source": "render"
+ },
+ "swatch-frame-black": {
+  "w": 600,
+  "h": 600,
+  "sizes": [
+   160,
+   320
+  ],
+  "fallback": 320,
+  "alt": {
+   "ar": "عينة إطار أسود",
+   "en": "Black frame sample"
+  },
+  "source": "render"
+ },
+ "swatch-frame-bronze": {
+  "w": 600,
+  "h": 600,
+  "sizes": [
+   160,
+   320
+  ],
+  "fallback": 320,
+  "alt": {
+   "ar": "عينة إطار برونزي",
+   "en": "Bronze frame sample"
+  },
+  "source": "render"
+ },
+ "swatch-frame-champagne": {
+  "w": 600,
+  "h": 600,
+  "sizes": [
+   160,
+   320
+  ],
+  "fallback": 320,
+  "alt": {
+   "ar": "عينة إطار شمبانيا",
+   "en": "Champagne frame sample"
+  },
+  "source": "render"
+ },
+ "swatch-glass-bronze": {
+  "w": 600,
+  "h": 600,
+  "sizes": [
+   160,
+   320
+  ],
+  "fallback": 320,
+  "alt": {
+   "ar": "عينة زجاج برونزي",
+   "en": "Bronze glass sample"
+  },
+  "source": "render"
+ },
+ "swatch-glass-clear": {
+  "w": 600,
+  "h": 600,
+  "sizes": [
+   160,
+   320
+  ],
+  "fallback": 320,
+  "alt": {
+   "ar": "عينة زجاج شفاف",
+   "en": "Clear glass sample"
+  },
+  "source": "render"
+ },
+ "swatch-glass-fluted": {
+  "w": 600,
+  "h": 600,
+  "sizes": [
+   160,
+   320
+  ],
+  "fallback": 320,
+  "alt": {
+   "ar": "عينة زجاج ساتان",
+   "en": "Satin glass sample"
+  },
+  "source": "render"
+ },
+ "swatch-glass-smoked": {
+  "w": 600,
+  "h": 600,
+  "sizes": [
+   160,
+   320
+  ],
+  "fallback": 320,
+  "alt": {
+   "ar": "عينة زجاج مدخّن",
+   "en": "Smoked glass sample"
+  },
+  "source": "render"
+ },
+ "swatch-graphite": {
+  "w": 600,
+  "h": 600,
+  "sizes": [
+   160,
+   320
+  ],
+  "fallback": 320,
+  "alt": {
+   "ar": "عينة تشطيب جرافيت",
+   "en": "Graphite finish sample"
+  },
+  "source": "render"
+ },
+ "swatch-oak": {
+  "w": 600,
+  "h": 600,
+  "sizes": [
+   160,
+   320
+  ],
+  "fallback": 320,
+  "alt": {
+   "ar": "عينة تشطيب بلوط طبيعي",
+   "en": "Natural oak finish sample"
+  },
+  "source": "render"
+ },
+ "swatch-walnut": {
+  "w": 600,
+  "h": 600,
+  "sizes": [
+   160,
+   320
+  ],
+  "fallback": 320,
+  "alt": {
+   "ar": "عينة تشطيب جوز مدخّن",
+   "en": "Smoked walnut finish sample"
+  },
+  "source": "render"
+ },
+ "walkin-cashmere-angle": {
+  "w": 1200,
+  "h": 1500,
+  "sizes": [
+   400,
+   800,
+   1200
+  ],
+  "fallback": 800,
+  "alt": {
+   "ar": "غرفة ملابس (ووك إن) بتشطيب كشميري مطفي مع جزيرة أدراج وإضاءة معلّقة",
+   "en": "Walk-in closet in matt cashmere with a drawer island and pendant light"
+  },
+  "source": "render"
+ },
+ "walkin-oak-mobile": {
+  "w": 1080,
+  "h": 1440,
+  "sizes": [
+   540,
+   1080
+  ],
+  "fallback": 1080,
+  "alt": {
+   "ar": "غرفة ملابس (ووك إن) من البلوط الطبيعي بواجهة زجاجية وجزيرة أدراج وإضاءة معلّقة",
+   "en": "Natural oak walk-in closet with a glass-fronted wall, drawer island and pendant light"
+  },
+  "source": "render"
+ },
+ "walkin-oak-wide": {
+  "w": 2400,
+  "h": 1200,
+  "sizes": [
+   960,
+   1600,
+   2400
+  ],
+  "fallback": 1600,
+  "alt": {
+   "ar": "غرفة ملابس (ووك إن) من البلوط الطبيعي بواجهة زجاجية وجزيرة أدراج وإضاءة معلّقة",
+   "en": "Natural oak walk-in closet with a glass-fronted wall, drawer island and pendant light"
+  },
+  "source": "render"
+ },
+ "walkin-walnut-angle": {
+  "w": 1200,
+  "h": 1500,
+  "sizes": [
+   400,
+   800,
+   1200
+  ],
+  "fallback": 800,
+  "alt": {
+   "ar": "غرفة ملابس (ووك إن) بتشطيب جوز مدخّن مع جزيرة أدراج وإضاءة معلّقة",
+   "en": "Walk-in closet in smoked walnut with a drawer island and pendant light"
   },
   "source": "render"
  }

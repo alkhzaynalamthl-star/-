@@ -1,16 +1,16 @@
 {
  "hero-glass-wide": {
   "rail_double": [
-   36.7,
-   69.2
+   33.6,
+   68.1
   ],
   "shelf_led": [
    50.0,
-   62.4
+   59.7
   ],
   "rail_long": [
-   63.3,
-   40.7
+   66.4,
+   32.9
   ]
  },
  "hero-glass-mobile": {
@@ -229,6 +229,158 @@
   "rail_long": [
    72.3,
    33.2
+  ]
+ },
+ "walkin-oak-wide": {
+  "rail_long": [
+   34.5,
+   34.0
+  ],
+  "shelf_led": [
+   50.0,
+   55.1
+  ],
+  "rail_double": [
+   65.4,
+   61.7
+  ],
+  "island": [
+   50.0,
+   72.7
+  ]
+ },
+ "walkin-oak-mobile": {
+  "rail_long": [
+   25.5,
+   41.2
+  ],
+  "shelf_led": [
+   49.8,
+   53.6
+  ],
+  "rail_double": [
+   75.1,
+   57.7
+  ],
+  "island": [
+   45.6,
+   64.6
+  ]
+ },
+ "walkin-walnut-angle": {
+  "rail_long": [
+   32.4,
+   35.4
+  ],
+  "shelf_led": [
+   55.2,
+   48.3
+  ],
+  "rail_double": [
+   81.5,
+   53.0
+  ],
+  "island": [
+   42.5,
+   59.7
+  ]
+ },
+ "walkin-cashmere-angle": {
+  "rail_long": [
+   32.4,
+   35.4
+  ],
+  "shelf_led": [
+   55.2,
+   48.3
+  ],
+  "rail_double": [
+   81.5,
+   53.0
+  ],
+  "island": [
+   42.5,
+   59.7
+  ]
+ },
+ "bespoke-wall": {
+  "rail_double": [
+   18.4,
+   55.4
+  ],
+  "shelf_led": [
+   87.9,
+   50.8
+  ]
+ },
+ "bespoke-wall-wide": {
+  "rail_double": [
+   24.7,
+   60.7
+  ],
+  "shelf_led": [
+   80.3,
+   51.6
+  ]
+ },
+ "hinged-oak-open-long": {
+  "rail_long": [
+   36.5,
+   34.4
+  ],
+  "shelf_led": [
+   66.9,
+   50.8
+  ]
+ },
+ "hinged-oak-open-drawers": {
+  "drawers": [
+   36.4,
+   67.4
+  ],
+  "shelf_led": [
+   66.9,
+   50.8
+  ]
+ },
+ "hinged-walnut-open-long": {
+  "rail_long": [
+   36.5,
+   34.4
+  ],
+  "shelf_led": [
+   66.9,
+   50.8
+  ]
+ },
+ "hinged-walnut-open-drawers": {
+  "drawers": [
+   36.4,
+   67.4
+  ],
+  "shelf_led": [
+   66.9,
+   50.8
+  ]
+ },
+ "hinged-cashmere-open-long": {
+  "rail_long": [
+   36.5,
+   34.4
+  ],
+  "shelf_led": [
+   66.9,
+   50.8
+  ]
+ },
+ "hinged-cashmere-open-drawers": {
+  "drawers": [
+   36.4,
+   67.4
+  ],
+  "shelf_led": [
+   66.9,
+   50.8
   ]
  }
 }

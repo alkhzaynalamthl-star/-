@@ -140,12 +140,6 @@ msgstr "بحث"
 msgid "My account"
 msgstr "حسابي"
 
-msgid "Search wardrobes"
-msgstr "ابحث في الخزائن"
-
-msgid "Search: glass wardrobe, sliding doors, walnut…"
-msgstr "ابحث: خزانة زجاجية، أبواب منزلقة، جوز…"
-
 msgid "Menu"
 msgstr "القائمة"
 
@@ -596,6 +590,9 @@ msgstr "صورة"
 msgid "Made-to-measure wardrobes and walk-in closets in Jeddah and Makkah"
 msgstr "خزائن ملابس وغرف ملابس مفصّلة بالمقاس في جدة ومكة"
 
+msgid "Search results for: %s"
+msgstr "نتائج البحث عن: %s"
+
 msgid "Wardrobes with wooden or glass hinged doors, sliding wardrobes, walk-in closets and made-to-measure designs. Free consultation and measurement in Jeddah and Makkah."
 msgstr "خزائن بأبواب خشبية أو زجاجية، وخزائن بأبواب منزلقة، وغرف ملابس، وتصاميم بالمقاس. استشارة وقياس مجاني في جدة ومكة."
 
@@ -664,6 +661,9 @@ msgstr "مسح الكل"
 
 msgid "Fits %s cm"
 msgstr "يناسب %s سم"
+
+msgid "Price %1$s to %2$s"
+msgstr "السعر من %1$s إلى %2$s"
 
 msgid "Active filters"
 msgstr "الفلاتر المفعّلة"
@@ -776,9 +776,6 @@ msgstr "نستخدم بياناتك لمعالجة طلبك وترتيب الق�
 msgid "We use your details to manage your account and orders, as described in our [privacy_policy]."
 msgstr "نستخدم بياناتك لإدارة حسابك وطلباتك، كما هو موضّح في [privacy_policy]."
 
-msgid "Search results for: %s"
-msgstr "نتائج البحث عن: %s"
-
 msgid "Journal"
 msgstr "المدونة"
 
@@ -793,6 +790,12 @@ msgstr "لا توجد نتائج"
 
 msgid "Try different words."
 msgstr "جرّب كلمات أخرى."
+
+msgid "Search wardrobes"
+msgstr "ابحث في الخزائن"
+
+msgid "Search: glass wardrobe, sliding doors, walnut…"
+msgstr "ابحث: خزانة زجاجية، أبواب منزلقة، جوز…"
 
 msgid "Your message was saved"
 msgstr "تم حفظ رسالتك"
