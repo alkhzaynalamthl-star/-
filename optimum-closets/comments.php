@@ -1,6 +1,6 @@
 <?php
 /**
- * التعليقات.
+ * Comments.
  *
  * @package Optimum
  */
@@ -15,8 +15,8 @@ if ( post_password_required() ) {
 	<?php if ( have_comments() ) : ?>
 		<h2 class="comments-title">
 			<?php
-			/* translators: %s: عدد التعليقات */
-			echo esc_html( sprintf( _n( '%s تعليق', '%s تعليقات', get_comments_number(), 'optimum' ), number_format_i18n( get_comments_number() ) ) );
+			/* translators: %s: number of comments */
+			echo esc_html( sprintf( _n( '%s comment', '%s comments', get_comments_number(), 'optimum' ), optimum_num( get_comments_number() ) ) );
 			?>
 		</h2>
 		<ol class="comment-list">

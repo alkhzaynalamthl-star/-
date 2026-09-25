@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="ar" dir="rtl" data-img-base="../assets/img/renders/">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>Concept 2 · Showroom — Optimum Closets</title>
+<meta name="description" content="Design concept 2: an interactive showroom that reveals wardrobe interiors as you browse.">
+<link rel="stylesheet" href="../assets/fonts/fonts.css">
+<link rel="stylesheet" href="showroom.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip</a>
+<div class="demo-bar" role="note"><span data-t="demo"></span></div>
+
+<header class="hdr">
+	<div class="wrap hdr-in">
+		<a class="logo" href="#top"><span class="logo-ar">الخزائن الأمثل</span><span class="logo-en">Optimum Closets</span></a>
+		<nav class="nav" aria-label="Main">
+			<a href="#types" data-t="products"></a>
+			<a href="#studio" data-t="materials"></a>
+			<a href="#bespoke" data-t="bespoke"></a>
+			<a href="#showrooms" data-t="showrooms"></a>
+		</nav>
+		<div class="hdr-actions">
+			<button class="pill" type="button" data-lang-toggle><span data-t="lang"></span></button>
+			<a class="ico" href="#search" data-t-attr="aria-label:search"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></a>
+			<a class="ico cart" href="#cart" data-t-attr="aria-label:cart"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 8h14l-1 12H6z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="cart-n">0</span></a>
+		</div>
+	</div>
+</header>
+
+<main id="main">
+	<section class="scene" id="top" aria-labelledby="scene-h">
+		<div class="stage">
+			<div class="stage-media" id="stage-media" aria-live="polite"></div>
+			<div class="hotspots" id="hotspots"></div>
+			<div class="wrap stage-copy">
+				<p class="kicker" data-t="kicker"></p>
+				<h1 id="scene-h" data-t="heroTitle"></h1>
+				<p class="lede" data-t="heroText"></p>
+				<div class="ctas">
+					<a class="btn btn-brass" href="#cards" data-t="shop"></a>
+					<a class="btn btn-glass" href="#bespoke" data-t="bespoke"></a>
+				</div>
+			</div>
+			<div class="wrap stage-ui">
+				<div class="seg" role="radiogroup" data-t-attr="aria-label:doorType" id="type-seg"></div>
+				<div class="seg seg-state" role="radiogroup" data-t-attr="aria-label:inside">
+					<button type="button" role="radio" data-state="closed" data-t="closed"></button>
+					<button type="button" role="radio" data-state="open" data-t="open"></button>
+				</div>
+				<p class="hint" data-t="scrollHint"></p>
+			</div>
+		</div>
+	</section>
+
+	<section class="types wrap" id="types" aria-labelledby="types-h">
+		<header class="sec-head">
+			<h2 id="types-h" data-t="categories"></h2>
+			<div class="rail-nav">
+				<button class="ico" type="button" data-rail="-1" data-t-attr="aria-label:prev"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M15 6l-6 6 6 6"/></svg></button>
+				<button class="ico" type="button" data-rail="1" data-t-attr="aria-label:next"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 6l6 6-6 6"/></svg></button>
+			</div>
+		</header>
+		<div class="rail" id="rail" tabindex="0"></div>
+	</section>
+
+	<section class="studio" id="studio" aria-labelledby="studio-h">
+		<div class="wrap studio-in">
+			<div class="studio-copy">
+				<p class="kicker" data-t="materials"></p>
+				<h2 id="studio-h" data-t="studioTitle"></h2>
+				<p class="muted" data-t="studioText"></p>
+				<div class="fin-list" id="fin-list" role="radiogroup"></div>
+			</div>
+			<div class="studio-media" id="studio-media"></div>
+		</div>
+	</section>
+
+	<section class="wrap featured" aria-labelledby="cards-h">
+		<header class="sec-head">
+			<h2 id="cards-h" data-t="featured"></h2>
+			<span class="tag" data-t="cardPreview"></span>
+		</header>
+		<div class="cards" id="cards"></div>
+	</section>
+
+	<section class="wrap process" aria-labelledby="proc-h">
+		<header class="sec-head"><h2 id="proc-h" data-t="process"></h2></header>
+		<ol class="timeline" id="timeline"><span class="tl-fill" aria-hidden="true"></span></ol>
+	</section>
+
+	<section class="bespoke wrap" id="bespoke">
+		<div class="bespoke-card">
+			<div class="bespoke-media" id="bespoke-media"></div>
+			<div class="bespoke-copy">
+				<p class="kicker" data-t="bespokeKicker"></p>
+				<h2 data-t="bespokeTitle"></h2>
+				<p class="muted" data-t="bespokeText"></p>
+				<a class="btn btn-brass" href="#showrooms" data-t="bespoke"></a>
+			</div>
+		</div>
+	</section>
+
+	<section class="wrap showrooms" id="showrooms" aria-labelledby="show-h">
+		<header class="sec-head"><h2 id="show-h" data-t="showrooms"></h2></header>
+		<div class="show-grid" id="show"></div>
+	</section>
+</main>
+
+<footer class="ftr">
+	<div class="wrap ftr-in">
+		<a class="logo" href="#top"><span class="logo-ar">الخزائن الأمثل</span><span class="logo-en">Optimum Closets</span></a>
+		<p id="ftr-contact"></p>
+		<p class="muted">© 2026 · <span data-t="footerNote"></span></p>
+	</div>
+</footer>
+
+<script src="../assets/img/renders/images.js"></script>
+<script src="shared/data.js"></script>
+<script>
+Object.assign( OC_DATA.strings, {
+	kicker: { ar: 'صالة العرض التفاعلية', en: 'The interactive showroom' },
+	scrollHint: { ar: 'مرّر للأسفل لتنفتح الأبواب', en: 'Scroll to open the doors' },
+	doorType: { ar: 'نوع الأبواب', en: 'Door type' },
+	prev: { ar: 'السابق', en: 'Previous' },
+	next: { ar: 'التالي', en: 'Next' },
+	studioTitle: { ar: 'الخزانة نفسها، بثلاث شخصيات', en: 'One wardrobe, three characters' },
+	studioText: { ar: 'اختر التشطيب وشاهد الصورة المطابقة له تمامًا: نفس الأبعاد، نفس المقابض، خامة مختلفة.', en: 'Pick a finish and see its exact matching image: same dimensions, same handles, a different material.' },
+	bespokeKicker: { ar: 'بالمقاس', en: 'Made to measure' },
+	bespokeTitle: { ar: 'مساحتك ليست قياسية؟ خزانتك أيضًا.', en: 'Your room isn’t standard? Neither is your wardrobe.' },
+	bespokeText: { ar: 'أرسل المقاسات وصور المكان، ونقترح لك تصميمًا وتسعيرًا مبدئيًا.', en: 'Send measurements and photos of the space; we will propose a design and an initial quote.' },
+	visit: { ar: 'احجز زيارة للمعرض', en: 'Book a showroom visit' },
+	hs_rail_double: { ar: 'علّاقتان مزدوجتان للقمصان والبناطيل', en: 'Double hanging for shirts and trousers' },
+	hs_shelf_led: { ar: 'رف بإضاءة LED دافئة', en: 'Shelf with a warm LED strip' },
+	hs_rail_long: { ar: 'علّاقة طويلة للثياب والعبايات', en: 'Long hanging for thobes and abayas' },
+	hs_drawers: { ar: 'أدراج بإغلاق هادئ', en: 'Soft-close drawers' },
+	hs_shoes: { ar: 'رفوف للأحذية', en: 'Shoe shelves' },
+	hs_island: { ar: 'جزيرة أدراج بسطح زجاجي', en: 'Drawer island with glass top' }
+} );
+</script>
+<script src="shared/core.js"></script>
+<script src="showroom.js"></script>
+</body>
+</html>

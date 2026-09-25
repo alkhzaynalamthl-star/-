@@ -1,109 +1,86 @@
 <?php
 /**
- * التذييل.
+ * Footer.
  *
  * @package Optimum
  */
 
 defined( 'ABSPATH' ) || exit;
-
-$optimum_phone   = optimum_mod( 'phone' );
-$optimum_email   = optimum_mod( 'email' );
-$optimum_address = optimum_mod( 'address' );
-$optimum_hours   = optimum_mod( 'hours' );
-$optimum_wa      = optimum_whatsapp_url( __( 'مرحباً، أرغب بالاستفسار عن الخزائن', 'optimum' ) );
-$optimum_pay     = array_filter( array_map( 'trim', explode( ',', (string) optimum_mod( 'payment_methods' ) ) ) );
+$optimum_ph = optimum_phone();
 ?>
 </main>
 
 <footer class="site-footer">
 	<div class="container footer-grid">
-		<div class="footer-col footer-about">
-			<a class="brand-text brand-light" href="<?php echo esc_url( home_url( '/' ) ); ?>"><span class="brand-name"><?php bloginfo( 'name' ); ?></span></a>
-			<p><?php echo esc_html( optimum_mod( 'footer_about' ) ); ?></p>
-			<?php optimum_social_links(); ?>
+		<div class="footer-brand">
+			<a class="brand" href="<?php echo esc_url( home_url( '/' ) ); ?>">
+				<span class="brand-ar" lang="ar">الخزائن الأمثل</span>
+				<span class="brand-en" lang="en">Optimum Closets</span>
+			</a>
+			<p><?php esc_html_e( 'Wardrobes and walk-in closets, designed, made and installed in Jeddah and Makkah.', 'optimum' ); ?></p>
+			<?php optimum_language_switcher( 'footer-lang' ); ?>
 		</div>
 
-		<div class="footer-col">
-			<h3 class="footer-title"><?php esc_html_e( 'تسوّق', 'optimum' ); ?></h3>
+		<div>
+			<h2 class="footer-title"><?php esc_html_e( 'Our Products', 'optimum' ); ?></h2>
+			<ul class="footer-links">
+				<?php foreach ( optimum_product_categories() as $optimum_cat ) : ?>
+					<li><a href="<?php echo esc_url( get_term_link( $optimum_cat ) ); ?>"><?php echo esc_html( $optimum_cat->name ); ?></a></li>
+				<?php endforeach; ?>
+			</ul>
+		</div>
+
+		<div>
+			<h2 class="footer-title"><?php esc_html_e( 'Showrooms', 'optimum' ); ?></h2>
+			<ul class="footer-links">
+				<?php foreach ( optimum_showrooms() as $optimum_s ) : ?>
+					<li><strong><?php echo esc_html( $optimum_s['city'] ); ?></strong><br><?php echo esc_html( $optimum_s['address'] ); ?></li>
+				<?php endforeach; ?>
+			</ul>
+		</div>
+
+		<div>
+			<h2 class="footer-title"><?php esc_html_e( 'Contact', 'optimum' ); ?></h2>
+			<ul class="footer-links">
+				<li><a href="<?php echo esc_url( $optimum_ph['href'] ); ?>"><bdi dir="ltr"><?php echo esc_html( $optimum_ph['label'] ); ?></bdi></a></li>
+				<li><a href="mailto:<?php echo esc_attr( optimum_mod( 'email' ) ); ?>"><?php echo esc_html( optimum_mod( 'email' ) ); ?></a></li>
+				<?php if ( optimum_mod( 'instagram' ) ) : ?>
+					<li><a href="<?php echo esc_url( optimum_mod( 'instagram' ) ); ?>" rel="noopener" target="_blank">Instagram</a></li>
+				<?php endif; ?>
+				<li><a href="<?php echo esc_url( optimum_page_url( 'made-to-measure' ) ); ?>"><?php esc_html_e( 'Request a made-to-measure design', 'optimum' ); ?></a></li>
+			</ul>
 			<?php
 			wp_nav_menu(
 				array(
 					'theme_location' => 'footer',
 					'container'      => false,
+					'menu_class'     => 'footer-links footer-menu',
 					'depth'          => 1,
-					'fallback_cb'    => 'optimum_fallback_menu',
+					'fallback_cb'    => '__return_false',
 				)
 			);
 			?>
 		</div>
-
-		<div class="footer-col">
-			<h3 class="footer-title"><?php esc_html_e( 'خدمة العملاء', 'optimum' ); ?></h3>
-			<?php
-			if ( has_nav_menu( 'footer2' ) ) {
-				wp_nav_menu(
-					array(
-						'theme_location' => 'footer2',
-						'container'      => false,
-						'depth'          => 1,
-					)
-				);
-			} elseif ( class_exists( 'WooCommerce' ) ) {
-				echo '<ul class="menu">';
-				printf( '<li><a href="%s">%s</a></li>', esc_url( wc_get_page_permalink( 'myaccount' ) ), esc_html__( 'حسابي', 'optimum' ) );
-				printf( '<li><a href="%s">%s</a></li>', esc_url( wc_get_cart_url() ), esc_html__( 'سلة المشتريات', 'optimum' ) );
-				$optimum_privacy = get_privacy_policy_url();
-				if ( $optimum_privacy ) {
-					printf( '<li><a href="%s">%s</a></li>', esc_url( $optimum_privacy ), esc_html__( 'سياسة الخصوصية', 'optimum' ) );
-				}
-				echo '</ul>';
-			}
-			?>
-		</div>
-
-		<div class="footer-col">
-			<h3 class="footer-title"><?php esc_html_e( 'تواصل معنا', 'optimum' ); ?></h3>
-			<ul class="contact-list">
-				<?php if ( $optimum_wa ) : ?>
-					<li><?php echo optimum_icon( 'whatsapp', 18 ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?><a href="<?php echo esc_url( $optimum_wa ); ?>" target="_blank" rel="noopener"><?php esc_html_e( 'واتساب', 'optimum' ); ?></a></li>
-				<?php endif; ?>
-				<?php if ( $optimum_phone ) : ?>
-					<li><?php echo optimum_icon( 'phone', 18 ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?><a href="tel:<?php echo esc_attr( $optimum_phone ); ?>" dir="ltr"><?php echo esc_html( $optimum_phone ); ?></a></li>
-				<?php endif; ?>
-				<?php if ( $optimum_email ) : ?>
-					<li><?php echo optimum_icon( 'mail', 18 ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?><a href="mailto:<?php echo esc_attr( antispambot( $optimum_email ) ); ?>"><?php echo esc_html( antispambot( $optimum_email ) ); ?></a></li>
-				<?php endif; ?>
-				<?php if ( $optimum_address ) : ?>
-					<li><?php echo optimum_icon( 'pin', 18 ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?><span><?php echo esc_html( $optimum_address ); ?></span></li>
-				<?php endif; ?>
-				<?php if ( $optimum_hours ) : ?>
-					<li><?php echo optimum_icon( 'clock', 18 ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?><span><?php echo esc_html( $optimum_hours ); ?></span></li>
-				<?php endif; ?>
-			</ul>
-		</div>
 	</div>
-
-	<div class="footer-bottom">
-		<div class="container footer-bottom-inner">
-			<p>&copy; <?php echo esc_html( wp_date( 'Y' ) ); ?> <?php bloginfo( 'name' ); ?>. <?php esc_html_e( 'جميع الحقوق محفوظة.', 'optimum' ); ?></p>
-			<?php if ( $optimum_pay ) : ?>
-				<ul class="payment-badges" aria-label="<?php esc_attr_e( 'وسائل الدفع', 'optimum' ); ?>">
-					<?php foreach ( $optimum_pay as $optimum_method ) : ?>
-						<li><?php echo esc_html( $optimum_method ); ?></li>
-					<?php endforeach; ?>
-				</ul>
-			<?php endif; ?>
-		</div>
+	<div class="container footer-base">
+		<span>© <?php echo esc_html( wp_date( 'Y' ) ); ?> <?php bloginfo( 'name' ); ?></span>
+		<?php if ( optimum_preview_mode() ) : ?>
+			<span><?php esc_html_e( 'Images marked “Illustrative render” are generated visualisations, not photos of completed projects.', 'optimum' ); ?></span>
+		<?php endif; ?>
 	</div>
 </footer>
 
-<?php if ( $optimum_wa ) : ?>
-	<a class="wa-float" href="<?php echo esc_url( $optimum_wa ); ?>" target="_blank" rel="noopener" aria-label="<?php esc_attr_e( 'تواصل معنا عبر واتساب', 'optimum' ); ?>">
-		<?php echo optimum_icon( 'whatsapp', 30 ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+<?php
+$optimum_wa = optimum_whatsapp_url( __( 'Hello, I would like to ask about your wardrobes', 'optimum' ) );
+if ( $optimum_wa ) :
+	?>
+	<a class="wa-float" href="<?php echo esc_url( $optimum_wa ); ?>" target="_blank" rel="noopener">
+		<?php echo optimum_icon( 'whatsapp', 26 ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+		<span class="screen-reader-text"><?php esc_html_e( 'Chat on WhatsApp', 'optimum' ); ?></span>
 	</a>
 <?php endif; ?>
 
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
 <?php wp_footer(); ?>
 </body>
 </html>

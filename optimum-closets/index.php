@@ -1,6 +1,6 @@
 <?php
 /**
- * القالب العام: المدونة والأرشيف والبحث.
+ * Blog, archives and search.
  *
  * @package Optimum
  */
@@ -14,14 +14,14 @@ get_header();
 		<h1 class="page-title">
 			<?php
 			if ( is_search() ) {
-				/* translators: %s: كلمة البحث */
-				printf( esc_html__( 'نتائج البحث عن: %s', 'optimum' ), '<span>' . esc_html( get_search_query() ) . '</span>' );
+				/* translators: %s: search terms */
+				printf( esc_html__( 'Search results for: %s', 'optimum' ), '<span>' . esc_html( get_search_query() ) . '</span>' );
 			} elseif ( is_archive() ) {
 				echo wp_kses_post( get_the_archive_title() );
 			} elseif ( is_home() && ! is_front_page() ) {
 				single_post_title();
 			} else {
-				esc_html_e( 'المدونة', 'optimum' );
+				esc_html_e( 'Journal', 'optimum' );
 			}
 			?>
 		</h1>
@@ -42,15 +42,15 @@ get_header();
 		<?php
 		the_posts_pagination(
 			array(
-				'prev_text' => esc_html__( 'السابق', 'optimum' ),
-				'next_text' => esc_html__( 'التالي', 'optimum' ),
+				'prev_text' => esc_html__( 'Previous', 'optimum' ),
+				'next_text' => esc_html__( 'Next', 'optimum' ),
 			)
 		);
 		?>
 	<?php else : ?>
 		<div class="empty-state">
-			<h2><?php esc_html_e( 'لا توجد نتائج', 'optimum' ); ?></h2>
-			<p><?php esc_html_e( 'جرّب البحث بكلمات أخرى.', 'optimum' ); ?></p>
+			<h2><?php esc_html_e( 'Nothing found', 'optimum' ); ?></h2>
+			<p><?php esc_html_e( 'Try different words.', 'optimum' ); ?></p>
 			<?php get_search_form(); ?>
 		</div>
 	<?php endif; ?>

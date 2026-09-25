@@ -1,18 +1,19 @@
 /*
-Theme Name: الخزائن الأمثل
+Theme Name: Optimum Closets
 Theme URI: https://optimum-closets.com/
-Author: الخزائن الأمثل
-Description: قالب ووكومرس عربي مخصص لمتجر الخزائن الأمثل: تصميم فاخر من اليمين لليسار، صفحة رئيسية بأقسام جاهزة، طلب عبر واتساب، شريط التوصيل المجاني، شارات الثقة، وصفحة دفع مبسطة.
-Version: 1.0.0
-Requires at least: 6.0
+Author: Optimum Closets
+Description: Bilingual (Arabic RTL / English LTR) WooCommerce theme for Optimum Closets — الخزائن الأمثل. Wardrobe configurator with server-side pricing, see-inside views, made-to-measure requests, showrooms, and three switchable design directions (Atelier, Showroom, Bayt).
+Version: 2.0.0
+Requires at least: 6.4
 Tested up to: 6.8
 Requires PHP: 7.4
-WC requires at least: 7.0
+WC requires at least: 8.6
 WC tested up to: 9.8
 License: GNU General Public License v2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: optimum
-Tags: e-commerce, rtl-language-support, custom-logo, custom-menu, featured-images, theme-options
+Domain Path: /languages
+Tags: e-commerce, rtl-language-support, translation-ready, custom-logo, featured-images
 */
 
-/* الأنماط الفعلية في assets/css/main.css و assets/css/woocommerce.css */
+/* Styles live in assets/css/store.css. */

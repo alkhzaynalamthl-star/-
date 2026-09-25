@@ -1,0 +1,301 @@
+{
+ "glass-black-closed": {
+  "w": 1200,
+  "h": 1500,
+  "sizes": [
+   400,
+   800,
+   1200
+  ],
+  "fallback": 800,
+  "alt": {
+   "ar": "خزانة ملابس بأبواب زجاجية وإطار ألمنيوم نحيف أسود وإضاءة داخلية، بأبواب مغلقة",
+   "en": "Glass-door wardrobe with a slim black aluminium frame and interior lighting, with doors closed"
+  },
+  "source": "render"
+ },
+ "glass-black-open": {
+  "w": 1200,
+  "h": 1500,
+  "sizes": [
+   400,
+   800,
+   1200
+  ],
+  "fallback": 800,
+  "alt": {
+   "ar": "خزانة ملابس بأبواب زجاجية وإطار ألمنيوم نحيف أسود وإضاءة داخلية، بأبواب مفتوحة تُظهر التقسيم الداخلي",
+   "en": "Glass-door wardrobe with a slim black aluminium frame and interior lighting, with doors open showing the interior layout"
+  },
+  "source": "render"
+ },
+ "glass-bronze-closed": {
+  "w": 1200,
+  "h": 1500,
+  "sizes": [
+   400,
+   800,
+   1200
+  ],
+  "fallback": 800,
+  "alt": {
+   "ar": "خزانة ملابس بأبواب زجاجية وإطار ألمنيوم نحيف برونزي وإضاءة داخلية، بأبواب مغلقة",
+   "en": "Glass-door wardrobe with a slim bronze aluminium frame and interior lighting, with doors closed"
+  },
+  "source": "render"
+ },
+ "glass-bronze-open": {
+  "w": 1200,
+  "h": 1500,
+  "sizes": [
+   400,
+   800,
+   1200
+  ],
+  "fallback": 800,
+  "alt": {
+   "ar": "خزانة ملابس بأبواب زجاجية وإطار ألمنيوم نحيف برونزي وإضاءة داخلية، بأبواب مفتوحة تُظهر التقسيم الداخلي",
+   "en": "Glass-door wardrobe with a slim bronze aluminium frame and interior lighting, with doors open showing the interior layout"
+  },
+  "source": "render"
+ },
+ "glass-champagne-closed": {
+  "w": 1200,
+  "h": 1500,
+  "sizes": [
+   400,
+   800,
+   1200
+  ],
+  "fallback": 800,
+  "alt": {
+   "ar": "خزانة ملابس بأبواب زجاجية وإطار ألمنيوم نحيف شمبانيا وإضاءة داخلية، بأبواب مغلقة",
+   "en": "Glass-door wardrobe with a slim champagne aluminium frame and interior lighting, with doors closed"
+  },
+  "source": "render"
+ },
+ "glass-champagne-open": {
+  "w": 1200,
+  "h": 1500,
+  "sizes": [
+   400,
+   800,
+   1200
+  ],
+  "fallback": 800,
+  "alt": {
+   "ar": "خزانة ملابس بأبواب زجاجية وإطار ألمنيوم نحيف شمبانيا وإضاءة داخلية، بأبواب مفتوحة تُظهر التقسيم الداخلي",
+   "en": "Glass-door wardrobe with a slim champagne aluminium frame and interior lighting, with doors open showing the interior layout"
+  },
+  "source": "render"
+ },
+ "hero-glass-mobile": {
+  "w": 1080,
+  "h": 1440,
+  "sizes": [
+   540,
+   1080
+  ],
+  "fallback": 1080,
+  "alt": {
+   "ar": "خزانة زجاجية بإطار برونزي وإضاءة دافئة في غرفة نوم هادئة",
+   "en": "Bronze-framed glass wardrobe with warm lighting in a calm bedroom"
+  },
+  "source": "render"
+ },
+ "hero-glass-wide": {
+  "w": 2400,
+  "h": 1200,
+  "sizes": [
+   960,
+   1600,
+   2400
+  ],
+  "fallback": 1600,
+  "alt": {
+   "ar": "خزانة زجاجية بإطار برونزي وإضاءة دافئة في غرفة نوم هادئة",
+   "en": "Bronze-framed glass wardrobe with warm lighting in a calm bedroom"
+  },
+  "source": "render"
+ },
+ "hinged-cashmere-closed": {
+  "w": 1200,
+  "h": 1500,
+  "sizes": [
+   400,
+   800,
+   1200
+  ],
+  "fallback": 800,
+  "alt": {
+   "ar": "خزانة ملابس بأبواب خشبية مفصلية بتشطيب كشميري مطفي ومقابض نحاسية، بأبواب مغلقة",
+   "en": "Hinged wooden-door wardrobe in matt cashmere with brass bar handles, with doors closed"
+  },
+  "source": "render"
+ },
+ "hinged-cashmere-open": {
+  "w": 1200,
+  "h": 1500,
+  "sizes": [
+   400,
+   800,
+   1200
+  ],
+  "fallback": 800,
+  "alt": {
+   "ar": "خزانة ملابس بأبواب خشبية مفصلية بتشطيب كشميري مطفي، بأبواب مفتوحة تُظهر علّاقتان مزدوجتان وأرفف",
+   "en": "Hinged wooden-door wardrobe in matt cashmere with doors open showing double hanging and shelves"
+  },
+  "source": "render"
+ },
+ "hinged-oak-closed": {
+  "w": 1200,
+  "h": 1500,
+  "sizes": [
+   400,
+   800,
+   1200
+  ],
+  "fallback": 800,
+  "alt": {
+   "ar": "خزانة ملابس بأبواب خشبية مفصلية بتشطيب بلوط طبيعي ومقابض نحاسية، بأبواب مغلقة",
+   "en": "Hinged wooden-door wardrobe in natural oak with brass bar handles, with doors closed"
+  },
+  "source": "render"
+ },
+ "hinged-oak-open": {
+  "w": 1200,
+  "h": 1500,
+  "sizes": [
+   400,
+   800,
+   1200
+  ],
+  "fallback": 800,
+  "alt": {
+   "ar": "خزانة ملابس بأبواب خشبية مفصلية بتشطيب بلوط طبيعي، بأبواب مفتوحة تُظهر علّاقتان مزدوجتان وأرفف",
+   "en": "Hinged wooden-door wardrobe in natural oak with doors open showing double hanging and shelves"
+  },
+  "source": "render"
+ },
+ "hinged-walnut-closed": {
+  "w": 1200,
+  "h": 1500,
+  "sizes": [
+   400,
+   800,
+   1200
+  ],
+  "fallback": 800,
+  "alt": {
+   "ar": "خزانة ملابس بأبواب خشبية مفصلية بتشطيب جوز مدخّن ومقابض نحاسية، بأبواب مغلقة",
+   "en": "Hinged wooden-door wardrobe in smoked walnut with brass bar handles, with doors closed"
+  },
+  "source": "render"
+ },
+ "hinged-walnut-open": {
+  "w": 1200,
+  "h": 1500,
+  "sizes": [
+   400,
+   800,
+   1200
+  ],
+  "fallback": 800,
+  "alt": {
+   "ar": "خزانة ملابس بأبواب خشبية مفصلية بتشطيب جوز مدخّن، بأبواب مفتوحة تُظهر علّاقتان مزدوجتان وأرفف",
+   "en": "Hinged wooden-door wardrobe in smoked walnut with doors open showing double hanging and shelves"
+  },
+  "source": "render"
+ },
+ "sliding-cashmere-closed": {
+  "w": 1200,
+  "h": 1500,
+  "sizes": [
+   400,
+   800,
+   1200
+  ],
+  "fallback": 800,
+  "alt": {
+   "ar": "خزانة ملابس بأبواب منزلقة بتشطيب كشميري مطفي ولوح زجاجي أوسط، بأبواب منزلقة مغلقة",
+   "en": "Sliding-door wardrobe in matt cashmere with a glass centre panel, with sliding doors closed"
+  },
+  "source": "render"
+ },
+ "sliding-cashmere-open": {
+  "w": 1200,
+  "h": 1500,
+  "sizes": [
+   400,
+   800,
+   1200
+  ],
+  "fallback": 800,
+  "alt": {
+   "ar": "خزانة ملابس بأبواب منزلقة بتشطيب كشميري مطفي ولوح زجاجي أوسط، مع باب منزلق مفتوح يُظهر الرف والعلّاقات",
+   "en": "Sliding-door wardrobe in matt cashmere with a glass centre panel, with one sliding panel open showing shelves and hanging space"
+  },
+  "source": "render"
+ },
+ "sliding-oak-closed": {
+  "w": 1200,
+  "h": 1500,
+  "sizes": [
+   400,
+   800,
+   1200
+  ],
+  "fallback": 800,
+  "alt": {
+   "ar": "خزانة ملابس بأبواب منزلقة بتشطيب بلوط طبيعي ولوح زجاجي أوسط، بأبواب منزلقة مغلقة",
+   "en": "Sliding-door wardrobe in natural oak with a glass centre panel, with sliding doors closed"
+  },
+  "source": "render"
+ },
+ "sliding-oak-open": {
+  "w": 1200,
+  "h": 1500,
+  "sizes": [
+   400,
+   800,
+   1200
+  ],
+  "fallback": 800,
+  "alt": {
+   "ar": "خزانة ملابس بأبواب منزلقة بتشطيب بلوط طبيعي ولوح زجاجي أوسط، مع باب منزلق مفتوح يُظهر الرف والعلّاقات",
+   "en": "Sliding-door wardrobe in natural oak with a glass centre panel, with one sliding panel open showing shelves and hanging space"
+  },
+  "source": "render"
+ },
+ "sliding-walnut-closed": {
+  "w": 1200,
+  "h": 1500,
+  "sizes": [
+   400,
+   800,
+   1200
+  ],
+  "fallback": 800,
+  "alt": {
+   "ar": "خزانة ملابس بأبواب منزلقة بتشطيب جوز مدخّن ولوح زجاجي أوسط، بأبواب منزلقة مغلقة",
+   "en": "Sliding-door wardrobe in smoked walnut with a glass centre panel, with sliding doors closed"
+  },
+  "source": "render"
+ },
+ "sliding-walnut-open": {
+  "w": 1200,
+  "h": 1500,
+  "sizes": [
+   400,
+   800,
+   1200
+  ],
+  "fallback": 800,
+  "alt": {
+   "ar": "خزانة ملابس بأبواب منزلقة بتشطيب جوز مدخّن ولوح زجاجي أوسط، مع باب منزلق مفتوح يُظهر الرف والعلّاقات",
+   "en": "Sliding-door wardrobe in smoked walnut with a glass centre panel, with one sliding panel open showing shelves and hanging space"
+  },
+  "source": "render"
+ }
+}

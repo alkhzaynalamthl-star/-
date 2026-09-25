@@ -1,6 +1,6 @@
 <?php
 /**
- * المقال المفرد.
+ * Single post.
  *
  * @package Optimum
  */
@@ -31,8 +31,8 @@ while ( have_posts() ) :
 		<?php
 		the_post_navigation(
 			array(
-				'prev_text' => '<span>' . esc_html__( 'السابق', 'optimum' ) . '</span> %title',
-				'next_text' => '<span>' . esc_html__( 'التالي', 'optimum' ) . '</span> %title',
+				'prev_text' => '<span>' . esc_html__( 'Previous', 'optimum' ) . '</span> %title',
+				'next_text' => '<span>' . esc_html__( 'Next', 'optimum' ) . '</span> %title',
 			)
 		);
 		if ( comments_open() || get_comments_number() ) {

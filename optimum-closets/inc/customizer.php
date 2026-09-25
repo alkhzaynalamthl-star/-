@@ -1,6 +1,10 @@
 <?php
 /**
- * إعدادات القالب في: المظهر ← تخصيص ← إعدادات الخزائن الأمثل.
+ * Customizer: Appearance → Customize → Optimum Closets.
+ *
+ * Defaults marked "confirmed" come from the company's public contact page
+ * (optimum-closets.com/en/contact-us) as indexed by search engines on
+ * 2026-09-25. Everything else is empty until the company confirms it.
  *
  * @package Optimum
  */
@@ -8,272 +12,141 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
- * القيم الافتراضية لكل الإعدادات.
+ * Default values.
  *
  * @return array
  */
 function optimum_defaults() {
 	return array(
-		// الألوان.
-		'color_primary'      => '#9a6a3f',
-		'color_accent'       => '#c8a15a',
-		'color_dark'         => '#1d1a16',
-
-		// التواصل.
-		'whatsapp'           => '',
-		'phone'              => '',
-		'email'              => '',
-		'address'            => '',
-		'hours'              => '',
-
-		// الشريط العلوي.
-		'announcement'       => 'توصيل وتركيب داخل المدينة • اطلب خزانتك بمقاساتك عبر واتساب',
-
-		// الواجهة الرئيسية.
-		'hero_eyebrow'       => 'تصميم • تفصيل • تركيب',
-		'hero_title'         => 'خزائن تُصمَّم لمساحتك، وتدوم معك',
-		'hero_text'          => 'غرف ملابس وخزائن جدارية ومطابخ بخامات مختارة وتشطيب متقن، نفصّلها على مقاسك ونركّبها في منزلك.',
-		'hero_btn_text'      => 'تسوّق الخزائن',
-		'hero_btn_url'       => '',
-		'hero_btn2_text'     => 'اطلب تصميمك الخاص',
-		'hero_image'         => '',
-
-		// المزايا.
-		'feature_1_title'    => 'تفصيل حسب المقاس',
-		'feature_1_text'     => 'نصمم الخزانة على أبعاد غرفتك بالضبط',
-		'feature_2_title'    => 'توصيل وتركيب',
-		'feature_2_text'     => 'فريقنا يوصل ويركّب في منزلك',
-		'feature_3_title'    => 'خامات مختارة',
-		'feature_3_text'     => 'أخشاب وإكسسوارات عالية الجودة',
-		'feature_4_title'    => 'دفع آمن',
-		'feature_4_text'     => 'وسائل دفع موثوقة ومحمية',
-
-		// قسم التفصيل.
-		'custom_title'       => 'خزانتك بمقاساتك، كما تتخيلها',
-		'custom_text'        => 'أرسل لنا مقاسات المساحة وصورة لها، ويجهّز لك مصممونا تصوراً وعرض سعر واضحاً قبل البدء.',
-		'custom_image'       => '',
-
-		// خطوات الطلب.
-		'step_1_title'       => 'أرسل المقاسات',
-		'step_1_text'        => 'صوّر المساحة وأرسل الأبعاد عبر واتساب.',
-		'step_2_title'       => 'استلم التصميم والسعر',
-		'step_2_text'        => 'نرسل لك تصوراً للخزانة وعرض سعر مفصلاً.',
-		'step_3_title'       => 'نصنّع ونركّب',
-		'step_3_text'        => 'نصنع خزانتك ونركبها في الموعد المتفق عليه.',
-
-		// الأسئلة الشائعة (لا يظهر السؤال إلا إذا كتبت إجابته).
-		'faq_1_q'            => 'كم تستغرق مدة التصنيع والتركيب؟',
-		'faq_1_a'            => '',
-		'faq_2_q'            => 'هل التركيب مشمول في السعر؟',
-		'faq_2_a'            => '',
-		'faq_3_q'            => 'ما مدة الضمان على الخزائن؟',
-		'faq_3_a'            => '',
-		'faq_4_q'            => 'ما هي طرق الدفع المتاحة؟',
-		'faq_4_a'            => '',
-		'faq_5_q'            => 'هل يمكن تعديل التصميم أو الألوان؟',
-		'faq_5_a'            => '',
-
-		// المتجر.
-		'free_shipping'      => 0,
-		'trust_1'            => 'توصيل وتركيب',
-		'trust_2'            => 'ضمان على المنتج',
-		'trust_3'            => 'دفع آمن',
-		'trust_4'            => 'دعم عبر واتساب',
-
-		// التذييل.
-		'footer_about'       => 'الخزائن الأمثل: تصميم وتفصيل وتركيب غرف الملابس والخزائن الجدارية والمطابخ بجودة عالية ولمسة عصرية.',
-		'payment_methods'    => '',
-		'instagram'          => '',
-		'snapchat'           => '',
-		'tiktok'             => '',
-		'x'                  => '',
+		'concept'         => 'atelier',
+		'preview_mode'    => true,
+		// Confirmed.
+		'phone'           => '+966541200434',
+		'email'           => 'info@optimum-closets.com',
+		'jeddah_ar'       => 'شارع الأمير سلطان، حي النعيم',
+		'jeddah_en'       => 'Prince Sultan Street, Al-Naeem District',
+		'makkah_ar'       => 'الطريق الدائري الثالث',
+		'makkah_en'       => 'Third Ring Road',
+		'lead_time_ar'    => 'من 2 إلى 4 أسابيع من اعتماد التصميم حتى التركيب',
+		'lead_time_en'    => '2–4 weeks from final design approval to installation',
+		// Not confirmed yet: left empty so nothing is invented.
+		'whatsapp'        => '',
+		'jeddah_map'      => 'https://www.google.com/maps/search/?api=1&query=Optimum+Closets+Prince+Sultan+Street+Al+Naeem+Jeddah',
+		'makkah_map'      => 'https://www.google.com/maps/search/?api=1&query=Optimum+Closets+Third+Ring+Road+Makkah',
+		'hours_ar'        => '',
+		'hours_en'        => '',
+		'instagram'       => 'https://www.instagram.com/optimum_closests/',
+		'hero_image'      => '',
+		'hero_image_m'    => '',
+		'hero_title_ar'   => '',
+		'hero_title_en'   => '',
+		'hero_text_ar'    => '',
+		'hero_text_en'    => '',
+		'request_email'   => '',
+		'request_webhook' => '',
 	);
 }
 
 /**
- * قراءة إعداد مع قيمته الافتراضية.
+ * Read a setting with its default.
  *
- * @param string $key المفتاح.
+ * @param string $key Key.
  * @return mixed
  */
 function optimum_mod( $key ) {
-	$defaults = optimum_defaults();
-	return get_theme_mod( $key, isset( $defaults[ $key ] ) ? $defaults[ $key ] : '' );
+	$d = optimum_defaults();
+	return get_theme_mod( $key, isset( $d[ $key ] ) ? $d[ $key ] : '' );
 }
 
 /**
- * تنظيف رقم الواتساب ليصبح أرقاماً فقط (بالصيغة الدولية).
+ * Read a bilingual setting (key_ar / key_en) for the current language.
  *
- * @param string $value الرقم.
+ * @param string $key      Base key.
+ * @param string $fallback Fallback when both are empty.
  * @return string
  */
-function optimum_sanitize_phone( $value ) {
-	$value = strtr( (string) $value, array_combine( array( '٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩' ), range( 0, 9 ) ) );
-	return preg_replace( '/[^0-9+]/', '', $value );
+function optimum_mod_i18n( $key, $fallback = '' ) {
+	$v = optimum_pick( optimum_mod( $key . '_ar' ), optimum_mod( $key . '_en' ) );
+	return '' !== (string) $v ? $v : $fallback;
 }
 
 /**
- * تسجيل الأقسام والإعدادات.
+ * Register the panel.
  *
- * @param WP_Customize_Manager $wp_customize مدير التخصيص.
+ * @param WP_Customize_Manager $c Manager.
  */
-function optimum_customize_register( $wp_customize ) {
-	$defaults = optimum_defaults();
+function optimum_customize_register( $c ) {
+	$d = optimum_defaults();
+	$c->add_panel( 'optimum', array( 'title' => __( 'Optimum Closets', 'optimum' ), 'priority' => 30 ) );
 
-	$wp_customize->add_panel(
-		'optimum',
+	$sections = array(
+		'optimum_design'    => __( 'Design & preview mode', 'optimum' ),
+		'optimum_contact'   => __( 'Contact & showrooms', 'optimum' ),
+		'optimum_home'      => __( 'Homepage hero', 'optimum' ),
+		'optimum_integrate' => __( 'Requests & integrations', 'optimum' ),
+	);
+	foreach ( $sections as $id => $title ) {
+		$c->add_section( $id, array( 'title' => $title, 'panel' => 'optimum' ) );
+	}
+
+	$choices = array();
+	foreach ( optimum_concepts() as $k => $v ) {
+		$choices[ $k ] = $v['label'];
+	}
+	$c->add_setting( 'concept', array( 'default' => 'atelier', 'sanitize_callback' => 'sanitize_key' ) );
+	$c->add_control( 'concept', array( 'section' => 'optimum_design', 'type' => 'radio', 'label' => __( 'Store design direction', 'optimum' ), 'choices' => $choices ) );
+
+	$c->add_setting( 'preview_mode', array( 'default' => true, 'sanitize_callback' => 'rest_sanitize_boolean' ) );
+	$c->add_control(
+		'preview_mode',
 		array(
-			'title'    => __( 'إعدادات الخزائن الأمثل', 'optimum' ),
-			'priority' => 20,
+			'section'     => 'optimum_design',
+			'type'        => 'checkbox',
+			'label'       => __( 'Preview mode (demo data, no live payments)', 'optimum' ),
+			'description' => __( 'Shows a preview banner and enables the “Preview — no payment” checkout method. Switch off only after a real payment gateway is configured.', 'optimum' ),
 		)
 	);
 
-	$sections = array(
-		'optimum_colors'   => __( 'الألوان', 'optimum' ),
-		'optimum_contact'  => __( 'التواصل وواتساب', 'optimum' ),
-		'optimum_hero'     => __( 'الصفحة الرئيسية: الواجهة', 'optimum' ),
-		'optimum_features' => __( 'الصفحة الرئيسية: المزايا والخطوات', 'optimum' ),
-		'optimum_custom'   => __( 'الصفحة الرئيسية: قسم التفصيل', 'optimum' ),
-		'optimum_faq'      => __( 'الأسئلة الشائعة', 'optimum' ),
-		'optimum_shop'     => __( 'المتجر والشحن', 'optimum' ),
-		'optimum_footer'   => __( 'التذييل والتواصل الاجتماعي', 'optimum' ),
-	);
-	foreach ( $sections as $id => $title ) {
-		$wp_customize->add_section( $id, array( 'title' => $title, 'panel' => 'optimum' ) );
-	}
-
-	// [مفتاح => [القسم, النوع, العنوان, الوصف]].
 	$fields = array(
-		'whatsapp'        => array( 'optimum_contact', 'phone', 'رقم واتساب', 'بالصيغة الدولية بدون أصفار أو +، مثال: 9665XXXXXXXX' ),
-		'phone'           => array( 'optimum_contact', 'phone', 'رقم الهاتف', '' ),
-		'email'           => array( 'optimum_contact', 'email', 'البريد الإلكتروني', '' ),
-		'address'         => array( 'optimum_contact', 'text', 'العنوان / المدينة', '' ),
-		'hours'           => array( 'optimum_contact', 'text', 'أوقات العمل', 'مثال: السبت - الخميس، 9 ص - 10 م' ),
-		'announcement'    => array( 'optimum_contact', 'text', 'نص الشريط العلوي', 'اتركه فارغاً لإخفاء الشريط' ),
-
-		'hero_eyebrow'    => array( 'optimum_hero', 'text', 'النص الصغير فوق العنوان', '' ),
-		'hero_title'      => array( 'optimum_hero', 'text', 'العنوان الرئيسي', '' ),
-		'hero_text'       => array( 'optimum_hero', 'textarea', 'الوصف', '' ),
-		'hero_btn_text'   => array( 'optimum_hero', 'text', 'نص الزر الأول', '' ),
-		'hero_btn_url'    => array( 'optimum_hero', 'url', 'رابط الزر الأول', 'اتركه فارغاً ليفتح صفحة المتجر' ),
-		'hero_btn2_text'  => array( 'optimum_hero', 'text', 'نص زر واتساب', '' ),
-		'hero_image'      => array( 'optimum_hero', 'image', 'صورة الواجهة', 'صورة عالية الجودة لخزانة أو غرفة ملابس من أعمالكم (1600×1000 تقريباً)' ),
-
-		'custom_title'    => array( 'optimum_custom', 'text', 'العنوان', '' ),
-		'custom_text'     => array( 'optimum_custom', 'textarea', 'الوصف', '' ),
-		'custom_image'    => array( 'optimum_custom', 'image', 'الصورة', '' ),
-
-		'free_shipping'   => array( 'optimum_shop', 'number', 'حد التوصيل المجاني (ريال)', 'يظهر للعميل شريط «باقي X ريال للتوصيل المجاني». ضع 0 لإخفائه. يجب أن يطابق إعداد الشحن في ووكومرس.' ),
-		'trust_1'         => array( 'optimum_shop', 'text', 'شارة الثقة 1', 'تظهر تحت زر الإضافة للسلة' ),
-		'trust_2'         => array( 'optimum_shop', 'text', 'شارة الثقة 2', '' ),
-		'trust_3'         => array( 'optimum_shop', 'text', 'شارة الثقة 3', '' ),
-		'trust_4'         => array( 'optimum_shop', 'text', 'شارة الثقة 4', '' ),
-
-		'footer_about'    => array( 'optimum_footer', 'textarea', 'نبذة عن المتجر', '' ),
-		'payment_methods' => array( 'optimum_footer', 'text', 'وسائل الدفع', 'مفصولة بفواصل، مثال: مدى, فيزا, Apple Pay, تابي' ),
-		'instagram'       => array( 'optimum_footer', 'url', 'رابط انستقرام', '' ),
-		'snapchat'        => array( 'optimum_footer', 'url', 'رابط سناب شات', '' ),
-		'tiktok'          => array( 'optimum_footer', 'url', 'رابط تيك توك', '' ),
-		'x'               => array( 'optimum_footer', 'url', 'رابط X (تويتر)', '' ),
+		'phone'           => array( 'optimum_contact', 'text', __( 'Phone (international format)', 'optimum' ), 'optimum_sanitize_phone' ),
+		'whatsapp'        => array( 'optimum_contact', 'text', __( 'WhatsApp number (international, digits only). Leave empty to hide WhatsApp buttons.', 'optimum' ), 'optimum_sanitize_phone' ),
+		'email'           => array( 'optimum_contact', 'email', __( 'E-mail', 'optimum' ), 'sanitize_email' ),
+		'jeddah_ar'       => array( 'optimum_contact', 'text', __( 'Jeddah showroom address (Arabic)', 'optimum' ), 'sanitize_text_field' ),
+		'jeddah_en'       => array( 'optimum_contact', 'text', __( 'Jeddah showroom address (English)', 'optimum' ), 'sanitize_text_field' ),
+		'jeddah_map'      => array( 'optimum_contact', 'url', __( 'Jeddah map link', 'optimum' ), 'esc_url_raw' ),
+		'makkah_ar'       => array( 'optimum_contact', 'text', __( 'Makkah showroom address (Arabic)', 'optimum' ), 'sanitize_text_field' ),
+		'makkah_en'       => array( 'optimum_contact', 'text', __( 'Makkah showroom address (English)', 'optimum' ), 'sanitize_text_field' ),
+		'makkah_map'      => array( 'optimum_contact', 'url', __( 'Makkah map link', 'optimum' ), 'esc_url_raw' ),
+		'hours_ar'        => array( 'optimum_contact', 'text', __( 'Opening hours (Arabic) — empty until confirmed', 'optimum' ), 'sanitize_text_field' ),
+		'hours_en'        => array( 'optimum_contact', 'text', __( 'Opening hours (English) — empty until confirmed', 'optimum' ), 'sanitize_text_field' ),
+		'lead_time_ar'    => array( 'optimum_contact', 'text', __( 'Lead time (Arabic)', 'optimum' ), 'sanitize_text_field' ),
+		'lead_time_en'    => array( 'optimum_contact', 'text', __( 'Lead time (English)', 'optimum' ), 'sanitize_text_field' ),
+		'instagram'       => array( 'optimum_contact', 'url', __( 'Instagram link', 'optimum' ), 'esc_url_raw' ),
+		'hero_title_ar'   => array( 'optimum_home', 'text', __( 'Headline (Arabic) — empty uses the theme text', 'optimum' ), 'sanitize_text_field' ),
+		'hero_title_en'   => array( 'optimum_home', 'text', __( 'Headline (English)', 'optimum' ), 'sanitize_text_field' ),
+		'hero_text_ar'    => array( 'optimum_home', 'textarea', __( 'Intro (Arabic)', 'optimum' ), 'sanitize_textarea_field' ),
+		'hero_text_en'    => array( 'optimum_home', 'textarea', __( 'Intro (English)', 'optimum' ), 'sanitize_textarea_field' ),
+		'request_email'   => array( 'optimum_integrate', 'email', __( 'Send new design requests to (default: site admin e-mail)', 'optimum' ), 'sanitize_email' ),
+		'request_webhook' => array( 'optimum_integrate', 'url', __( 'Request handling service webhook URL (optional). Signed with OPTIMUM_WEBHOOK_SECRET from wp-config.php.', 'optimum' ), 'esc_url_raw' ),
 	);
-
-	for ( $i = 1; $i <= 4; $i++ ) {
-		$fields[ "feature_{$i}_title" ] = array( 'optimum_features', 'text', "الميزة {$i}: العنوان", '' );
-		$fields[ "feature_{$i}_text" ]  = array( 'optimum_features', 'text', "الميزة {$i}: الوصف", '' );
-	}
-	for ( $i = 1; $i <= 3; $i++ ) {
-		$fields[ "step_{$i}_title" ] = array( 'optimum_features', 'text', "الخطوة {$i}: العنوان", '' );
-		$fields[ "step_{$i}_text" ]  = array( 'optimum_features', 'text', "الخطوة {$i}: الوصف", '' );
-	}
-	for ( $i = 1; $i <= 5; $i++ ) {
-		$fields[ "faq_{$i}_q" ] = array( 'optimum_faq', 'text', "السؤال {$i}", '' );
-		$fields[ "faq_{$i}_a" ] = array( 'optimum_faq', 'textarea', "الإجابة {$i}", 'لا يظهر السؤال في الموقع حتى تكتب إجابته' );
+	foreach ( $fields as $key => $f ) {
+		$c->add_setting( $key, array( 'default' => isset( $d[ $key ] ) ? $d[ $key ] : '', 'sanitize_callback' => $f[3] ) );
+		$c->add_control( $key, array( 'section' => $f[0], 'type' => $f[1], 'label' => $f[2] ) );
 	}
 
-	$sanitizers = array(
-		'text'     => 'sanitize_text_field',
-		'textarea' => 'sanitize_textarea_field',
-		'url'      => 'esc_url_raw',
-		'email'    => 'sanitize_email',
-		'phone'    => 'optimum_sanitize_phone',
-		'number'   => 'absint',
-		'image'    => 'esc_url_raw',
-	);
-
-	foreach ( $fields as $key => $field ) {
-		list( $section, $type, $label, $description ) = $field;
-
-		$wp_customize->add_setting(
-			$key,
-			array(
-				'default'           => $defaults[ $key ],
-				'sanitize_callback' => $sanitizers[ $type ],
-			)
-		);
-
-		if ( 'image' === $type ) {
-			$wp_customize->add_control(
-				new WP_Customize_Image_Control(
-					$wp_customize,
-					$key,
-					array(
-						'label'       => $label,
-						'description' => $description,
-						'section'     => $section,
-					)
-				)
-			);
-			continue;
-		}
-
-		$wp_customize->add_control(
-			$key,
-			array(
-				'label'       => $label,
-				'description' => $description,
-				'section'     => $section,
-				'type'        => 'phone' === $type ? 'tel' : $type,
-			)
-		);
-	}
-
-	$colors = array(
-		'color_primary' => __( 'اللون الأساسي (الأزرار والروابط)', 'optimum' ),
-		'color_accent'  => __( 'اللون الذهبي (اللمسات)', 'optimum' ),
-		'color_dark'    => __( 'اللون الداكن (الخلفيات الداكنة والنصوص)', 'optimum' ),
-	);
-	foreach ( $colors as $key => $label ) {
-		$wp_customize->add_setting(
-			$key,
-			array(
-				'default'           => $defaults[ $key ],
-				'sanitize_callback' => 'sanitize_hex_color',
-			)
-		);
-		$wp_customize->add_control(
-			new WP_Customize_Color_Control(
-				$wp_customize,
-				$key,
-				array(
-					'label'   => $label,
-					'section' => 'optimum_colors',
-				)
-			)
-		);
+	foreach ( array( 'hero_image' => __( 'Hero image — wide (2400×1200)', 'optimum' ), 'hero_image_m' => __( 'Hero image — mobile (1080×1440)', 'optimum' ) ) as $key => $label ) {
+		$c->add_setting( $key, array( 'default' => '', 'sanitize_callback' => 'absint' ) );
+		$c->add_control( new WP_Customize_Media_Control( $c, $key, array( 'section' => 'optimum_home', 'label' => $label, 'mime_type' => 'image' ) ) );
 	}
 }
 add_action( 'customize_register', 'optimum_customize_register' );
 
 /**
- * متغيرات CSS من الألوان المختارة.
+ * Keep "+" and digits.
  *
+ * @param string $value Value.
  * @return string
  */
-function optimum_customizer_css() {
-	return sprintf(
-		':root{--c-primary:%1$s;--c-accent:%2$s;--c-dark:%3$s;}',
-		esc_attr( optimum_mod( 'color_primary' ) ),
-		esc_attr( optimum_mod( 'color_accent' ) ),
-		esc_attr( optimum_mod( 'color_dark' ) )
-	);
+function optimum_sanitize_phone( $value ) {
+	return preg_replace( '/[^\d+]/', '', (string) $value );
 }

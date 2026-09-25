@@ -1,6 +1,7 @@
 <?php
 /**
- * تكامل ووكومرس: السلة، واتساب، التوصيل المجاني، شارات الثقة، صفحة الدفع.
+ * WooCommerce integration: support, currency display, checkout fields,
+ * header cart, cart → checkout → confirmation steps.
  *
  * @package Optimum
  */
@@ -8,30 +9,27 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
- * دعم ووكومرس ومعرض صور المنتج.
+ * Theme support.
  */
 function optimum_wc_setup() {
 	add_theme_support(
 		'woocommerce',
 		array(
-			'thumbnail_image_width' => 600,
-			'single_image_width'    => 900,
+			'thumbnail_image_width' => 800,
+			'single_image_width'    => 1200,
 			'product_grid'          => array(
-				'default_columns' => 4,
+				'default_columns' => 3,
 				'min_columns'     => 2,
 				'max_columns'     => 4,
 			),
 		)
 	);
-	add_theme_support( 'wc-product-gallery-zoom' );
-	add_theme_support( 'wc-product-gallery-lightbox' );
-	add_theme_support( 'wc-product-gallery-slider' );
 }
 add_action( 'after_setup_theme', 'optimum_wc_setup' );
 
-// العنوان يظهر في رأس الصفحة الخاص بالقالب.
+// The theme styles every WooCommerce screen itself.
+add_filter( 'woocommerce_enqueue_styles', '__return_empty_array' );
 add_filter( 'woocommerce_show_page_title', '__return_false' );
-
 add_filter(
 	'loop_shop_per_page',
 	function () {
@@ -39,233 +37,336 @@ add_filter(
 	}
 );
 
+/*
+ * ---------------------------------------------------------------------------
+ * Currency and numbers
+ * ---------------------------------------------------------------------------
+ */
+
+/**
+ * SAR symbol per language: "ر.س" in Arabic, "SAR" in English.
+ */
+add_filter(
+	'woocommerce_currency_symbol',
+	function ( $symbol, $currency ) {
+		if ( 'SAR' === $currency ) {
+			return optimum_is_en() ? 'SAR' : 'ر.س';
+		}
+		return $symbol;
+	},
+	10,
+	2
+);
+
+/**
+ * "6,900 ر.س" in Arabic, "SAR 6,900" in English. Western digits in both.
+ */
+add_filter(
+	'woocommerce_price_format',
+	function () {
+		return optimum_is_en() ? '%1$s&nbsp;%2$s' : '%2$s&nbsp;%1$s';
+	}
+);
+add_filter(
+	'wc_price_args',
+	function ( $args ) {
+		$args['decimal_separator']  = '.';
+		$args['thousand_separator'] = ',';
+		$args['decimals']           = 0;
+		return $args;
+	}
+);
+add_filter(
+	'wc_price',
+	function ( $html ) {
+		return '<bdi class="money">' . $html . '</bdi>';
+	},
+	20
+);
+
+/*
+ * ---------------------------------------------------------------------------
+ * Header cart
+ * ---------------------------------------------------------------------------
+ */
+
+/**
+ * Header cart link with count.
+ */
+function optimum_header_cart() {
+	$count = WC()->cart ? WC()->cart->get_cart_contents_count() : 0;
+	?>
+	<a class="icon-btn header-cart" href="<?php echo esc_url( wc_get_cart_url() ); ?>">
+		<?php echo optimum_icon( 'bag' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+		<span class="screen-reader-text">
+			<?php
+			/* translators: %s: number of items */
+			echo esc_html( sprintf( _n( 'Cart, %s item', 'Cart, %s items', $count, 'optimum' ), optimum_num( $count ) ) );
+			?>
+		</span>
+		<span class="header-cart-count<?php echo $count ? '' : ' is-empty'; ?>" aria-hidden="true"><?php echo esc_html( optimum_num( $count ) ); ?></span>
+	</a>
+	<?php
+}
+
+add_filter(
+	'woocommerce_add_to_cart_fragments',
+	function ( $fragments ) {
+		ob_start();
+		optimum_header_cart();
+		$fragments['a.header-cart'] = ob_get_clean();
+		return $fragments;
+	}
+);
+
+/**
+ * Cart → Checkout → Confirmation indicator.
+ *
+ * @param int $current 1, 2 or 3.
+ */
+function optimum_checkout_steps( $current ) {
+	$steps = array(
+		1 => __( 'Cart', 'optimum' ),
+		2 => __( 'Delivery & payment', 'optimum' ),
+		3 => __( 'Confirmation', 'optimum' ),
+	);
+	echo '<ol class="checkout-steps" aria-label="' . esc_attr__( 'Order progress', 'optimum' ) . '">';
+	foreach ( $steps as $n => $label ) {
+		$state = $n < $current ? 'is-done' : ( $n === $current ? 'is-current' : '' );
+		printf(
+			'<li class="%1$s"%2$s><span class="step-dot">%3$s</span><span class="step-label">%4$s</span></li>',
+			esc_attr( $state ),
+			$n === $current ? ' aria-current="step"' : '',
+			$n < $current ? optimum_icon( 'check', 14 ) : esc_html( optimum_num( $n ) ), // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+			esc_html( $label )
+		);
+	}
+	echo '</ol>';
+}
+
+/*
+ * ---------------------------------------------------------------------------
+ * Checkout fields tuned for Saudi addresses (Jeddah & Makkah first)
+ * ---------------------------------------------------------------------------
+ */
+
+/**
+ * Cities served. Keys are stored on the order; labels follow the language.
+ *
+ * @return array
+ */
+function optimum_cities() {
+	return array(
+		'Jeddah' => __( 'Jeddah', 'optimum' ),
+		'Makkah' => __( 'Makkah', 'optimum' ),
+		'Other'  => __( 'Another city (we will confirm availability)', 'optimum' ),
+	);
+}
+
+add_filter(
+	'woocommerce_checkout_fields',
+	function ( $fields ) {
+		unset( $fields['billing']['billing_company'], $fields['billing']['billing_address_2'], $fields['billing']['billing_postcode'], $fields['billing']['billing_state'] );
+		unset( $fields['shipping']['shipping_company'], $fields['shipping']['shipping_address_2'], $fields['shipping']['shipping_postcode'], $fields['shipping']['shipping_state'] );
+
+		$b = &$fields['billing'];
+		$b['billing_first_name']['label']        = __( 'First name', 'optimum' );
+		$b['billing_last_name']['label']         = __( 'Last name', 'optimum' );
+		$b['billing_phone']['label']             = __( 'Mobile number', 'optimum' );
+		$b['billing_phone']['placeholder']       = '05XXXXXXXX';
+		$b['billing_phone']['priority']          = 25;
+		$b['billing_phone']['required']          = true;
+		$b['billing_phone']['custom_attributes'] = array(
+			'inputmode' => 'tel',
+			'dir'       => 'ltr',
+		);
+		$b['billing_email']['label']             = __( 'E-mail', 'optimum' );
+		$b['billing_email']['priority']          = 26;
+		$b['billing_email']['custom_attributes'] = array( 'dir' => 'ltr' );
+		$b['billing_city']                       = array(
+			'type'     => 'select',
+			'label'    => __( 'City', 'optimum' ),
+			'required' => true,
+			'options'  => array( '' => __( 'Choose your city', 'optimum' ) ) + optimum_cities(),
+			'class'    => array( 'form-row-wide' ),
+			'priority' => 70,
+		);
+		$b['billing_address_1']['label']       = __( 'District and street', 'optimum' );
+		$b['billing_address_1']['placeholder'] = __( 'e.g. Al-Naeem, Prince Sultan Street, building 12', 'optimum' );
+		$b['billing_address_1']['priority']    = 80;
+		if ( isset( $b['billing_country'] ) ) {
+			$b['billing_country']['priority'] = 90;
+		}
+		if ( isset( $fields['order']['order_comments'] ) ) {
+			$fields['order']['order_comments']['label']       = __( 'Notes for our team', 'optimum' );
+			$fields['order']['order_comments']['placeholder'] = __( 'Preferred time for measurement or installation, landmarks, floor…', 'optimum' );
+		}
+		return $fields;
+	},
+	20
+);
+
+/**
+ * Saudi mobile numbers: 05XXXXXXXX or +9665XXXXXXXX.
+ */
+add_action(
+	'woocommerce_after_checkout_validation',
+	function ( $data, $errors ) {
+		$phone = isset( $data['billing_phone'] ) ? preg_replace( '/[\s\-]/', '', $data['billing_phone'] ) : '';
+		$phone = strtr( $phone, array_combine( array( '٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩' ), range( 0, 9 ) ) );
+		if ( $phone && ! preg_match( '/^(?:\+?966|0)5\d{8}$/', $phone ) ) {
+			$errors->add( 'billing_phone', __( 'Please enter a Saudi mobile number, for example 05XXXXXXXX.', 'optimum' ) );
+		}
+		if ( isset( $data['billing_city'] ) && '' !== $data['billing_city'] && ! array_key_exists( $data['billing_city'], optimum_cities() ) ) {
+			$errors->add( 'billing_city', __( 'Please choose your city.', 'optimum' ) );
+		}
+	},
+	10,
+	2
+);
+
+/**
+ * Show the translated city name on order screens.
+ */
+add_filter(
+	'woocommerce_order_formatted_billing_address',
+	function ( $address ) {
+		$cities = optimum_cities();
+		if ( isset( $address['city'], $cities[ $address['city'] ] ) && 'Other' !== $address['city'] ) {
+			$address['city'] = $cities[ $address['city'] ];
+		}
+		return $address;
+	}
+);
+
+// Deliver to the billing address (installation address) only.
+add_filter(
+	'woocommerce_ship_to_different_address_checked',
+	'__return_false'
+);
+add_filter(
+	'option_woocommerce_ship_to_destination',
+	function () {
+		return 'billing_only';
+	}
+);
+
+/**
+ * Plain, reassuring note under "Place order". No claims about payment
+ * security are made here: those depend on the gateway chosen later.
+ */
+add_action(
+	'woocommerce_review_order_after_submit',
+	function () {
+		echo '<p class="secure-note">' . esc_html__( 'Your order is reviewed by our team before manufacturing. We will call you to confirm measurements and the installation date.', 'optimum' ) . '</p>';
+	}
+);
+
+/**
+ * My Account menu: keep what a furniture customer needs.
+ */
+add_filter(
+	'woocommerce_account_menu_items',
+	function ( $items ) {
+		unset( $items['downloads'] );
+		return $items;
+	}
+);
+
+/**
+ * Related products: 3 (fits the card grid).
+ */
 add_filter(
 	'woocommerce_output_related_products_args',
 	function ( $args ) {
-		$args['posts_per_page'] = 4;
-		$args['columns']        = 4;
+		$args['posts_per_page'] = 3;
+		$args['columns']        = 3;
 		return $args;
 	}
 );
 
 /**
- * أيقونة السلة في الرأس مع العدد.
+ * Structured breadcrumbs markup.
  */
-function optimum_header_cart() {
-	$count = WC()->cart ? WC()->cart->get_cart_contents_count() : 0;
-	?>
-	<a class="icon-btn header-cart" href="<?php echo esc_url( wc_get_cart_url() ); ?>" aria-label="<?php esc_attr_e( 'سلة المشتريات', 'optimum' ); ?>">
-		<?php echo optimum_icon( 'cart' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-		<span class="header-cart-count<?php echo $count ? '' : ' is-empty'; ?>"><?php echo esc_html( number_format_i18n( $count ) ); ?></span>
-	</a>
-	<?php
-}
-
-/**
- * تحديث عدد السلة تلقائياً بعد الإضافة بدون إعادة تحميل الصفحة.
- *
- * @param array $fragments الأجزاء.
- * @return array
- */
-function optimum_cart_fragment( $fragments ) {
-	ob_start();
-	optimum_header_cart();
-	$fragments['a.header-cart'] = ob_get_clean();
-	return $fragments;
-}
-add_filter( 'woocommerce_add_to_cart_fragments', 'optimum_cart_fragment' );
-
-/**
- * شريط «باقي X للتوصيل المجاني».
- */
-function optimum_free_shipping_bar() {
-	$threshold = (float) optimum_mod( 'free_shipping' );
-	if ( $threshold <= 0 || ! WC()->cart || WC()->cart->is_empty() ) {
-		return;
+add_filter(
+	'woocommerce_breadcrumb_defaults',
+	function ( $d ) {
+		$d['delimiter']   = '<span class="sep" aria-hidden="true">/</span>';
+		$d['wrap_before'] = '<nav class="breadcrumb" aria-label="' . esc_attr__( 'Breadcrumb', 'optimum' ) . '">';
+		$d['wrap_after']  = '</nav>';
+		$d['home']        = __( 'Home', 'optimum' );
+		return $d;
 	}
-
-	$subtotal  = (float) WC()->cart->get_displayed_subtotal();
-	$remaining = max( 0, $threshold - $subtotal );
-	$percent   = min( 100, round( $subtotal / $threshold * 100 ) );
-	?>
-	<div class="free-ship<?php echo $remaining <= 0 ? ' is-done' : ''; ?>">
-		<p>
-			<?php echo optimum_icon( 'truck', 20 ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-			<?php
-			if ( $remaining > 0 ) {
-				/* translators: %s: المبلغ المتبقي */
-				printf( esc_html__( 'أضف %s فقط واحصل على توصيل مجاني!', 'optimum' ), '<strong>' . wp_kses_post( wc_price( $remaining ) ) . '</strong>' );
-			} else {
-				esc_html_e( 'رائع! طلبك مؤهل للتوصيل المجاني.', 'optimum' );
-			}
-			?>
-		</p>
-		<div class="free-ship-track"><span style="width:<?php echo esc_attr( $percent ); ?>%"></span></div>
-	</div>
-	<?php
-}
-add_action( 'woocommerce_before_cart_table', 'optimum_free_shipping_bar' );
-add_action( 'woocommerce_checkout_before_order_review', 'optimum_free_shipping_bar' );
-add_action( 'woocommerce_widget_shopping_cart_before_buttons', 'optimum_free_shipping_bar' );
+);
 
 /**
- * شارة الخصم بالنسبة المئوية بدلاً من «تخفيض!».
- *
- * @param string     $html    الشارة.
- * @param WP_Post    $post    المقال.
- * @param WC_Product $product المنتج.
- * @return string
+ * Quantity input: no spinner clutter, bigger target.
  */
-function optimum_sale_flash( $html, $post, $product ) {
-	$percent = 0;
+add_filter(
+	'woocommerce_quantity_input_args',
+	function ( $args ) {
+		$args['classes'][] = 'qty-input';
+		return $args;
+	}
+);
 
-	if ( $product->is_type( 'variable' ) ) {
-		foreach ( $product->get_children() as $child_id ) {
-			$child = wc_get_product( $child_id );
-			if ( $child && $child->is_on_sale() && (float) $child->get_regular_price() > 0 ) {
-				$percent = max( $percent, 1 - (float) $child->get_sale_price() / (float) $child->get_regular_price() );
-			}
+/**
+ * Only real, approved reviews produce ratings: turn off star output when a
+ * product has none (WooCommerce already hides zero ratings; this keeps the
+ * card layout from reserving space).
+ */
+add_filter(
+	'woocommerce_product_get_rating_html',
+	function ( $html, $rating, $count ) {
+		return $count > 0 ? $html : '';
+	},
+	10,
+	3
+);
+
+/**
+ * −/+ buttons around quantity inputs (hidden automatically for sold-individually items).
+ */
+add_action(
+	'woocommerce_before_quantity_input_field',
+	function () {
+		echo '<button type="button" class="qty-step" data-step="-1"><span aria-hidden="true">−</span><span class="screen-reader-text">' . esc_html__( 'Decrease quantity', 'optimum' ) . '</span></button>';
+	}
+);
+add_action(
+	'woocommerce_after_quantity_input_field',
+	function () {
+		echo '<button type="button" class="qty-step" data-step="1"><span aria-hidden="true">+</span><span class="screen-reader-text">' . esc_html__( 'Increase quantity', 'optimum' ) . '</span></button>';
+	}
+);
+
+/**
+ * Shipping method labels created by the theme's store setup follow the language.
+ */
+add_filter(
+	'woocommerce_shipping_rate_label',
+	function ( $label ) {
+		$map = array(
+			'Delivery & installation' => __( 'Delivery & installation', 'optimum' ),
+		);
+		return isset( $map[ $label ] ) ? $map[ $label ] : $label;
+	}
+);
+
+/**
+ * Privacy notices in the visitor's language (WooCommerce stores them as options).
+ */
+add_filter(
+	'woocommerce_get_privacy_policy_text',
+	function ( $text, $type ) {
+		if ( 'checkout' === $type ) {
+			return __( 'We use your details to process your order and arrange measurement, delivery and installation, as described in our [privacy_policy].', 'optimum' );
 		}
-	} elseif ( (float) $product->get_regular_price() > 0 && '' !== $product->get_sale_price() ) {
-		$percent = 1 - (float) $product->get_sale_price() / (float) $product->get_regular_price();
-	}
-
-	$percent = (int) round( $percent * 100 );
-	if ( $percent <= 0 ) {
-		return '<span class="onsale">' . esc_html__( 'عرض', 'optimum' ) . '</span>';
-	}
-
-	/* translators: %s: نسبة الخصم */
-	return '<span class="onsale">' . esc_html( sprintf( __( 'خصم %s٪', 'optimum' ), number_format_i18n( $percent ) ) ) . '</span>';
-}
-add_filter( 'woocommerce_sale_flash', 'optimum_sale_flash', 10, 3 );
-
-/**
- * زر «اطلب عبر واتساب» في صفحة المنتج.
- */
-function optimum_whatsapp_order_button() {
-	global $product;
-	if ( ! $product ) {
-		return;
-	}
-
-	$message = sprintf(
-		/* translators: 1: اسم المنتج 2: رابط المنتج */
-		__( "مرحباً، أرغب بطلب أو الاستفسار عن:\n%1\$s\n%2\$s", 'optimum' ),
-		$product->get_name(),
-		get_permalink( $product->get_id() )
-	);
-	$url = optimum_whatsapp_url( $message );
-	if ( ! $url ) {
-		return;
-	}
-	?>
-	<a class="btn btn-whatsapp btn-block wa-order" href="<?php echo esc_url( $url ); ?>" target="_blank" rel="noopener">
-		<?php echo optimum_icon( 'whatsapp', 20 ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-		<?php esc_html_e( 'اطلب أو استفسر عبر واتساب', 'optimum' ); ?>
-	</a>
-	<?php
-}
-add_action( 'woocommerce_single_product_summary', 'optimum_whatsapp_order_button', 35 );
-
-/**
- * شارات الثقة تحت زر الشراء.
- */
-function optimum_trust_badges() {
-	$icons  = array( 1 => 'truck', 2 => 'shield', 3 => 'lock', 4 => 'chat' );
-	$badges = '';
-	foreach ( $icons as $i => $icon ) {
-		$text = optimum_mod( "trust_{$i}" );
-		if ( $text ) {
-			$badges .= '<li>' . optimum_icon( $icon, 20 ) . '<span>' . esc_html( $text ) . '</span></li>';
+		if ( 'registration' === $type ) {
+			return __( 'We use your details to manage your account and orders, as described in our [privacy_policy].', 'optimum' );
 		}
-	}
-	if ( $badges ) {
-		echo '<ul class="trust-badges">' . $badges . '</ul>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped above.
-	}
-}
-add_action( 'woocommerce_single_product_summary', 'optimum_trust_badges', 36 );
-
-/**
- * شريط الشراء الثابت أسفل الشاشة في الجوال (صفحة المنتج).
- */
-function optimum_sticky_add_to_cart() {
-	if ( ! is_product() ) {
-		return;
-	}
-	$product = wc_get_product( get_queried_object_id() );
-	if ( ! $product || ! $product->is_purchasable() || ! $product->is_in_stock() ) {
-		return;
-	}
-	?>
-	<div class="sticky-atc" id="sticky-atc" aria-hidden="true">
-		<div class="sticky-atc-info">
-			<strong><?php echo esc_html( $product->get_name() ); ?></strong>
-			<span class="price"><?php echo wp_kses_post( $product->get_price_html() ); ?></span>
-		</div>
-		<a class="btn btn-primary" href="#product-<?php echo esc_attr( $product->get_id() ); ?>" data-scroll-to-cart tabindex="-1">
-			<?php echo esc_html( $product->is_type( 'simple' ) ? __( 'أضف للسلة', 'optimum' ) : __( 'اختر المواصفات', 'optimum' ) ); ?>
-		</a>
-	</div>
-	<?php
-}
-add_action( 'wp_footer', 'optimum_sticky_add_to_cart' );
-
-/**
- * صفحة دفع أبسط: إزالة الحقول غير الضرورية.
- *
- * @param array $fields الحقول.
- * @return array
- */
-function optimum_checkout_fields( $fields ) {
-	unset( $fields['billing']['billing_company'], $fields['shipping']['shipping_company'] );
-	unset( $fields['billing']['billing_address_2'], $fields['shipping']['shipping_address_2'] );
-
-	if ( isset( $fields['billing']['billing_postcode'] ) ) {
-		$fields['billing']['billing_postcode']['required'] = false;
-	}
-	if ( isset( $fields['shipping']['shipping_postcode'] ) ) {
-		$fields['shipping']['shipping_postcode']['required'] = false;
-	}
-	if ( isset( $fields['billing']['billing_phone'] ) ) {
-		$fields['billing']['billing_phone']['priority'] = 25;
-		$fields['billing']['billing_phone']['placeholder'] = '05XXXXXXXX';
-	}
-	if ( isset( $fields['order']['order_comments'] ) ) {
-		$fields['order']['order_comments']['placeholder'] = __( 'مقاسات خاصة، موعد التركيب المفضل، أو أي ملاحظة...', 'optimum' );
-	}
-	return $fields;
-}
-add_filter( 'woocommerce_checkout_fields', 'optimum_checkout_fields' );
-
-/**
- * الرمز البريدي اختياري في العناوين أيضاً (غير مستخدم عادة في المملكة).
- *
- * @param array $fields الحقول.
- * @return array
- */
-function optimum_default_address_fields( $fields ) {
-	if ( isset( $fields['postcode'] ) ) {
-		$fields['postcode']['required'] = false;
-	}
-	return $fields;
-}
-add_filter( 'woocommerce_default_address_fields', 'optimum_default_address_fields' );
-
-/**
- * رسالة طمأنة تحت زر إتمام الطلب.
- */
-function optimum_checkout_secure_note() {
-	echo '<p class="secure-note">' . optimum_icon( 'lock', 18 ) . esc_html__( 'بياناتك ومدفوعاتك محمية ومشفّرة بالكامل.', 'optimum' ) . '</p>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-}
-add_action( 'woocommerce_review_order_after_submit', 'optimum_checkout_secure_note' );
-
-/**
- * زر فلترة المنتجات للجوال (يفتح الشريط الجانبي).
- */
-function optimum_filters_toggle() {
-	if ( is_active_sidebar( 'shop-sidebar' ) ) {
-		echo '<button class="btn btn-outline filters-toggle" type="button" aria-controls="shop-sidebar">' . esc_html__( 'فلترة', 'optimum' ) . '</button>';
-	}
-}
-add_action( 'woocommerce_before_shop_loop', 'optimum_filters_toggle', 25 );
+		return $text;
+	},
+	10,
+	2
+);

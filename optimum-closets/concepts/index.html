@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Design Concepts — Optimum Closets</title>
+<meta name="description" content="Three design directions for the Optimum Closets store, compared, with a recommendation.">
+<link rel="stylesheet" href="../assets/fonts/fonts.css">
+<style>
+:root { --bg: #f6f2ec; --card: #fff; --ink: #1f1a16; --muted: #6b6057; --line: #e2d8cb; --accent: #8a6a4a; --g: clamp(16px, 4vw, 40px); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --bg: #141210; --card: #1d1a17; --ink: #efe7dc; --muted: #a99b8a; --line: #332d27; --accent: #c9a26b; } }
+:root[data-theme="dark"] { --bg: #141210; --card: #1d1a17; --ink: #efe7dc; --muted: #a99b8a; --line: #332d27; --accent: #c9a26b; }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 400 16px/1.75 "IBM Plex Sans Arabic", system-ui, sans-serif; overflow-x: clip; }
+a { color: inherit; }
+img { display: block; width: 100%; height: auto; }
+.wrap { max-width: 1280px; margin-inline: auto; padding-inline: var(--g); }
+header.top { padding-block: 40px 24px; display: flex; justify-content: space-between; align-items: start; gap: 16px; flex-wrap: wrap; }
+h1 { font-family: "Markazi Text", serif; font-weight: 600; font-size: clamp(34px, 5vw, 60px); line-height: 1.1; margin: 0 0 8px; }
+.sub { color: var(--muted); max-width: 64ch; margin: 0; }
+.lang { border: 1px solid var(--line); background: var(--card); padding: 8px 16px; border-radius: 999px; font: inherit; color: inherit; cursor: pointer; }
+.concept { display: grid; grid-template-columns: 1.6fr 1fr; gap: clamp(16px, 3vw, 36px); padding-block: 36px; border-top: 1px solid var(--line); align-items: start; }
+.shots { display: grid; grid-template-columns: 3.2fr 1fr; gap: 12px; align-items: end; }
+.shot { border-radius: 12px; overflow: hidden; border: 1px solid var(--line); background: var(--card); }
+.shot.m { border-radius: 18px; }
+.meta h2 { font-family: "Markazi Text", serif; font-weight: 600; font-size: 34px; line-height: 1.15; margin: 4px 0 10px; }
+.num { font-size: 13px; color: var(--accent); letter-spacing: .08em; }
+.meta p { margin: 0 0 12px; color: var(--muted); }
+dl { display: grid; grid-template-columns: auto 1fr; gap: 6px 14px; font-size: 14px; margin: 14px 0 18px; }
+dt { color: var(--muted); }
+dd { margin: 0; }
+.links { display: flex; flex-wrap: wrap; gap: 8px; }
+.links a { text-decoration: none; border: 1px solid var(--line); background: var(--card); padding: 8px 14px; border-radius: 999px; font-size: 14px; }
+.links a.primary { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.pick { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: clamp(20px, 3vw, 36px); margin-block: 20px 60px; }
+.pick h2 { font-family: "Markazi Text", serif; font-weight: 600; font-size: 36px; margin: 0 0 10px; }
+.pick ul { margin: 10px 0 0; padding-inline-start: 20px; color: var(--muted); }
+.badge { display: inline-block; font-size: 12px; background: var(--accent); color: #fff; padding: 2px 10px; border-radius: 999px; margin-inline-start: 8px; vertical-align: middle; }
+table { width: 100%; border-collapse: collapse; font-size: 14px; margin-top: 8px; }
+th, td { text-align: start; padding: 10px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { color: var(--muted); font-weight: 500; }
+.tablewrap { overflow-x: auto; }
+footer { color: var(--muted); font-size: 13px; padding-block: 0 40px; }
+@media (max-width: 860px) { .concept { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+	<header class="top">
+		<div>
+			<h1 data-i="title">ثلاثة اتجاهات لتصميم متجر الخزائن الأمثل</h1>
+			<p class="sub" data-i="intro">كل اتجاه صفحة رئيسية قابلة للتصفح على الجوال والكمبيوتر، بالعربية والإنجليزية، مع معاينة لبطاقة المنتج. المحتوى واحد في الثلاثة، والاختلاف في التكوين والخط والعرض والحركة.</p>
+		</div>
+		<button class="lang" type="button" id="lang">English</button>
+	</header>
+
+	<section class="concept">
+		<div class="shots">
+			<a class="shot" href="atelier.html"><img src="shots/atelier-1440.webp" alt="" loading="lazy" width="1440" height="900" data-alt="c1d"></a>
+			<a class="shot m" href="atelier.html"><img src="shots/atelier-375.webp" alt="" loading="lazy" width="375" height="812" data-alt="c1m"></a>
+		</div>
+		<div class="meta">
+			<span class="num">01</span>
+			<h2 data-i="c1">فخامة معمارية هادئة: «أتيليه»</h2>
+			<p data-i="c1d">صور كبيرة ومساحات واسعة وخط Markazi Text بطابع تحريري. الحركة بطيئة: الصورة الرئيسية تنفتح من المنتصف كباب منزلق، والأقسام تظهر بهدوء. التركيز على الخامة والتفاصيل.</p>
+			<dl>
+				<dt data-i="type">الخطوط</dt><dd>Markazi Text + IBM Plex Sans Arabic</dd>
+				<dt data-i="palette">الألوان</dt><dd data-i="c1p">عاجي، إسبريسو، برونزي</dd>
+				<dt data-i="best">الأنسب لـ</dt><dd data-i="c1b">بناء الثقة والانطباع الفاخر، والطلبات عالية القيمة</dd>
+			</dl>
+			<div class="links"><a class="primary" href="atelier.html" data-i="openAr">افتح بالعربية</a><a href="atelier.html?lang=en" data-i="openEn">افتح بالإنجليزية</a></div>
+		</div>
+	</section>
+
+	<section class="concept">
+		<div class="shots">
+			<a class="shot" href="showroom.html"><img src="shots/showroom-1440.webp" alt="" loading="lazy" width="1440" height="900" data-alt="c2d"></a>
+			<a class="shot m" href="showroom.html"><img src="shots/showroom-375.webp" alt="" loading="lazy" width="375" height="812" data-alt="c2m"></a>
+		</div>
+		<div class="meta">
+			<span class="num">02</span>
+			<h2 data-i="c2">صالة عرض تفاعلية: «شوروم»</h2>
+			<p data-i="c2d">واجهة داكنة كصالة عرض مسائية. عند التمرير تنفتح أبواب الخزانة وتظهر نقاط تشرح التقسيم الداخلي، مع تبديل التشطيب بانتقال مسح للصورة المطابقة. الحركة هنا تشرح المنتج.</p>
+			<dl>
+				<dt data-i="type">الخطوط</dt><dd>Alexandria + Readex Pro</dd>
+				<dt data-i="palette">الألوان</dt><dd data-i="c2p">جوز داكن، ضوء نحاسي</dd>
+				<dt data-i="best">الأنسب لـ</dt><dd data-i="c2b">إبراز الخزائن الزجاجية والإضاءة والتقسيمات الداخلية</dd>
+			</dl>
+			<div class="links"><a class="primary" href="showroom.html" data-i="openAr">افتح بالعربية</a><a href="showroom.html?lang=en" data-i="openEn">افتح بالإنجليزية</a></div>
+		</div>
+	</section>
+
+	<section class="concept">
+		<div class="shots">
+			<a class="shot" href="bayt.html"><img src="shots/bayt-1440.webp" alt="" loading="lazy" width="1440" height="900" data-alt="c3d"></a>
+			<a class="shot m" href="bayt.html"><img src="shots/bayt-375.webp" alt="" loading="lazy" width="375" height="812" data-alt="c3m"></a>
+		</div>
+		<div class="meta">
+			<span class="num">03</span>
+			<h2 data-i="c3">متجر دافئ ومعاصر: «بيت»</h2>
+			<p data-i="c3d">بطاقات مدمجة وبحث بارز وشرائح أقسام ثابتة وترتيب فوري وإضافة سريعة للسلة. ألوان رملية وطينية مع أخضر عميق، وخطا Almarai وTajawal المألوفان في المتاجر السعودية. حركة قليلة وسرعة أعلى.</p>
+			<dl>
+				<dt data-i="type">الخطوط</dt><dd>Almarai + Tajawal</dd>
+				<dt data-i="palette">الألوان</dt><dd data-i="c3p">رملي، طيني، أخضر عميق</dd>
+				<dt data-i="best">الأنسب لـ</dt><dd data-i="c3b">التصفح السريع ومقارنة الأسعار والشراء من الجوال</dd>
+			</dl>
+			<div class="links"><a class="primary" href="bayt.html" data-i="openAr">افتح بالعربية</a><a href="bayt.html?lang=en" data-i="openEn">افتح بالإنجليزية</a></div>
+		</div>
+	</section>
+
+	<section class="pick">
+		<h2 data-i="recT">التوصية: «أتيليه» أساسًا للمتجر <span class="badge" data-i="default">الافتراضي</span></h2>
+		<p data-i="recP">«أتيليه» يعبّر أفضل عن الفخامة الهادئة وجودة الخامة، ويناسب قرار شراء عالي القيمة يحتاج إلى ثقة. لكنه وحده بطيء قليلًا في التسوق، لذلك يأخذ المتجر منه الهوية ويضيف أفضل ما في الاتجاهين الآخرين:</p>
+		<ul>
+			<li data-i="rec1">من «شوروم»: معاينة الخزانة من الداخل بنقاط تفاعلية، وتبديل التشطيب مع الصورة المطابقة، في صفحة المنتج حيث يفيد العميل فعلًا.</li>
+			<li data-i="rec2">من «بيت»: بطاقات مدمجة، وفلاتر وترتيب سريع، وسعر واضح في صفحة المنتجات.</li>
+			<li data-i="rec3">الاتجاهان الآخران متاحان للمعاينة، ويمكن تبديل الاتجاه الافتراضي للمتجر من المخصّص في ووردبريس.</li>
+		</ul>
+		<div class="tablewrap">
+			<table>
+				<thead><tr><th></th><th>01 Atelier</th><th>02 Showroom</th><th>03 Bayt</th></tr></thead>
+				<tbody>
+					<tr><th data-i="r1">الانطباع</th><td data-i="r1a">فاخر، هادئ</td><td data-i="r1b">مسرحي، تقني</td><td data-i="r1c">دافئ، عملي</td></tr>
+					<tr><th data-i="r2">سرعة التسوق</th><td>●●○</td><td>●○○</td><td>●●●</td></tr>
+					<tr><th data-i="r3">إبراز الداخل</th><td>●●○</td><td>●●●</td><td>●○○</td></tr>
+					<tr><th data-i="r4">الأداء على الجوال</th><td>●●●</td><td>●●○</td><td>●●●</td></tr>
+				</tbody>
+			</table>
+		</div>
+	</section>
+	<footer data-i="foot">الصور مجسّمات ثلاثية الأبعاد توضيحية أُنشئت لهذا المشروع، والأسعار تجريبية. ستُستبدل بصور منتجات وأعمال الخزائن الأمثل الفعلية.</footer>
+</div>
+<script>
+( function () {
+	var en = {
+		title: 'Three design directions for the Optimum Closets store',
+		intro: 'Each direction is a browsable homepage for mobile and desktop, in Arabic and English, with a product card preview. The content is identical; they differ in composition, typography, presentation and motion.',
+		c1: 'Quiet architectural luxury: “Atelier”',
+		c1d: 'Large images, generous space and an editorial serif (Markazi Text). Slow motion: the hero opens from the centre like a sliding door and sections settle in calmly. The focus is material and detail.',
+		c1p: 'Ivory, espresso, bronze', c1b: 'Building trust and a premium first impression for high-value orders',
+		c2: 'Interactive showroom: “Showroom”',
+		c2d: 'A dark, after-hours showroom. As you scroll the doors open and hotspots explain the interior; switching finish wipes to the exact matching image. Here, motion explains the product.',
+		c2p: 'Dark walnut, brass light', c2b: 'Showcasing glass wardrobes, lighting and interior layouts',
+		c3: 'Warm contemporary store: “Bayt”',
+		c3d: 'Compact cards, a prominent search, sticky category chips, instant sorting and quick add. Sand, clay and deep green with Almarai and Tajawal, familiar from Saudi retail. Little motion, more speed.',
+		c3p: 'Sand, clay, deep green', c3b: 'Fast browsing, price comparison and buying on mobile',
+		type: 'Typefaces', palette: 'Palette', best: 'Best for',
+		openAr: 'Open in Arabic', openEn: 'Open in English',
+		recT: 'Recommendation: “Atelier” as the store’s base', default: 'Default',
+		recP: 'Atelier best expresses quiet luxury and material quality, and suits a high-value purchase that needs trust. On its own it is a little slow to shop, so the store takes its identity and adds the best of the other two:',
+		rec1: 'From Showroom: the see-inside view with interactive hotspots and finish switching with matching imagery, on the product page where it actually helps.',
+		rec2: 'From Bayt: compact cards, fast filters and sorting, and clear prices on the product listing.',
+		rec3: 'The other two directions stay available to preview, and the store’s default direction can be switched in the WordPress Customizer.',
+		r1: 'Feel', r1a: 'Premium, calm', r1b: 'Theatrical, technical', r1c: 'Warm, practical', r2: 'Shopping speed', r3: 'Shows interiors', r4: 'Mobile performance',
+		foot: 'Images are illustrative 3D renders created for this project, and prices are demo values. They will be replaced with Optimum Closets’ actual product and project photos.'
+	};
+	var ar = {};
+	document.querySelectorAll( '[data-i]' ).forEach( function ( el ) { ar[ el.getAttribute( 'data-i' ) ] = el.innerHTML; } );
+	var lang = new URLSearchParams( location.search ).get( 'lang' ) === 'en' ? 'en' : 'ar';
+	function apply() {
+		var d = lang === 'en' ? en : ar;
+		document.documentElement.lang = lang;
+		document.documentElement.dir = lang === 'en' ? 'ltr' : 'rtl';
+		document.querySelectorAll( '[data-i]' ).forEach( function ( el ) {
+			var k = el.getAttribute( 'data-i' );
+			if ( d[ k ] !== undefined ) { el.innerHTML = d[ k ]; }
+		} );
+		document.querySelectorAll( '.links a, a.shot' ).forEach( function ( a ) {
+			if ( a.classList.contains( 'shot' ) ) { a.href = a.getAttribute( 'href' ).split( '?' )[ 0 ] + ( lang === 'en' ? '?lang=en' : '?lang=ar' ); }
+		} );
+		document.getElementById( 'lang' ).textContent = lang === 'en' ? 'العربية' : 'English';
+		document.querySelectorAll( 'img[data-alt]' ).forEach( function ( img ) {
+			var n = img.getAttribute( 'data-alt' );
+			var name = { c1: 'Atelier', c2: 'Showroom', c3: 'Bayt' }[ n.slice( 0, 2 ) ];
+			img.alt = lang === 'en' ? name + ( n[ 2 ] === 'd' ? ' homepage on desktop' : ' homepage on mobile' ) : 'الصفحة الرئيسية لاتجاه ' + name + ( n[ 2 ] === 'd' ? ' على الكمبيوتر' : ' على الجوال' );
+		} );
+	}
+	document.getElementById( 'lang' ).addEventListener( 'click', function () {
+		lang = lang === 'en' ? 'ar' : 'en';
+		var u = new URL( location.href ); u.searchParams.set( 'lang', lang ); history.replaceState( null, '', u );
+		apply();
+	} );
+	apply();
+} )();
+</script>
+</body>
+</html>

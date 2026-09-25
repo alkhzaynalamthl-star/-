@@ -1,6 +1,6 @@
 <?php
 /**
- * إعداد القالب: الدعم، القوائم، الأنماط والسكربتات.
+ * Theme supports, menus, assets.
  *
  * @package Optimum
  */
@@ -8,11 +8,9 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
- * تفعيل مزايا ووردبريس.
+ * Theme supports and menus.
  */
 function optimum_setup() {
-	load_theme_textdomain( 'optimum', OPTIMUM_DIR . '/languages' );
-
 	add_theme_support( 'title-tag' );
 	add_theme_support( 'post-thumbnails' );
 	add_theme_support( 'automatic-feed-links' );
@@ -22,7 +20,7 @@ function optimum_setup() {
 		'custom-logo',
 		array(
 			'height'      => 80,
-			'width'       => 240,
+			'width'       => 260,
 			'flex-height' => true,
 			'flex-width'  => true,
 		)
@@ -30,44 +28,62 @@ function optimum_setup() {
 
 	register_nav_menus(
 		array(
-			'primary' => __( 'القائمة الرئيسية', 'optimum' ),
-			'footer'  => __( 'روابط التذييل', 'optimum' ),
-			'footer2' => __( 'روابط خدمة العملاء', 'optimum' ),
+			'primary' => __( 'Main menu', 'optimum' ),
+			'footer'  => __( 'Footer links', 'optimum' ),
 		)
 	);
 
-	add_image_size( 'optimum-category', 600, 750, true );
-	add_image_size( 'optimum-hero', 1600, 1000, true );
+	add_image_size( 'optimum-card', 800, 1000, true );
+	add_image_size( 'optimum-wide', 1600, 800, true );
 }
 add_action( 'after_setup_theme', 'optimum_setup' );
 
 /**
- * عرض المحتوى الافتراضي.
+ * Content width.
  */
 function optimum_content_width() {
-	$GLOBALS['content_width'] = 1240;
+	$GLOBALS['content_width'] = 1320;
 }
 add_action( 'after_setup_theme', 'optimum_content_width', 0 );
 
 /**
- * الأنماط والسكربتات.
+ * Asset URL with cache-busting by file time.
+ *
+ * @param string $rel Relative path.
+ * @return string
+ */
+function optimum_asset( $rel ) {
+	$file = OPTIMUM_DIR . '/assets/' . $rel;
+	$ver  = file_exists( $file ) ? filemtime( $file ) : OPTIMUM_VERSION;
+	return add_query_arg( 'v', $ver, OPTIMUM_URI . '/assets/' . $rel );
+}
+
+/**
+ * Styles and scripts.
  */
 function optimum_assets() {
-	wp_enqueue_style(
-		'optimum-fonts',
-		'https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Noto+Kufi+Arabic:wght@600;700;800&display=swap',
-		array(),
-		null
+	wp_enqueue_style( 'optimum-fonts', optimum_asset( 'fonts/fonts.css' ), array(), null );
+	wp_enqueue_style( 'optimum-store', optimum_asset( 'css/store.css' ), array( 'optimum-fonts' ), null );
+
+	wp_enqueue_script( 'optimum-store', optimum_asset( 'js/store.js' ), array(), null, array( 'strategy' => 'defer', 'in_footer' => true ) );
+	wp_localize_script(
+		'optimum-store',
+		'OptimumStore',
+		array(
+			'lang'    => optimum_lang(),
+			'reduced' => false,
+			'i18n'    => array(
+				'added'   => __( 'Added to your cart', 'optimum' ),
+				'viewCart' => __( 'View cart', 'optimum' ),
+				'error'   => __( 'Something went wrong. Please try again.', 'optimum' ),
+				'loading' => __( 'Loading…', 'optimum' ),
+			),
+		)
 	);
-	wp_enqueue_style( 'optimum-main', OPTIMUM_URI . '/assets/css/main.css', array(), OPTIMUM_VERSION );
 
-	if ( class_exists( 'WooCommerce' ) ) {
-		wp_enqueue_style( 'optimum-woocommerce', OPTIMUM_URI . '/assets/css/woocommerce.css', array( 'optimum-main' ), OPTIMUM_VERSION );
+	if ( function_exists( 'is_product' ) && is_product() ) {
+		wp_enqueue_script( 'optimum-product', optimum_asset( 'js/product.js' ), array(), null, array( 'strategy' => 'defer', 'in_footer' => true ) );
 	}
-
-	wp_add_inline_style( 'optimum-main', optimum_customizer_css() );
-
-	wp_enqueue_script( 'optimum-main', OPTIMUM_URI . '/assets/js/main.js', array(), OPTIMUM_VERSION, true );
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
@@ -76,33 +92,33 @@ function optimum_assets() {
 add_action( 'wp_enqueue_scripts', 'optimum_assets' );
 
 /**
- * الاتصال المسبق بخوادم الخطوط لتسريع التحميل.
- *
- * @param array  $urls          الروابط.
- * @param string $relation_type نوع العلاقة.
- * @return array
+ * Preload the two fonts every page of the active concept uses.
  */
-function optimum_resource_hints( $urls, $relation_type ) {
-	if ( 'preconnect' === $relation_type ) {
-		$urls[] = 'https://fonts.googleapis.com';
-		$urls[] = array(
-			'href'        => 'https://fonts.gstatic.com',
-			'crossorigin' => 'anonymous',
-		);
+function optimum_preload_fonts() {
+	$files = optimum_concept_fonts();
+	$sub   = optimum_is_en() ? 'latin' : 'arabic';
+	foreach ( $files as $f ) {
+		printf( '<link rel="preload" href="%s" as="font" type="font/woff2" crossorigin>' . "\n", esc_url( OPTIMUM_URI . '/assets/fonts/' . sprintf( $f, $sub ) ) );
 	}
-	return $urls;
 }
-add_filter( 'wp_resource_hints', 'optimum_resource_hints', 10, 2 );
+add_action( 'wp_head', 'optimum_preload_fonts', 2 );
 
 /**
- * منطقة الودجات في التذييل وفي الشريط الجانبي للمتجر.
+ * Browser theme colour.
+ */
+function optimum_meta_theme_color() {
+	printf( '<meta name="theme-color" content="%s">' . "\n", esc_attr( optimum_concept_meta( 'theme_color' ) ) );
+}
+add_action( 'wp_head', 'optimum_meta_theme_color', 1 );
+
+/**
+ * Widgets: optional extra area under the shop filters.
  */
 function optimum_widgets_init() {
 	register_sidebar(
 		array(
-			'name'          => __( 'فلاتر المتجر', 'optimum' ),
+			'name'          => __( 'Shop sidebar (below filters)', 'optimum' ),
 			'id'            => 'shop-sidebar',
-			'description'   => __( 'تظهر بجانب قائمة المنتجات (مثل فلترة السعر واللون).', 'optimum' ),
 			'before_widget' => '<section id="%1$s" class="widget %2$s">',
 			'after_widget'  => '</section>',
 			'before_title'  => '<h3 class="widget-title">',
@@ -113,9 +129,31 @@ function optimum_widgets_init() {
 add_action( 'widgets_init', 'optimum_widgets_init' );
 
 /**
- * لون شريط المتصفح على الجوال.
+ * Body classes: concept, language, preview mode.
+ *
+ * @param array $classes Classes.
+ * @return array
  */
-function optimum_meta_theme_color() {
-	printf( '<meta name="theme-color" content="%s">' . "\n", esc_attr( optimum_mod( 'color_dark' ) ) );
+function optimum_body_classes( $classes ) {
+	$classes[] = 'concept-' . optimum_concept();
+	$classes[] = 'lang-' . optimum_lang();
+	if ( optimum_preview_mode() ) {
+		$classes[] = 'is-preview-mode';
+	}
+	return $classes;
 }
-add_action( 'wp_head', 'optimum_meta_theme_color', 1 );
+add_filter( 'body_class', 'optimum_body_classes' );
+
+/**
+ * Preview mode: demo data and no live payments/integrations.
+ * On by default until an administrator switches it off in the Customizer
+ * (or defines OPTIMUM_PREVIEW_MODE false in wp-config.php).
+ *
+ * @return bool
+ */
+function optimum_preview_mode() {
+	if ( defined( 'OPTIMUM_PREVIEW_MODE' ) ) {
+		return (bool) OPTIMUM_PREVIEW_MODE;
+	}
+	return (bool) get_theme_mod( 'preview_mode', true );
+}

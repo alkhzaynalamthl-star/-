@@ -1,8 +1,6 @@
 <?php
 /**
- * الصفحة الرئيسية.
- *
- * كل النصوص والصور قابلة للتعديل من: المظهر ← تخصيص ← إعدادات الخزائن الأمثل.
+ * Homepage.
  *
  * @package Optimum
  */
@@ -11,244 +9,188 @@ defined( 'ABSPATH' ) || exit;
 
 get_header();
 
-$optimum_has_wc   = class_exists( 'WooCommerce' );
-$optimum_shop     = optimum_mod( 'hero_btn_url' ) ? optimum_mod( 'hero_btn_url' ) : optimum_shop_url();
-$optimum_hero_img = optimum_mod( 'hero_image' );
-$optimum_wa       = optimum_whatsapp_url( __( 'مرحباً، أرغب بتصميم خزانة حسب المقاس', 'optimum' ) );
+$optimum_shop   = function_exists( 'wc_get_page_permalink' ) ? wc_get_page_permalink( 'shop' ) : home_url( '/' );
+$optimum_custom = optimum_page_url( 'made-to-measure' );
+$optimum_title  = optimum_mod_i18n( 'hero_title', __( 'Wardrobes designed around your life', 'optimum' ) );
+$optimum_text   = optimum_mod_i18n( 'hero_text', __( 'Selected woods, slim-framed glass and light that reveals every detail. Designed, made and installed in Jeddah and Makkah.', 'optimum' ) );
+$optimum_hero   = (int) optimum_mod( 'hero_image' );
+$optimum_hero_m = (int) optimum_mod( 'hero_image_m' );
 ?>
 
-<section class="hero<?php echo $optimum_hero_img ? ' has-image' : ''; ?>">
-	<?php if ( $optimum_hero_img ) : ?>
-		<img class="hero-bg" src="<?php echo esc_url( $optimum_hero_img ); ?>" alt="" fetchpriority="high">
-	<?php endif; ?>
-	<div class="container hero-inner">
-		<div class="hero-content">
-			<span class="eyebrow"><?php echo esc_html( optimum_mod( 'hero_eyebrow' ) ); ?></span>
-			<h1 class="hero-title"><?php echo esc_html( optimum_mod( 'hero_title' ) ); ?></h1>
-			<p class="hero-text"><?php echo esc_html( optimum_mod( 'hero_text' ) ); ?></p>
-			<div class="hero-actions">
-				<a class="btn btn-primary btn-lg" href="<?php echo esc_url( $optimum_shop ); ?>"><?php echo esc_html( optimum_mod( 'hero_btn_text' ) ); ?></a>
-				<?php if ( $optimum_wa ) : ?>
-					<a class="btn btn-ghost btn-lg" href="<?php echo esc_url( $optimum_wa ); ?>" target="_blank" rel="noopener">
-						<?php echo optimum_icon( 'whatsapp', 20 ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-						<?php echo esc_html( optimum_mod( 'hero_btn2_text' ) ); ?>
-					</a>
-				<?php endif; ?>
-			</div>
-		</div>
-		<?php if ( ! $optimum_hero_img ) : ?>
-			<div class="hero-art" aria-hidden="true"><?php get_template_part( 'template-parts/wardrobe-art' ); ?></div>
-		<?php endif; ?>
-	</div>
-</section>
-
-<section class="features">
-	<div class="container features-grid">
+<section class="hero" aria-labelledby="hero-title">
+	<div class="hero-media">
 		<?php
-		$optimum_feature_icons = array( 1 => 'ruler', 2 => 'truck', 3 => 'gem', 4 => 'lock' );
-		foreach ( $optimum_feature_icons as $optimum_i => $optimum_icon ) :
-			$optimum_title = optimum_mod( "feature_{$optimum_i}_title" );
-			if ( ! $optimum_title ) {
-				continue;
+		if ( $optimum_hero ) {
+			echo '<picture>';
+			if ( $optimum_hero_m ) {
+				echo '<source media="(max-width: 699px)" srcset="' . esc_attr( (string) wp_get_attachment_image_srcset( $optimum_hero_m, 'full' ) ) . '" sizes="100vw">';
 			}
-			?>
-			<div class="feature">
-				<span class="feature-icon"><?php echo optimum_icon( $optimum_icon, 26 ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span>
-				<div>
-					<h3><?php echo esc_html( $optimum_title ); ?></h3>
-					<p><?php echo esc_html( optimum_mod( "feature_{$optimum_i}_text" ) ); ?></p>
-				</div>
-			</div>
-		<?php endforeach; ?>
+			echo wp_get_attachment_image( $optimum_hero, 'full', false, array( 'sizes' => '100vw', 'fetchpriority' => 'high', 'loading' => 'eager' ) );
+			echo '</picture>';
+		} else {
+			echo optimum_render_picture( 'hero-glass-wide', '100vw', array( 'eager' => true, 'mobile' => 'hero-glass-mobile' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+			echo optimum_render_tag(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+		}
+		?>
 	</div>
+	<div class="container hero-copy">
+		<p class="eyebrow"><?php esc_html_e( 'Optimum Closets · Jeddah & Makkah', 'optimum' ); ?></p>
+		<h1 id="hero-title"><?php echo esc_html( $optimum_title ); ?></h1>
+		<p class="hero-lede"><?php echo esc_html( $optimum_text ); ?></p>
+		<div class="hero-ctas">
+			<a class="btn btn-hero" href="<?php echo esc_url( $optimum_shop ); ?>"><?php esc_html_e( 'Shop Wardrobes', 'optimum' ); ?></a>
+			<a class="btn btn-hero-line" href="<?php echo esc_url( $optimum_custom ); ?>"><?php esc_html_e( 'Request a Made-to-Measure Design', 'optimum' ); ?></a>
+		</div>
+	</div>
+	<ul class="container hero-facts">
+		<li><?php echo optimum_icon( 'ruler', 18 ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?><?php esc_html_e( 'Free consultation & measurement', 'optimum' ); ?></li>
+		<li><?php echo optimum_icon( 'clock', 18 ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?><?php echo esc_html( optimum_mod_i18n( 'lead_time' ) ); ?></li>
+		<li><?php echo optimum_icon( 'pin', 18 ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?><?php esc_html_e( 'Showrooms in Jeddah & Makkah', 'optimum' ); ?></li>
+	</ul>
 </section>
 
 <?php
-if ( $optimum_has_wc ) :
-	$optimum_cats = get_terms(
-		array(
-			'taxonomy'   => 'product_cat',
-			'parent'     => 0,
-			'hide_empty' => true,
-			'number'     => 6,
-			'exclude'    => array( (int) get_option( 'default_product_cat' ) ),
-			'orderby'    => 'menu_order',
-		)
-	);
-
-	if ( ! is_wp_error( $optimum_cats ) && $optimum_cats ) :
-		?>
-		<section class="section">
-			<div class="container">
-				<?php optimum_section_head( __( 'تصفّح حسب القسم', 'optimum' ), __( 'اختر مساحتك', 'optimum' ), optimum_shop_url() ); ?>
-				<div class="cat-grid cat-count-<?php echo esc_attr( count( $optimum_cats ) ); ?>">
-					<?php
-					foreach ( $optimum_cats as $optimum_cat ) :
-						$optimum_thumb = get_term_meta( $optimum_cat->term_id, 'thumbnail_id', true );
-						?>
-						<a class="cat-card" href="<?php echo esc_url( get_term_link( $optimum_cat ) ); ?>">
-							<?php
-							if ( $optimum_thumb ) {
-								echo wp_get_attachment_image( $optimum_thumb, 'optimum-category', false, array( 'class' => 'cat-img', 'loading' => 'lazy' ) );
-							} else {
-								echo '<span class="cat-img cat-img-empty"></span>';
-							}
-							?>
-							<span class="cat-body">
-								<span class="cat-name"><?php echo esc_html( $optimum_cat->name ); ?></span>
-								<span class="cat-count">
-									<?php
-									/* translators: %s: عدد المنتجات */
-									echo esc_html( sprintf( _n( '%s منتج', '%s منتجات', $optimum_cat->count, 'optimum' ), number_format_i18n( $optimum_cat->count ) ) );
-									?>
-								</span>
-							</span>
-						</a>
-					<?php endforeach; ?>
-				</div>
-			</div>
-		</section>
-	<?php endif; ?>
-
-	<section class="section section-soft">
-		<div class="container">
-			<?php optimum_section_head( __( 'الأكثر طلباً', 'optimum' ), __( 'اختيارات عملائنا', 'optimum' ), optimum_shop_url() ); ?>
-			<?php echo do_shortcode( '[products limit="8" columns="4" best_selling="true"]' ); ?>
-		</div>
-	</section>
-<?php endif; ?>
-
-<section class="section custom-cta">
-	<div class="container custom-grid">
-		<div class="custom-media">
-			<?php if ( optimum_mod( 'custom_image' ) ) : ?>
-				<img src="<?php echo esc_url( optimum_mod( 'custom_image' ) ); ?>" alt="<?php echo esc_attr( optimum_mod( 'custom_title' ) ); ?>" loading="lazy">
-			<?php else : ?>
-				<div class="custom-media-art" aria-hidden="true"><?php get_template_part( 'template-parts/wardrobe-art' ); ?></div>
-			<?php endif; ?>
-		</div>
-		<div class="custom-content">
-			<span class="eyebrow"><?php esc_html_e( 'خدمة التفصيل', 'optimum' ); ?></span>
-			<h2 class="section-title"><?php echo esc_html( optimum_mod( 'custom_title' ) ); ?></h2>
-			<p class="lead"><?php echo esc_html( optimum_mod( 'custom_text' ) ); ?></p>
-			<ol class="steps">
-				<?php for ( $optimum_i = 1; $optimum_i <= 3; $optimum_i++ ) : ?>
-					<li class="step">
-						<span class="step-num"><?php echo esc_html( number_format_i18n( $optimum_i ) ); ?></span>
-						<div>
-							<h3><?php echo esc_html( optimum_mod( "step_{$optimum_i}_title" ) ); ?></h3>
-							<p><?php echo esc_html( optimum_mod( "step_{$optimum_i}_text" ) ); ?></p>
-						</div>
-					</li>
-				<?php endfor; ?>
-			</ol>
-			<?php if ( $optimum_wa ) : ?>
-				<a class="btn btn-whatsapp btn-lg" href="<?php echo esc_url( $optimum_wa ); ?>" target="_blank" rel="noopener">
-					<?php echo optimum_icon( 'whatsapp', 20 ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-					<?php esc_html_e( 'أرسل مقاساتك الآن', 'optimum' ); ?>
-				</a>
-			<?php endif; ?>
-		</div>
-	</div>
-</section>
-
-<?php if ( $optimum_has_wc ) : ?>
-	<section class="section">
-		<div class="container">
-			<?php optimum_section_head( __( 'جديدنا', 'optimum' ), __( 'وصل حديثاً', 'optimum' ), optimum_shop_url() ); ?>
-			<?php echo do_shortcode( '[products limit="4" columns="4" orderby="date" order="DESC"]' ); ?>
-		</div>
-	</section>
-
-	<?php
-	// آراء حقيقية من تقييمات المنتجات (4 نجوم فأكثر) - لا تظهر إن لم توجد تقييمات.
-	$optimum_reviews = get_comments(
-		array(
-			'post_type'  => 'product',
-			'status'     => 'approve',
-			'type'       => 'review',
-			'number'     => 3,
-			'meta_query' => array( // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
-				array(
-					'key'     => 'rating',
-					'value'   => 4,
-					'compare' => '>=',
-					'type'    => 'NUMERIC',
-				),
-			),
-		)
-	);
-	if ( $optimum_reviews ) :
-		?>
-		<section class="section section-dark">
-			<div class="container">
-				<?php optimum_section_head( __( 'آراء العملاء', 'optimum' ), __( 'ماذا قال عملاؤنا', 'optimum' ) ); ?>
-				<div class="reviews-grid">
-					<?php
-					foreach ( $optimum_reviews as $optimum_review ) :
-						$optimum_rating = (int) get_comment_meta( $optimum_review->comment_ID, 'rating', true );
-						?>
-						<figure class="review-card">
-							<div class="stars" role="img" aria-label="<?php echo esc_attr( sprintf( /* translators: %d: التقييم */ __( 'التقييم %d من 5', 'optimum' ), $optimum_rating ) ); ?>">
-								<?php
-								for ( $optimum_s = 1; $optimum_s <= 5; $optimum_s++ ) {
-									echo '<span class="' . ( $optimum_s <= $optimum_rating ? 'on' : '' ) . '">' . optimum_icon( 'star', 18 ) . '</span>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-								}
-								?>
-							</div>
-							<blockquote><?php echo esc_html( wp_trim_words( $optimum_review->comment_content, 40 ) ); ?></blockquote>
-							<figcaption>
-								<strong><?php echo esc_html( $optimum_review->comment_author ); ?></strong>
-								<a href="<?php echo esc_url( get_permalink( $optimum_review->comment_post_ID ) ); ?>"><?php echo esc_html( get_the_title( $optimum_review->comment_post_ID ) ); ?></a>
-							</figcaption>
-						</figure>
-					<?php endforeach; ?>
-				</div>
-			</div>
-		</section>
-	<?php endif; ?>
-<?php endif; ?>
-
-<?php
-$optimum_faqs = array();
-for ( $optimum_i = 1; $optimum_i <= 5; $optimum_i++ ) {
-	$optimum_q = optimum_mod( "faq_{$optimum_i}_q" );
-	$optimum_a = optimum_mod( "faq_{$optimum_i}_a" );
-	if ( $optimum_q && $optimum_a ) {
-		$optimum_faqs[] = array( $optimum_q, $optimum_a );
-	}
-}
-if ( $optimum_faqs ) :
+$optimum_cats = optimum_product_categories();
+if ( $optimum_cats ) :
 	?>
-	<section class="section">
-		<div class="container container-narrow">
-			<?php optimum_section_head( __( 'لديك سؤال؟', 'optimum' ), __( 'الأسئلة الشائعة', 'optimum' ) ); ?>
-			<div class="faq">
-				<?php foreach ( $optimum_faqs as $optimum_faq ) : ?>
-					<details class="faq-item">
-						<summary><?php echo esc_html( $optimum_faq[0] ); ?><?php echo optimum_icon( 'plus', 20 ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></summary>
-						<div class="faq-answer"><?php echo wp_kses_post( wpautop( $optimum_faq[1] ) ); ?></div>
-					</details>
+	<section class="section container home-cats" aria-labelledby="cats-title">
+		<header class="sec-head reveal">
+			<span class="sec-idx">01</span>
+			<h2 class="sec-title" id="cats-title"><?php esc_html_e( 'Shop by type', 'optimum' ); ?></h2>
+			<a class="link-more" href="<?php echo esc_url( $optimum_shop ); ?>"><?php esc_html_e( 'View all', 'optimum' ); ?> <?php echo optimum_icon( 'arrow', 16 ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></a>
+		</header>
+		<div class="cat-grid">
+			<?php foreach ( array_values( $optimum_cats ) as $optimum_i => $optimum_cat ) : ?>
+				<a class="cat-card reveal cat-<?php echo (int) $optimum_i; ?>" href="<?php echo esc_url( get_term_link( $optimum_cat ) ); ?>">
+					<span class="cat-media"><?php echo optimum_category_image( $optimum_cat, 3 === $optimum_i ? '(min-width: 1100px) 50vw, 90vw' : '(min-width: 1100px) 25vw, 70vw' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span>
+					<span class="cat-cap">
+						<span class="cat-n"><?php echo esc_html( sprintf( '%02d', $optimum_i + 1 ) ); ?></span>
+						<span class="cat-name"><?php echo esc_html( $optimum_cat->name ); ?></span>
+						<?php echo optimum_icon( 'arrow', 18 ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+					</span>
+				</a>
+			<?php endforeach; ?>
+		</div>
+	</section>
+<?php endif; ?>
+
+<?php
+if ( class_exists( 'WooCommerce' ) ) :
+	$optimum_featured = wc_get_products(
+		array(
+			'status'   => 'publish',
+			'limit'    => 4,
+			'featured' => true,
+			'orderby'  => 'menu_order',
+			'order'    => 'ASC',
+		)
+	);
+	if ( ! $optimum_featured ) {
+		$optimum_featured = wc_get_products( array( 'status' => 'publish', 'limit' => 4, 'orderby' => 'menu_order', 'order' => 'ASC' ) );
+	}
+	if ( $optimum_featured ) :
+		?>
+		<section class="section container home-products" aria-labelledby="feat-title">
+			<header class="sec-head reveal">
+				<span class="sec-idx">02</span>
+				<h2 class="sec-title" id="feat-title"><?php esc_html_e( 'Featured wardrobes', 'optimum' ); ?></h2>
+				<a class="link-more" href="<?php echo esc_url( $optimum_shop ); ?>"><?php esc_html_e( 'View all', 'optimum' ); ?> <?php echo optimum_icon( 'arrow', 16 ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></a>
+			</header>
+			<ul class="products product-grid cols-4">
+				<?php
+				foreach ( $optimum_featured as $optimum_p ) {
+					$GLOBALS['product'] = $optimum_p; // phpcs:ignore WordPress.WP.GlobalVariablesOverride
+					$GLOBALS['post']    = get_post( $optimum_p->get_id() ); // phpcs:ignore WordPress.WP.GlobalVariablesOverride
+					setup_postdata( $GLOBALS['post'] );
+					wc_get_template_part( 'content', 'product' );
+				}
+				wp_reset_postdata();
+				?>
+			</ul>
+		</section>
+		<?php
+	endif;
+endif;
+?>
+
+<section class="section materials" aria-labelledby="mat-title">
+	<div class="container mat-in">
+		<div class="mat-media reveal" data-tabs-panels>
+			<?php
+			$optimum_materials = array(
+				array( 'detail-handle', __( 'Natural oak', 'optimum' ), __( 'Real straight-grain veneer with brushed brass handles.', 'optimum' ) ),
+				array( 'detail-glass-frame', __( 'Glass & slim frame', 'optimum' ), __( 'A 22 mm bronze aluminium frame around tinted glass.', 'optimum' ) ),
+				array( 'detail-led-shelf', __( 'Integrated light', 'optimum' ), __( 'Warm LED strips under each shelf show every garment clearly.', 'optimum' ) ),
+				array( 'detail-drawer', __( 'Walnut drawers', 'optimum' ), __( 'Soft-close interior drawers with bronze pulls.', 'optimum' ) ),
+			);
+			foreach ( $optimum_materials as $optimum_i => $optimum_m ) {
+				printf(
+					'<div class="mat-frame%1$s" id="mat-panel-%2$d" role="tabpanel" aria-labelledby="mat-tab-%2$d"%3$s>%4$s</div>',
+					0 === $optimum_i ? ' is-active' : '',
+					(int) $optimum_i,
+					0 === $optimum_i ? '' : ' aria-hidden="true"',
+					optimum_render_picture( $optimum_m[0], '(min-width: 900px) 50vw, 100vw' ) // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+				);
+			}
+			echo optimum_render_tag(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+			?>
+		</div>
+		<div class="mat-copy">
+			<header class="sec-head reveal">
+				<span class="sec-idx">03</span>
+				<h2 class="sec-title" id="mat-title"><?php esc_html_e( 'Materials you feel before you see', 'optimum' ); ?></h2>
+			</header>
+			<div class="mat-list" role="tablist" aria-orientation="vertical" data-tabs>
+				<?php foreach ( $optimum_materials as $optimum_i => $optimum_m ) : ?>
+					<button class="mat-tab" type="button" role="tab" id="mat-tab-<?php echo (int) $optimum_i; ?>" aria-controls="mat-panel-<?php echo (int) $optimum_i; ?>" aria-selected="<?php echo 0 === $optimum_i ? 'true' : 'false'; ?>" tabindex="<?php echo 0 === $optimum_i ? '0' : '-1'; ?>">
+						<span class="mat-n"><?php echo esc_html( sprintf( '%02d', $optimum_i + 1 ) ); ?></span>
+						<span><strong><?php echo esc_html( $optimum_m[1] ); ?></strong><span><?php echo esc_html( $optimum_m[2] ); ?></span></span>
+					</button>
 				<?php endforeach; ?>
 			</div>
 		</div>
-	</section>
-<?php endif; ?>
+	</div>
+</section>
 
-<?php if ( $optimum_wa ) : ?>
-	<section class="cta-band">
-		<div class="container cta-band-inner">
-			<div>
-				<h2><?php esc_html_e( 'محتار في اختيار الخزانة المناسبة؟', 'optimum' ); ?></h2>
-				<p><?php esc_html_e( 'تحدث مع مستشارنا الآن، وسنساعدك في اختيار التصميم والمقاس المناسب لمساحتك.', 'optimum' ); ?></p>
-			</div>
-			<a class="btn btn-light btn-lg" href="<?php echo esc_url( $optimum_wa ); ?>" target="_blank" rel="noopener">
-				<?php echo optimum_icon( 'whatsapp', 20 ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-				<?php esc_html_e( 'تحدث مع مستشارنا', 'optimum' ); ?>
-			</a>
-		</div>
-	</section>
-<?php endif; ?>
+<section class="section container process" aria-labelledby="proc-title">
+	<header class="sec-head reveal">
+		<span class="sec-idx">04</span>
+		<h2 class="sec-title" id="proc-title"><?php esc_html_e( 'How ordering works', 'optimum' ); ?></h2>
+	</header>
+	<ol class="steps">
+		<?php foreach ( optimum_process_steps() as $optimum_i => $optimum_s ) : ?>
+			<li class="step reveal">
+				<span class="step-n"><?php echo esc_html( sprintf( '%02d', $optimum_i + 1 ) ); ?></span>
+				<h3><?php echo esc_html( $optimum_s[0] ); ?></h3>
+				<p><?php echo esc_html( $optimum_s[1] ); ?></p>
+			</li>
+		<?php endforeach; ?>
+	</ol>
+</section>
+
+<section class="bespoke-band" aria-labelledby="bespoke-title">
+	<div class="bespoke-media">
+		<?php echo optimum_render_picture( 'bespoke-wall-wide', '100vw', array( 'mobile' => 'bespoke-wall' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+		<?php echo optimum_render_tag(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+	</div>
+	<div class="container bespoke-copy reveal">
+		<p class="eyebrow"><?php esc_html_e( 'Made to measure', 'optimum' ); ?></p>
+		<h2 id="bespoke-title"><?php esc_html_e( 'A whole wall, drawn to the size of your room', 'optimum' ); ?></h2>
+		<p><?php esc_html_e( 'Send your room’s measurements and photos; our designer will come back with a proposal and an initial quote.', 'optimum' ); ?></p>
+		<a class="btn btn-hero" href="<?php echo esc_url( $optimum_custom ); ?>"><?php esc_html_e( 'Request a Made-to-Measure Design', 'optimum' ); ?></a>
+	</div>
+</section>
+
+<section class="section container showrooms" aria-labelledby="show-title">
+	<header class="sec-head reveal">
+		<span class="sec-idx">05</span>
+		<h2 class="sec-title" id="show-title"><?php esc_html_e( 'Visit our showrooms', 'optimum' ); ?></h2>
+		<a class="link-more" href="<?php echo esc_url( optimum_page_url( 'showrooms' ) ); ?>"><?php esc_html_e( 'Details', 'optimum' ); ?> <?php echo optimum_icon( 'arrow', 16 ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></a>
+	</header>
+	<div class="show-grid">
+		<?php get_template_part( 'template-parts/showroom-cards' ); ?>
+	</div>
+</section>
 
 <?php
 get_footer();

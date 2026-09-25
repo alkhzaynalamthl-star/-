@@ -1,0 +1,234 @@
+{
+ "hero-glass-wide": {
+  "rail_double": [
+   36.7,
+   69.2
+  ],
+  "shelf_led": [
+   50.0,
+   62.4
+  ],
+  "rail_long": [
+   63.3,
+   40.7
+  ]
+ },
+ "hero-glass-mobile": {
+  "rail_double": [
+   20.1,
+   56.5
+  ],
+  "shelf_led": [
+   49.1,
+   50.8
+  ],
+  "rail_long": [
+   80.1,
+   31.5
+  ]
+ },
+ "hinged-oak-closed": {
+  "rail_double": [
+   32.5,
+   56.5
+  ],
+  "shelf_led": [
+   66.2,
+   50.8
+  ]
+ },
+ "hinged-oak-open": {
+  "rail_double": [
+   36.5,
+   55.9
+  ],
+  "shelf_led": [
+   66.9,
+   50.8
+  ]
+ },
+ "hinged-walnut-closed": {
+  "rail_double": [
+   32.5,
+   56.5
+  ],
+  "shelf_led": [
+   66.2,
+   50.8
+  ]
+ },
+ "hinged-walnut-open": {
+  "rail_double": [
+   36.5,
+   55.9
+  ],
+  "shelf_led": [
+   66.9,
+   50.8
+  ]
+ },
+ "hinged-cashmere-closed": {
+  "rail_double": [
+   32.5,
+   56.5
+  ],
+  "shelf_led": [
+   66.2,
+   50.8
+  ]
+ },
+ "hinged-cashmere-open": {
+  "rail_double": [
+   36.5,
+   55.9
+  ],
+  "shelf_led": [
+   66.9,
+   50.8
+  ]
+ },
+ "glass-bronze-closed": {
+  "rail_double": [
+   32.5,
+   56.5
+  ],
+  "shelf_led": [
+   66.2,
+   50.8
+  ]
+ },
+ "glass-bronze-open": {
+  "rail_double": [
+   36.5,
+   55.9
+  ],
+  "shelf_led": [
+   66.9,
+   50.8
+  ]
+ },
+ "glass-black-closed": {
+  "rail_double": [
+   32.5,
+   56.5
+  ],
+  "shelf_led": [
+   66.2,
+   50.8
+  ]
+ },
+ "glass-black-open": {
+  "rail_double": [
+   36.5,
+   55.9
+  ],
+  "shelf_led": [
+   66.9,
+   50.8
+  ]
+ },
+ "glass-champagne-closed": {
+  "rail_double": [
+   32.5,
+   56.5
+  ],
+  "shelf_led": [
+   66.2,
+   50.8
+  ]
+ },
+ "glass-champagne-open": {
+  "rail_double": [
+   36.5,
+   55.9
+  ],
+  "shelf_led": [
+   66.9,
+   50.8
+  ]
+ },
+ "sliding-oak-closed": {
+  "rail_double": [
+   27.0,
+   56.5
+  ],
+  "shelf_led": [
+   49.0,
+   50.8
+  ],
+  "rail_long": [
+   72.2,
+   31.5
+  ]
+ },
+ "sliding-oak-open": {
+  "rail_double": [
+   31.6,
+   55.9
+  ],
+  "shelf_led": [
+   51.3,
+   50.8
+  ],
+  "rail_long": [
+   72.3,
+   33.2
+  ]
+ },
+ "sliding-cashmere-closed": {
+  "rail_double": [
+   27.0,
+   56.5
+  ],
+  "shelf_led": [
+   49.0,
+   50.8
+  ],
+  "rail_long": [
+   72.2,
+   31.5
+  ]
+ },
+ "sliding-cashmere-open": {
+  "rail_double": [
+   31.6,
+   55.9
+  ],
+  "shelf_led": [
+   51.3,
+   50.8
+  ],
+  "rail_long": [
+   72.3,
+   33.2
+  ]
+ },
+ "sliding-walnut-closed": {
+  "rail_double": [
+   27.0,
+   56.5
+  ],
+  "shelf_led": [
+   49.0,
+   50.8
+  ],
+  "rail_long": [
+   72.2,
+   31.5
+  ]
+ },
+ "sliding-walnut-open": {
+  "rail_double": [
+   31.6,
+   55.9
+  ],
+  "shelf_led": [
+   51.3,
+   50.8
+  ],
+  "rail_long": [
+   72.3,
+   33.2
+  ]
+ }
+}

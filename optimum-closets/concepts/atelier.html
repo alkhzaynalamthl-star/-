@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="ar" dir="rtl" data-img-base="../assets/img/renders/">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Concept 1 · Atelier — Optimum Closets</title>
+<meta name="description" content="Design concept 1: quiet architectural luxury for Optimum Closets.">
+<link rel="stylesheet" href="../assets/fonts/fonts.css">
+<link rel="stylesheet" href="atelier.css">
+<link rel="preload" as="image" type="image/webp" href="../assets/img/renders/hero-glass-wide-1600.webp" media="(min-width: 700px)">
+</head>
+<body>
+<a class="skip" href="#main" data-t="view">Skip</a>
+<div class="demo-bar" role="note"><span data-t="demo"></span></div>
+
+<header class="hdr" id="hdr">
+	<div class="wrap hdr-in">
+		<button class="ico menu-btn" type="button" aria-expanded="false" aria-controls="drawer" data-t-attr="aria-label:menu">
+			<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8h18M3 16h18"/></svg>
+		</button>
+		<a class="logo" href="#top" aria-label="Optimum Closets">
+			<span class="logo-ar">الخزائن الأمثل</span>
+			<span class="logo-en">OPTIMUM CLOSETS</span>
+		</a>
+		<nav class="nav" aria-label="Main">
+			<div class="nav-item has-mega">
+				<button type="button" class="nav-link" aria-expanded="false" aria-controls="mega"><span data-t="products"></span>
+					<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></button>
+				<div class="mega" id="mega" hidden><div class="wrap mega-in" id="mega-list"></div></div>
+			</div>
+			<a class="nav-link" href="#bespoke" data-t="bespoke"></a>
+			<a class="nav-link" href="#work" data-t="work"></a>
+			<a class="nav-link" href="#showrooms" data-t="showrooms"></a>
+			<a class="nav-link" href="#contact" data-t="contact"></a>
+		</nav>
+		<div class="hdr-actions">
+			<button class="lang" type="button" data-lang-toggle><span data-t="lang"></span></button>
+			<a class="ico" href="#search" data-t-attr="aria-label:search"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></a>
+			<a class="ico hide-sm" href="#account" data-t-attr="aria-label:account"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></a>
+			<a class="ico cart" href="#cart" data-t-attr="aria-label:cart"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 8h14l-1 12H6z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="cart-n">0</span></a>
+		</div>
+	</div>
+</header>
+
+<div class="drawer" id="drawer" hidden>
+	<div class="drawer-panel">
+		<button class="ico drawer-x" type="button" data-t-attr="aria-label:close"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+		<p class="eyebrow" data-t="products"></p>
+		<ul class="drawer-cats" id="drawer-cats"></ul>
+		<ul class="drawer-links">
+			<li><a href="#bespoke" data-t="bespoke"></a></li>
+			<li><a href="#work" data-t="work"></a></li>
+			<li><a href="#showrooms" data-t="showrooms"></a></li>
+			<li><a href="#contact" data-t="contact"></a></li>
+		</ul>
+	</div>
+</div>
+
+<main id="main">
+	<section class="hero" id="top">
+		<div class="hero-media">
+			<picture>
+				<source media="(max-width: 699px)" type="image/webp" srcset="../assets/img/renders/hero-glass-mobile-540.webp 540w, ../assets/img/renders/hero-glass-mobile-1080.webp 1080w" sizes="100vw">
+				<source media="(min-width: 700px)" type="image/webp" srcset="../assets/img/renders/hero-glass-wide-960.webp 960w, ../assets/img/renders/hero-glass-wide-1600.webp 1600w, ../assets/img/renders/hero-glass-wide-2400.webp 2400w" sizes="100vw">
+				<img id="hero-img" src="../assets/img/renders/hero-glass-wide-1600.jpg" alt="" fetchpriority="high" width="2400" height="1200">
+			</picture>
+		</div>
+		<div class="wrap hero-copy">
+			<p class="eyebrow light" data-t="brandLine">Optimum Closets</p>
+			<h1 data-t="heroTitle"></h1>
+			<p class="lede" data-t="heroText"></p>
+			<div class="ctas">
+				<a class="btn btn-ivory" href="#featured" data-t="shop"></a>
+				<a class="btn btn-line" href="#bespoke" data-t="bespoke"></a>
+			</div>
+		</div>
+		<ul class="wrap hero-facts">
+			<li data-t="consultFree"></li>
+			<li data-t="leadTime"></li>
+			<li data-t="twoCities"></li>
+		</ul>
+	</section>
+
+	<section class="statement wrap reveal">
+		<p data-t="statement"></p>
+	</section>
+
+	<section class="cats wrap" aria-labelledby="cats-h">
+		<header class="sec-head reveal">
+			<span class="idx">01</span>
+			<h2 id="cats-h" data-t="categories"></h2>
+		</header>
+		<div class="cats-grid" id="cats"></div>
+	</section>
+
+	<section class="featured wrap" id="featured" aria-labelledby="feat-h">
+		<header class="sec-head reveal">
+			<span class="idx">02</span>
+			<h2 id="feat-h" data-t="featured"></h2>
+			<span class="tag" data-t="cardPreview"></span>
+		</header>
+		<div class="cards" id="cards"></div>
+	</section>
+
+	<section class="materials" aria-labelledby="mat-h">
+		<div class="wrap mat-in">
+			<div class="mat-media reveal" id="mat-media"></div>
+			<div class="mat-copy">
+				<header class="sec-head reveal">
+					<span class="idx">03</span>
+					<h2 id="mat-h" data-t="materialsTitle"></h2>
+				</header>
+				<ol class="mat-list" id="mat-list" role="tablist"></ol>
+			</div>
+		</div>
+	</section>
+
+	<section class="process wrap" aria-labelledby="proc-h">
+		<header class="sec-head reveal">
+			<span class="idx">04</span>
+			<h2 id="proc-h" data-t="process"></h2>
+		</header>
+		<ol class="steps" id="steps"></ol>
+	</section>
+
+	<section class="bespoke" id="bespoke">
+		<div class="bespoke-media" id="bespoke-media"></div>
+		<div class="wrap bespoke-copy reveal">
+			<p class="eyebrow light" data-t="bespokeEyebrow"></p>
+			<h2 data-t="bespokeTitle"></h2>
+			<p data-t="bespokeText"></p>
+			<a class="btn btn-ivory" href="#contact" data-t="bespoke"></a>
+		</div>
+	</section>
+
+	<section class="showrooms wrap" id="showrooms" aria-labelledby="show-h">
+		<header class="sec-head reveal">
+			<span class="idx">05</span>
+			<h2 id="show-h" data-t="showrooms"></h2>
+		</header>
+		<div class="show-grid" id="show"></div>
+	</section>
+</main>
+
+<footer class="ftr" id="contact">
+	<div class="wrap ftr-in">
+		<div>
+			<a class="logo" href="#top"><span class="logo-ar">الخزائن الأمثل</span><span class="logo-en">OPTIMUM CLOSETS</span></a>
+			<p class="ftr-note" data-t="heroText"></p>
+		</div>
+		<div id="ftr-contact"></div>
+		<div>
+			<p class="eyebrow" data-t="products"></p>
+			<ul id="ftr-cats"></ul>
+		</div>
+	</div>
+	<div class="wrap ftr-base"><span>© 2026 <span data-t="brandName"></span></span><span data-t="footerNote"></span></div>
+</footer>
+
+<script src="../assets/img/renders/images.js"></script>
+<script src="shared/data.js"></script>
+<script>
+Object.assign( OC_DATA.strings, {
+	brandLine: { ar: 'الخزائن الأمثل · جدة ومكة', en: 'Optimum Closets · Jeddah & Makkah' },
+	brandName: { ar: 'الخزائن الأمثل', en: 'Optimum Closets' },
+	statement: { ar: 'نؤمن أن الخزانة الجيدة لا تُرى فقط؛ بل تُعاش كل صباح. لذلك نبدأ من المساحة والضوء والخامة، ثم نرسم كل رف حول ما تملكه فعلًا.', en: 'A good wardrobe is not only seen; it is lived with every morning. So we start with space, light and material, then draw every shelf around what you actually own.' },
+	bespokeEyebrow: { ar: 'التفصيل بالمقاس', en: 'Made to measure' },
+	bespokeTitle: { ar: 'جدار كامل، مصمَّم على مقاس مساحتك', en: 'A whole wall, drawn to the size of your room' },
+	bespokeText: { ar: 'أرسل مقاسات مساحتك وصورها، وسيعود إليك مصممنا باقتراح وتسعير مبدئي.', en: 'Send your room’s measurements and photos; our designer will come back with a proposal and an initial quote.' }
+} );
+</script>
+<script src="shared/core.js"></script>
+<script src="atelier.js"></script>
+</body>
+</html>
